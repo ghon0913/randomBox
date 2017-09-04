@@ -17,7 +17,7 @@ public class MemberDAO {
 	public String idCheck(SqlSession session, String userid) {
 		
 		String id = session.selectOne("idCheck", userid);
-		boolean ck;
+		boolean ck = false;
 		
 		if(id!=null) {
 			//ck = 
