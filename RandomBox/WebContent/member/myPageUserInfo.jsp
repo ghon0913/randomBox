@@ -4,7 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-
+<div align="center">
 <table border="1">
 	<tr colspan="2">
 		<td>이름</td>
@@ -41,3 +41,4 @@
 			<!-- 다음주소 끝 -->
 	</tr>
 </table>
+</div>

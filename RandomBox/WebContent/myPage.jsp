@@ -7,10 +7,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>마이페이지</title>
 </head>
 <body>
-	<jsp:include page="include/top.jsp" flush="true" /><br>
+	<jsp:include page="include/top.jsp" flush="true" />
+	<br/><br/><br/><br/>
 	<jsp:include page="member/myPage.jsp" flush="true" /><br>
 </body>
 </html>

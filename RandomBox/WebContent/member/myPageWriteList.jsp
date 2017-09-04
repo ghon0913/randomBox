@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<div align="center">
 <table border="1">
 	<tr>
 		<td>문의제목</td>
@@ -45,3 +45,4 @@
 		<td colspan="3" align="center">페이지번호</td>
 	</tr>
 </table>
+</div>
