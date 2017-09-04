@@ -3,5 +3,13 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mybatis.MemberMapper">
-
+	<insert id="insertMember" parameterType="MemberDTO">
+		insert into 
+		joinmember(userid,username,passwd,email,phone,
+		gender,birthday,post1,post2,addr1,addr2,ox
+		values(
+		#{userid},#{username},#{passwd},
+		#{email},#{phone},#{gender},#{birthday},
+		#{post1},#{post2},#{addr1},#{addr2},#{ox})
+	</insert>
 </mapper>
