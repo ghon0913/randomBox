@@ -35,8 +35,8 @@ public class MemberAddServlet extends HttpServlet {
 		String post2 = request.getParameter("post2");
 		String addr1 = request.getParameter("addr1");
 		String addr2 = request.getParameter("addr2");
-		String email = email1 + email2;
-		String phone = phone1 + phone2 + phone3;
+		String email = email1 +"@"+ email2;
+		String phone = phone1 +"-"+ phone2 +"-"+ phone3;
 		
 		MemberDTO dto = new MemberDTO();
 		dto.setOx(ox);

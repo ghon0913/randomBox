@@ -17,15 +17,17 @@ public class MemberDAO {
 	}// end insertMember
 	
 	/* 아이디 중복 체크 */
-	public String idCheck(SqlSession session, String userid) {
+	public boolean idCheck(SqlSession session, String userid) {
 		
 		String id = session.selectOne("idCheck", userid);
-		boolean ck = false;
+		boolean ck;
 		
 		if(id!=null) {
-			//ck = 
+			ck = true;
+		}else {
+			ck = false;
 		}
-		return id;
+		return ck;
 	}// end idCheck
 
 	

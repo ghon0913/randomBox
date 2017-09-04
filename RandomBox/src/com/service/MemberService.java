@@ -30,14 +30,14 @@ public class MemberService {
 	}// end insertMember
 	
 	/* 아이디 체크 */
-	public String idCheck(String userid) throws MyException{
+	public boolean idCheck(String userid) throws MyException{
 		
 		SqlSession session = MybatisTemplate.openSession();
 		MemberDAO dao = new MemberDAO();
-		String id;
+		boolean ck;
 		
 		try {
-			id = dao.idCheck(session, userid);
+			ck = dao.idCheck(session, userid);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException("idCheck 실패");
@@ -45,7 +45,7 @@ public class MemberService {
 			session.close();
 		}
 		
-		return id;
+		return ck;
 	}// end idCheck
 	
 	public MemberDTO searchMember(HashMap<String,String> map) {

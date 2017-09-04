@@ -40,7 +40,7 @@
 			</tr>
 			<tr>
 				<td>이메일</td>
-				<td><input type="text" name="email1" id="email1">
+				<td id="email_td"><input type="text" name="email1" id="email1">
 					@ <select name="email2" id="email2">
 						<option value="">선택하기</option>
 						<option id="etc" value="etc">직접입력하기</option>
@@ -105,7 +105,7 @@
 $(document).ready(function(){
 
     /* 아이디 중복 검사 */
-    $("#userid").on("keyup", function(){
+    $("#userid").on("keyup", function(event){
     	
     	$.ajax({
     		
@@ -125,10 +125,14 @@ $(document).ready(function(){
     });
     
     /* 비밀번호 확인 */
-     $("#passwd2").on("keyup", function(){
+     $("#passwd2").on("keyup", function(event){
     	
     	 var passwd = $("#passwd").val();
     	 var passwd2 = $("#passwd2").val();
+    	 
+     	if($("#passwd2")==""){
+    		$("#passwdCheck").empty();
+    	}
     	 
     	 if(passwd == passwd2){
     		 $("#passwdCheck").text("비밀번호 일치");
@@ -137,13 +141,22 @@ $(document).ready(function(){
     	 }
     });
     
-    /* 이메일 중복 검사 */
-/*     $("option [value='etc']").on("click", function(){
+    /* 이메일 직접 입력  */
+    $("select#email2").on("change", function(event){
     	
-    }); */
+		if($("#email2 option:selected").attr("value")=='etc'){
+			$("select#email2").before("<input type='text' name='email2' id='email_etc'>");
+		}
+		
+		if($("#email2 option:selected").attr("value")!='etc'){
+			$("#email_etc").attr({"type":"hidden","name":"etc"});
+		}
+       
+    });
+
+    /* 이메일 중복 검사 */
     
-    /* 비어있는 칸 검사 */
-    
+    /* 빈칸 없나 확인 */
     
 });
 </script>
