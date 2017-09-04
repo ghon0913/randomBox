@@ -1,5 +1,7 @@
 package com.dao;
 
+import java.util.HashMap;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.dto.MemberDTO;
@@ -11,6 +13,7 @@ public class MemberDAO {
 		
 		int n = session.insert("insertMember", dto);
 		return n;
+
 	}// end insertMember
 	
 	/* 아이디 중복 체크 */
@@ -24,5 +27,13 @@ public class MemberDAO {
 		}
 		return id;
 	}// end idCheck
+
+	
+	public MemberDTO searchMember(SqlSession session, HashMap<String, String> map) {
+		
+		MemberDTO dto = session.selectOne("searchMember",map);
+		return dto;
+	}
+
 
 }

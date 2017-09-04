@@ -21,4 +21,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from joinmember
 		where userid = #{userid}
 	</select>
+	
+	<select id="searchMember" parameterType="hashmap" resultType="MemberDTO">
+		select userid,username,passwd,email,phone,
+		gender,birthday,post1,post2,addr1,addr2,ox,cookie
+		from joinmember
+		where userid=#{userid} and passwd=#{passwd}
+	</select>
+	
 </mapper>
