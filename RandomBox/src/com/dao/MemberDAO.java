@@ -8,7 +8,7 @@ public class MemberDAO {
 	
 	public int insertMember(SqlSession session, MemberDTO dto) {
 		
-		int n = session.insert("insetMember", dto);
+		int n = session.insert("insertMember", dto);
 		return n;
 	}
 
