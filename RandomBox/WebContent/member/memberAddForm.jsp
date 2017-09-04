@@ -10,19 +10,20 @@
 <!-- DAUM 주소 라이브러리 끝 -->
 
 <div id="memberAddForm">
-	<form action="MemberAddServlet">
+	<form action="MemberAddServlet" method="post">
 	<h3>구매 회원가입</h3>
 	<p>회원 정보를 입력해 주세요. 모두 입력하셔야 가입이 가능합니다.</p>
 		<table name="memberAddForm">
 			<tr>
-				<td colsapn="2" align="center">
+				<td colspan="2" align="center">
 					일반 구매회원 <input type="radio" name="ox" value="N" checked="checked">
 		                            사업자 판매회원 <input type="radio" name="ox" value="Y">
 				</td>
 			</tr>
 			<tr>
 				<td>아이디</td>
-				<td><input type="text" name="userid" id="userid"></td>
+				<td><input type="text" name="userid" id="userid">
+				<span id="idCheck"></span></td>
 			</tr>
 			<tr>
 				<td>비밀번호</td>
@@ -30,7 +31,8 @@
 			</tr>
 			<tr>
 				<td>비밀번호 확인</td>
-				<td><input type="password" name="passwd2" id="passwd2"></td>
+				<td><input type="password" name="passwd2" id="passwd2">
+				<span id="passwdCheck"></span></td>
 			</tr>
 			<tr>
 				<td>이름</td>
@@ -48,7 +50,8 @@
 						<option value="gmail.com">gmail.com</option>
 						<option value="hotmail.com">hotmail.com</option>
 						<option value="korea.com">korea.com</option>
-					</select></td>
+					</select>
+				<span id="emailCheck"></span></td>
 			</tr>
 			<tr>
 				<td>성별</td>
@@ -97,20 +100,47 @@
 		</table>
 	</form>
 </div>
-
+<script type="text/javascript" src="jquery-3.2.1.js"></script>
 <script>
 $(document).ready(function(){
 
     /* 아이디 중복 검사 */
-    
+    $("#userid").on("keyup", function(){
+    	
+    	$.ajax({
+    		
+    		type : "get",
+    		url : "IdCheckServlet",
+    		data : {
+    			userid:$("#userid").val()
+    		},
+    		dataType : "text",
+    		success : function(responseData, status, xhr){
+    			$("#idCheck").text(responseData);
+    		},
+    		error : function(xhr, status, e){
+    			console.log(status, e);
+    		}
+    	}); // end ajax
+    });
     
     /* 비밀번호 확인 */
-    
+     $("#passwd2").on("keyup", function(){
+    	
+    	 var passwd = $("#passwd").val();
+    	 var passwd2 = $("#passwd2").val();
+    	 
+    	 if(passwd == passwd2){
+    		 $("#passwdCheck").text("비밀번호 일치");
+    	 }else{
+    		 $("#passwdCheck").text("비밀번호 불일치");
+    	 }
+    });
     
     /* 이메일 중복 검사 */
-    $("option [value='etc']").on("click", function(){
+/*     $("option [value='etc']").on("click", function(){
     	
-    })
+    }); */
     
     /* 비어있는 칸 검사 */
     

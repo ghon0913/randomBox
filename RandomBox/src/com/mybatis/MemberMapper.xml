@@ -3,6 +3,8 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mybatis.MemberMapper">
+
+	<!-- 회원가입 -->
 	<insert id="insertMember" parameterType="MemberDTO">
 		insert into 
 		joinmember(userid,username,passwd,email,phone,
@@ -12,4 +14,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{email},#{phone},#{gender},#{birthday},
 		#{post1},#{post2},#{addr1},#{addr2},#{ox})
 	</insert>
+	
+	<!-- 아이디 중복 체크 위한 아이디 리스트 -->
+	<select id="idCheck" parameterType="String" resultType="String">
+		select userid
+		from joinmember
+		where userid = #{userid}
+	</select>
 </mapper>

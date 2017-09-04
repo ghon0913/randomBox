@@ -12,7 +12,7 @@
 				<p>
 					<span class="fleft"><input type="checkbox" name="autoLogin" id=""><label
 						for=""> 아이디 저장</label></span> <span class="fright"><a href="">아이디
-							찾기</a>&nbsp;|&nbsp;<a href="">비밀번호 찾기</a>&nbsp;|&nbsp;<a href="">회원가입</a></span>
+							찾기</a>&nbsp;|&nbsp;<a href="">비밀번호 찾기</a>&nbsp;|&nbsp;<a href="MemberAddFormServlet">회원가입</a></span>
 				</p>
 			</div>
 			<a href="LoginServlet" id="" class="loginBtn">로그인</a>
