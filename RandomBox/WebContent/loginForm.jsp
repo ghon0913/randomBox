@@ -20,6 +20,6 @@
 	<jsp:include page="login/loginForm.jsp" flush="true" /><br>
 	
 	
-	<a href="LoginServlet">이동하자</a>
+
 </body>
 </html>

@@ -5,20 +5,28 @@
 	pageEncoding="UTF-8"%>
 <div align="center">
 	<div class="loginForm">
-		<form method="get" action="">
+		<form name="LoginForm" method="get" action="">
 			<div class="box">
-				<input type="text" class="iText" name="userid" value="아이디를 입력하세요."> <br>
-				<input type="password" name="passwd" id="" class="iText"> <br>
+				<input type="text" class="iText" name="userid" value="아이디를 입력하세요.">
+				<br> <input type="password" name="passwd" id="" class="iText">
+				<br>
 				<p>
-					<span class="fleft"><input type="checkbox" name="autoLogin" id=""><label
-						for=""> 아이디 저장</label></span> <span class="fright"><a href="">아이디
-							찾기</a>&nbsp;|&nbsp;<a href="">비밀번호 찾기</a>&nbsp;|&nbsp;<a href="">회원가입</a></span>
+					<span class="fleft"><input type="checkbox" name="autoLogin"
+						id="autoLogin"><label for=""> 아이디 저장</label></span> <span class="fright"><a
+						href="">아이디 찾기</a>&nbsp;|&nbsp;<a href="">비밀번호 찾기</a>&nbsp;|&nbsp;<a
+						href="">회원가입</a></span>
 				</p>
 			</div>
-			<a href="LoginServlet" id="" class="loginBtn">로그인</a>
+			<a href="javascript:login(LoginForm)" id="" class="loginBtn">로그인</a>
 		</form>
 	</div>
 </div>
+<script>
+	function login(f) {
+		f.action = "LoginServlet";
+		f.submit();
+	}
+</script>
 <style>
 .loginForm {
 	position: relative;

@@ -14,7 +14,7 @@ public class MemberDAO {
 		return n;
 	}
 	
-	public MemberDTO searchMember(SqlSession session, HashMap map) {
+	public MemberDTO searchMember(SqlSession session, HashMap<String, String> map) {
 		
 		MemberDTO dto = session.selectOne("searchMember",map);
 		return dto;

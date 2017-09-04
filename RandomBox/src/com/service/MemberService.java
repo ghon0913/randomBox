@@ -1,5 +1,7 @@
 package com.service;
 
+import java.util.HashMap;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.dao.MemberDAO;
@@ -24,6 +26,21 @@ public class MemberService {
 			session.close();
 		}
 
+	}
+	
+	public MemberDTO searchMember(HashMap<String,String> map) {
+		SqlSession session = MybatisTemplate.openSession();
+		MemberDAO dao = new MemberDAO();
+		MemberDTO dto = null;
+		try {
+			dto = dao.searchMember(session, map);
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			session.close();
+		}
+		
+		return dto;
 	}
 
 }
