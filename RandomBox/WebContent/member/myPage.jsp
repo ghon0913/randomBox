@@ -3,46 +3,51 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<script type="text/javascript" src="jquery-3.2.1.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	var kind="myPageOrderInfo";
+	
+	$("#userinfo").on("click",function(){
 
-<form id="myPage">
+		var d = "myPageUserInfo.jsp"
+		console.log(kind);
+	});
+	$("#orderinfo").on("click",function(){
+		var kk=$("#orderinfo").val()
+		console.log(kind);
+		
+		$.ajax({
+    		type:"get",
+    		url:"ThrowMyPagekindServlet",
+    		data:{
+    			kind:$("#orderinfo").val()
+    		},
+    		dataType:"text"
 
-	<table border="1" style="color: yellow">
-		<!-- 상단 회원정보/주문내역/내가쓴글 선택시 화면 전환 -->
-		<tr>
+		});
+		
+	});
 
-			<td><input type="button" value="회원정보"
-				onclick="userinfo()">
-			</td>
-			
-			<td><input type="button" value="주문내역"
-				onclick="orderinfo()">
-			</td>
-			
-			<td><input type="button" value="내가쓴글"
-				onclick="writelist()">
-			</td>
-		</tr>
-		<tr>
-			<td>
-				ㅇㅇ님 안녕하세용
-			</td>
-		</tr>
+	$("#writelist").on("click",function(){
+		console.log("writelist 클릭");
+	});
+		
+});
 
-	</table>
+</script>
+
+<button id="userinfo" value="userinfo" >회원정보</button>
+<button id="orderinfo" value="userinfo" >주문내역</button>
+<button id="writelist" >내가쓴글</button>
 
 
+하
+<hr/>
+<jsp:include page="${kind}.jsp" flush="true"/>
 
 
 </form>
 
-<script>
-	function userinfo() {
-		location.href = "MyPageUserInfoServlet";
-	}
-	function orderinfo() {
-		location.href = "MyPageOrderInfoServlet";
-	}
-	function writelist() {
-		location.href = "MyPageWriteListServlet";
-	}
-</script>
+	

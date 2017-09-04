@@ -17,6 +17,7 @@ public class MyPageUserInfoServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String target="myPageUserInfo.jsp";
+		
 		RequestDispatcher dis=request.getRequestDispatcher(target);
 		dis.forward(request, response);
 	}
