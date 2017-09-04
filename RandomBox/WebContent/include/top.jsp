@@ -14,7 +14,7 @@
 		<input type="text" name="searchBar" value="검색하세요" size="50"> 
 		<input type="button" value="검색">
 		<a href="LoginFormServlet">로그인</a>&nbsp;&nbsp;
-		<a href="">회원가입</a>&nbsp;&nbsp;
+		<a href="MemberAddFormServlet">회원가입</a>&nbsp;&nbsp;
 		<a href="">장바구니</a>&nbsp;&nbsp;
 	</div>
 </div>
