@@ -21,15 +21,14 @@ public class IdCheckServlet extends HttpServlet {
 		String mesg = "사용가능";
 		
 		MemberService service = new MemberService();
-		String idck;
+		boolean ck;
 		
 		try {
-			idck = service.idCheck(userid);
-			System.out.println(idck);
-/*			
-			if(idck = ) {
+			ck = service.idCheck(userid);
+
+			if(ck) {
 				mesg = "아이디 중복";
-			}*/
+			}
 		} catch (MyException e) {
 			e.printStackTrace();
 		}
