@@ -11,15 +11,20 @@
 		<tr>
 
 			<td><input type="button" value="회원정보"
-				onclick="userinfo('${cartList.num}','${cartList.userid}')">
+				onclick="userinfo()">
 			</td>
 			
 			<td><input type="button" value="주문내역"
-				onclick="orderinfo('${cartList.num}','${cartList.userid}')">
+				onclick="orderinfo()">
 			</td>
 			
 			<td><input type="button" value="내가쓴글"
-				onclick="writelist'${cartList.num}','${cartList.userid}')">
+				onclick="writelist()">
+			</td>
+		</tr>
+		<tr>
+			<td>
+				ㅇㅇ님 안녕하세용
 			</td>
 		</tr>
 
@@ -31,16 +36,13 @@
 </form>
 
 <script>
-	function userinfo(num, userid) {
-		location.href = "MyPageUserInfoServlet?num=" + num + "&userid=" + userid;
-		//number에해당되는물품정보 id에해당되는 개인정보
+	function userinfo() {
+		location.href = "MyPageUserInfoServlet";
 	}
-	function orderinfo(num, userid) {
-		location.href = "MyPageOrderInfoServlet?num=" + num + "&userid=" + userid;
-		//number에해당되는물품정보 id에해당되는 개인정보
+	function orderinfo() {
+		location.href = "MyPageOrderInfoServlet";
 	}
-	function writelist(num, userid) {
-		location.href = "MyPageWriteListServlet?num=" + num + "&userid=" + userid;
-		//number에해당되는물품정보 id에해당되는 개인정보
+	function writelist() {
+		location.href = "MyPageWriteListServlet";
 	}
 </script>
