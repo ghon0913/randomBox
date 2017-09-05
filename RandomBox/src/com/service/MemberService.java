@@ -48,6 +48,25 @@ public class MemberService {
 		return ck;
 	}// end idCheck
 	
+	/* 아이디 체크 */
+	public boolean emailCheck(String email) throws MyException{
+		
+		SqlSession session = MybatisTemplate.openSession();
+		MemberDAO dao = new MemberDAO();
+		boolean ck;
+		
+		try {
+			ck = dao.emailCheck(session, email);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException("emailCheck 실패");
+		} finally {
+			session.close();
+		}
+		
+		return ck;
+	}// end emailCheck
+	
 	public MemberDTO searchMember(HashMap<String,String> map) {
 		SqlSession session = MybatisTemplate.openSession();
 		MemberDAO dao = new MemberDAO();
