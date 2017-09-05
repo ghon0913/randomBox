@@ -7,8 +7,8 @@
 
 <hr>
 <div style="height: 200">
-	<div>
-		<img src="logo.jpg" width="200" height="200" align="left">
+	<div><a href="home.jsp">
+		<img src="logo.jpg" width="200" height="200" align="left"></a>
 	</div>
 	<div align="center">
 		<input type="text" name="searchBar" value="검색하세요" size="50"> 
