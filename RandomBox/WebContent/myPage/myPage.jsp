@@ -5,86 +5,150 @@
 	pageEncoding="UTF-8"%>
 <script type="text/javascript" src="jquery-3.2.1.js"></script>
 <script type="text/javascript">
+	$(document).ready(function() {
+		$("#userinfo").on("click", function(event) {
+			$("#firstpage").empty();
+			$.ajax({
+				type : "get",
+				url : "userinfo.do",
+				data : {
+					userid : $("#userinfo").attr("id")
+				},
+				dataType : "text",
+				success : function(responseData, status, xhr) {
+					$("#here").html(responseData);
+				},
+				error : function(xhr, status, e) {
+					console.log(xhr, status, e);
+				}
+			});
 
-$(document).ready(function(){
-	$("#userinfo").on("click",function(event){
-		console.log($("#userinfo").val());
-		$.ajax({
-			type:"get",
-			url:"userinfo.do",
-			data:{
-				kind:$("#userinfo").attr("id")
-			},
-			dataType:"text",
-			success:function(responseData,status,xhr){
-				$("#here").html(responseData);
-			},
-			error:function(xhr,status,e){
-				console.log(xhr,status,e);
-			}
+		});
+
+		$("#orderinfo").on("click", function(event) {
+			$("#firstpage").empty();
+			$.ajax({
+				type : "get",
+				url : "orderinfo.do",
+				data : {
+					userid : $("#orderinfo").attr("id")
+				},
+				dataType : "text",
+				success : function(responseData, status, xhr) {
+					$("#here").html(responseData);
+				},
+				error : function(xhr, status, e) {
+					console.log(xhr, status, e);
+				}
+			});
+
+		});
+
+		$("#writelist").on("click", function(event) {
+			$("#firstpage").empty();
+			$.ajax({
+				type : "get",
+				url : "writelist.do",
+				data : {
+					userid : $("#writelist").attr("id")
+
+				},
+				dataType : "text",
+				success : function(responseData, status, xhr) {
+					$("#here").html(responseData);
+				},
+				error : function(xhr, status, e) {
+					console.log(xhr, status, e);
+				}
+			});
+
+		});
+
+		$("#sellinfo").on("click", function(event) {
+			$("#firstpage").empty();
+			$.ajax({
+				type : "get",
+				url : "sellinfo.do",
+				data : {
+					userid : $("#sellinfo").attr("id")
+
+				},
+				dataType : "text",
+				success : function(responseData, status, xhr) {
+					$("#here").html(responseData);
+				},
+				error : function(xhr, status, e) {
+					console.log(xhr, status, e);
+				}
+			});
 		});
 		
-	});
-	
-	$("#orderinfo").on("click",function(event){
-		console.log($("#orderinfo").val());
-		$.ajax({
-			type:"get",
-			url:"orderinfo.do",
-			data:{
-				kind:$("#orderinfo").attr("id")
-			},
-			dataType:"text",
-			success:function(responseData,status,xhr){
-				$("#here").html(responseData);
-			},
-			error:function(xhr,status,e){
-				console.log(xhr,status,e);
-			}
+		$("#writelist").on("click", function(event) {
+			$("#firstpage").empty();
+			$.ajax({
+				type : "get",
+				url : "writelist.do",
+				data : {
+					userid : $("#writelist").attr("id")
+
+				},
+				dataType : "text",
+				success : function(responseData, status, xhr) {
+					$("#here").html(responseData);
+				},
+				error : function(xhr, status, e) {
+					console.log(xhr, status, e);
+				}
+			});
 		});
 		
-	});
+		$("#goodsinfo").on("click", function(event) {
+			$("#firstpage").empty();
+			$.ajax({
+				type : "get",
+				url : "goodsinfo.do",
+				data : {
+					userid : $("#goodsinfo").attr("id")
+				},
+				dataType : "text",
+				success : function(responseData, status, xhr) {
+					$("#here").html(responseData);
+				},
+				error : function(xhr, status, e) {
+					console.log(xhr, status, e);
+				}
+			});
 
-	$("#writelist").on("click",function(event){
-		console.log($("#writelist").attr("id"));
-		$.ajax({
-			type:"get",
-			url:"writelist.do",
-			data:{
-				kind:$("#writelist").attr("id")
-			},
-			dataType:"text",
-			success:function(responseData,status,xhr){
-				$("#here").html(responseData);
-			},
-			error:function(xhr,status,e){
-				console.log(xhr,status,e);
-			}
 		});
-		
+
 	});
-		
-});
-/* 
-$("button").click(function(){
-	    $("#w3s").attr("href", "https://www.w3schools.com/jquery");
-	}); 
-
-$("#daum").attr("href","http://www.google.com");
-*/
-
 </script>
 
-username 님 안녕하세요.<br/><br/>
-<button id="userinfo"  >회원정보</button>
-<button id="orderinfo" >주문내역</button>
-<button id="writelist"  >내가쓴글</button>
+username 님 안녕하세요.
+<br />
+<br />
+
+	<img src="images/mypage/userinfo.png" id="userinfo" width="100">
+<%-- <c:if test="ture"> --%>
+
+	<img src="images/mypage/orderinfo.png" id="orderinfo" width="100">
+	<img src="images/mypage/writelist.png" id="writelist" width="100"><br />
+<%-- </c:if>
+ --%>
+
+<%-- <c:if test="ture">
+ --%>
+	<img src="images/mypage/sellinfo.png" id="sellinfo" width="100">
+	<img src="images/mypage/goodsinfo.png" id="goodsinfo" width="100">
+
+<%-- </c:if> --%>
+<hr />
+
+<div id="firstpage">
+<img src="logo.jpg">
+</div>
+
+<div id="here"></div>
 
 
 
-<hr/>
-<div id="here"> </div>
-
-</form>
-
-	

@@ -11,7 +11,6 @@
 </head>
 <body>
 	<jsp:include page="include/top.jsp" flush="true" />
-	<br/><br/><br/><br/>
 	<jsp:include page="myPage/myPage.jsp" flush="true" /><br>
 </body>
 </html>

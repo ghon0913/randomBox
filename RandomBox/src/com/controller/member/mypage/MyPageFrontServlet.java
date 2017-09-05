@@ -14,6 +14,8 @@ public class MyPageFrontServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String userid = request.getParameter("userid");
+		System.out.println(userid);
 		
 		String requestURI =request.getRequestURI();
 		String contextPath = request.getContextPath();
@@ -30,15 +32,15 @@ public class MyPageFrontServlet extends HttpServlet {
 		if(command.equals("/writelist.do")) {
 			target = "myPage/myPageWriteList.jsp";
 		}
-		if(command.equals("")) {
+		if(command.equals("/sellinfo.do")) {
+			target = "myPage/myPageSellInfo.jsp";
 			
 		}
-		if(command.equals("")) {
+		if(command.equals("/goodsinfo.do")) {
+			target = "myPage/myPageGoodsInfo.jsp";
 			
 		}
-		if(command.equals("")) {
-			
-		}
+
 		
 
 
