@@ -22,11 +22,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where userid = #{userid}
 	</select>
 	
+	<!-- 로그인 -->
 	<select id="searchMember" parameterType="hashmap" resultType="MemberDTO">
 		select userid,username,passwd,email,phone,
-		gender,birthday,post1,post2,addr1,addr2,ox,cookie
+		gender,birthday,post1,post2,addr1,addr2,ox,sessionid,sessionlimit
 		from joinmember
 		where userid=#{userid} and passwd=#{passwd}
 	</select>
 	
+	<!-- 자동로그인 설정  -->
+	<update id="updateSession" parameterType="hashmap">
+		update joinmember set sessionId = #{sessionId}, sessionLimit = #{sessionLimit} 
+		where userid=#{userid}
+	</update>	
+	
+	<!-- 세션id 가져오기  -->
+	<select id="checkSessionId" parameterType="String" resultType="MemberDTO">
+		select * from joinmember where sessionId =#{sessionId} and sessionLimit > now()	
+	</select>
 </mapper>
