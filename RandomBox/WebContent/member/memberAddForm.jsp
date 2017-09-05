@@ -41,15 +41,15 @@
 			<tr>
 				<td>이메일</td>
 				<td id="email_td"><input type="text" name="email1" id="email1">
-					@ <select name="email2" id="email2">
-						<option value="empty">선택하기</option>
+					@ <input type="text" name="email2" id="email2"> <select
+					name="email" id="email">
 						<option id="etc" value="etc">직접입력하기</option>
-						<option value="naver.com">naver.com</option>
-						<option value="daum.net">daum.net</option>
-						<option value="nate.com">nate.com</option>
-						<option value="gmail.com">gmail.com</option>
-						<option value="hotmail.com">hotmail.com</option>
-						<option value="korea.com">korea.com</option>
+						<option value="naver.com">naver</option>
+						<option value="daum.net">daum</option>
+						<option value="nate.com">nate</option>
+						<option value="gmail.com">gmail</option>
+						<option value="hotmail.com">hotmail</option>
+						<option value="korea.com">korea</option>
 				</select> <span id="emailCheck"></span></td>
 			</tr>
 			<tr>
@@ -93,7 +93,7 @@
 			</tr>
 		</table>
 	</form>
-</div> 
+</div>
 <script type="text/javascript" src="jquery-3.2.1.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -137,73 +137,83 @@ $(document).ready(function(){
     });
     
     
-    /* 이메일 직접 입력  */
-    $("select#email2").on("change", function(event){
-    	
-		if($("#email2 option:selected").attr("value")=='etc'){
-			$("select#email2").before("<input type='text' name='email2' id='email_etc'>");
-		}
+     /* 이메일 중복, 유효성 검사 */
+     var ck_email = /^([\w\.-]+)@([a-z\d\.-]+)\.([a-z\.]{2,6})$/;
+     var email1, email2, email;
+     
+     $("select#email").on("change", function(event){
+    	 
+		$("[readonly='readonly']").attr("readonly","false");	
 		
-		if($("#email2 option:selected").attr("value")!='etc'){
-			$("#email_etc").remove("input#email_etc");
+		if($("#email option:selected").attr("value")!='etc'){
+			
+			$("#email2").val($('#email option:selected').attr('value'));
+			$("#email2").attr("readonly","readonly");
+			
+			if($("#email1").val() != null){
+	    		email1 = $("#email1").val();
+	    		email2 = $("#email2").val();
+	    	}
+	    	email = email1+"@"+email2;
+	    	console.log(email+"***");
+	
+	    	$.ajax({
+        		
+        		type : "post",
+        		url : "EmailCheckServlet",
+        		data : {
+        			email: email
+        		},
+        		dataType : "text",
+        		success : function(responseData, status, xhr){
+        			$("#emailCheck").val("");
+        			$("#emailCheck").text(responseData);
+        		},
+        		error : function(xhr, status, e){
+        			console.log(status, e);
+        		}
+        	}); // end ajax
+			
+		}else{
+			$("#email2").val("");
 		}
     });
 
-    
-    /* 이메일 중복, 유효성 검사 */
-    var email1, email2, email;
-    $("select#email2").on("change", function(){
-    	
-    	switch ($("#email2 option:selected").attr("value")) {
-    	
-    	case 'etc' : 
-	    	$("#email_etc").on("keyUp", function(){
-	        	console.log("##############");
-	        	/* if($("#email1").val() != null){
-	        		email1 = $("#email1").val();
-	        		email2 = $("[name = email2]").val();
-	        	}
-	        	email = email1+"@"+email2;
-	        	console.log(email+"###");
-	        	
-	         	if(ck_email.test(email) != true){
-	         		$("#emailCheck").empty();
-	        		$("#emailCheck").text("이메일 유형 부적합");
-	        	}*/
-	       	});
-	    	break;
-    	
-    	case 'empty' :
-    		break;
+    	$("#email2").on("keyUp", function(){
+    		console.log("%%%%");
     		
-    	default :
-    		email1 = $("#email1").val();
-    		email2 = $("[name = email2]").val();
-    		break;
-    	}
-    	
-    	email = email1+"@"+email2;
-	 	
-    	$.ajax({
-    		
-    		type : "post",
-    		url : "EmailCheckServlet",
-    		data : {
-    			email: email
-    		},
-    		dataType : "text",
-    		success : function(responseData, status, xhr){
-    			$("#emailCheck").text(responseData);
-    		},
-    		error : function(xhr, status, e){
-    			console.log(status, e);
-    		}
-    	}); // end ajax
-   	});
-    
+    		if($("#email1").val() != null){
+	    		email1 = $("#email1").val();
+	    		email2 = $("#email2").val();
+	    	}
+    		email = email1+"@"+email2;
+	    	console.log(email+"@@@");
+	    	
+    		if(ck_email.test(email != true)){
+	     		$("#emailCheck").val("");
+	    		$("#emailCheck").text("이메일 유형 부적합");
+	    	}else{
+	    		$.ajax({
+	        		
+	        		type : "post",
+	        		url : "EmailCheckServlet",
+	        		data : {
+	        			email: email
+	        		},
+	        		dataType : "text",
+	        		success : function(responseData, status, xhr){
+	        			$("#emailCheck").val("");
+	        			$("#emailCheck").text(responseData);
+	        		},
+	        		error : function(xhr, status, e){
+	        			console.log(status, e);
+	        		}
+	        	}); // end ajax
+	    	}
+    	});
 
     
-    /* 유효성, 빈칸 없나 확인 */
+    /* 빈칸 없나 확인 */
 	$("#memberAddForm").on("submit", function(e){
 		
 		if($("#userid").val().length==0){
@@ -215,7 +225,7 @@ $(document).ready(function(){
 		}else if($("#username").val().length==0){
 			alert("입력하신 이름을 확인해주세요!");
 			e.preventDefault();
-		}else if($("#email1").val().length==0 || $("#email2 option:selected").attr("value")=='empty' || $("#email_etc").val().length==0){
+		}else if($("#email1").val().length==0 || $("#email2").val().length==0 || $("#emailCheck").text()=="이메일 유형 부적합"){
 			alert("입력하신 이메일을 확인해주세요!");
 			e.preventDefault();
  		}else if($("#birthday").val().length == 0){
