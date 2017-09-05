@@ -30,6 +30,21 @@ public class MemberDAO {
 		return ck;
 	}// end idCheck
 
+	/* 이메일 중복 체크 */
+	public boolean emailCheck(SqlSession session, String email) {
+		
+		String e = session.selectOne("emailCheck", email);
+		boolean ck;
+		
+		if(e!=null) {
+			ck = true;
+		}else {
+			ck = false;
+		}
+		return ck;
+	}// end emailCheck
+	
+
 	/* 로그인 */
 	public MemberDTO searchMember(SqlSession session, HashMap<String, String> map) {
 
