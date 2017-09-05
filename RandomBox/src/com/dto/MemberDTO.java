@@ -14,13 +14,15 @@ public class MemberDTO {
 	private String addr1;
 	private String addr2;
 	private String ox;
-	private String cookie;
+	private String sessionId;
+	private String sessionLimit;
 	public MemberDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public MemberDTO(String userid, String username, String passwd, String email, String phone, String gender,
-			String birthday, String post1, String post2, String addr1, String addr2, String ox, String cookie) {
+			String birthday, String post1, String post2, String addr1, String addr2, String ox, String sessionId,
+			String sessionLimit) {
 		super();
 		this.userid = userid;
 		this.username = username;
@@ -34,7 +36,8 @@ public class MemberDTO {
 		this.addr1 = addr1;
 		this.addr2 = addr2;
 		this.ox = ox;
-		this.cookie = cookie;
+		this.sessionId = sessionId;
+		this.sessionLimit = sessionLimit;
 	}
 	public String getUserid() {
 		return userid;
@@ -108,13 +111,18 @@ public class MemberDTO {
 	public void setOx(String ox) {
 		this.ox = ox;
 	}
-	public String getCookie() {
-		return cookie;
+	public String getSessionId() {
+		return sessionId;
 	}
-	public void setCookie(String cookie) {
-		this.cookie = cookie;
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
 	}
-	
+	public String getSessionLimit() {
+		return sessionLimit;
+	}
+	public void setSessionLimit(String sessionLimit) {
+		this.sessionLimit = sessionLimit;
+	}
 	
 	
 }
