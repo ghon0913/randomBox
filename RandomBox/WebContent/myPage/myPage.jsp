@@ -12,7 +12,7 @@
 				type : "get",
 				url : "userinfo.do",
 				data : {
-					userid : $("#userinfo").attr("id")
+					"userid" : "admin"
 				},
 				dataType : "text",
 				success : function(responseData, status, xhr) {

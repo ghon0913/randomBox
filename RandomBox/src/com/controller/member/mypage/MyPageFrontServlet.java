@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dto.MemberDTO;
+import com.exception.MyException;
+import com.service.MyPageService;
+
 @WebServlet("*.do")
 public class MyPageFrontServlet extends HttpServlet {
 
@@ -22,8 +26,20 @@ public class MyPageFrontServlet extends HttpServlet {
 		String command = requestURI.substring(contextPath.length());
 		
 		String target = "";
+		MyPageService mservice = new MyPageService();
 		
 		if(command.equals("/userinfo.do")) {
+
+			try {
+				MemberDTO dto = mservice.myPageUserInfo(userid);
+				request.setAttribute("dto", dto);
+			} catch (MyException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				
+			}
+			
+			
 			target="myPage/myPageUserInfo.jsp";
 		}
 		if(command.equals("/orderinfo.do")) {
@@ -39,6 +55,19 @@ public class MyPageFrontServlet extends HttpServlet {
 		if(command.equals("/goodsinfo.do")) {
 			target = "myPage/myPageGoodsInfo.jsp";
 			
+		}
+		if(command.equals("/userinfoupdate.do")) {
+			System.out.println("userinfoupdate");
+			String passwd = request.getParameter("passwd");
+			MemberDTO dto = new MemberDTO();
+			dto.setPasswd(passwd);
+			
+			try {
+				mservice.updateuserinfo(dto);
+			} catch (MyException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		

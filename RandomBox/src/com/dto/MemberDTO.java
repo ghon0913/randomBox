@@ -20,6 +20,13 @@ public class MemberDTO {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	@Override
+	public String toString() {
+		return "MemberDTO [userid=" + userid + ", username=" + username + ", passwd=" + passwd + ", email=" + email
+				+ ", phone=" + phone + ", gender=" + gender + ", birthday=" + birthday + ", post1=" + post1 + ", post2="
+				+ post2 + ", addr1=" + addr1 + ", addr2=" + addr2 + ", ox=" + ox + ", sessionId=" + sessionId
+				+ ", sessionLimit=" + sessionLimit + "]";
+	}
 	public MemberDTO(String userid, String username, String passwd, String email, String phone, String gender,
 			String birthday, String post1, String post2, String addr1, String addr2, String ox, String sessionId,
 			String sessionLimit) {
