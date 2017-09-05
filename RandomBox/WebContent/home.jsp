@@ -10,6 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	
 	<c:if test="${! empty result }">
 	       <script>
 	              alert('${result}');

@@ -6,6 +6,12 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<properties resource="com/mybatis/jdbc.properties" />
 	<typeAliases>
 		<typeAlias type="com.dto.MemberDTO" alias="MemberDTO" />
+		<typeAlias type="com.dto.CartDTO" alias="CartDTO" />
+		<typeAlias type="com.dto.GoodsDTO" alias="GoodsDTO" />
+		<typeAlias type="com.dto.OrderInfoDTO" alias="OrderInfoDTO" />
+		<typeAlias type="com.dto.QnABoardDTO" alias="QnABoardDTO" />
+		<typeAlias type="com.dto.ReviewBoardDTO" alias="ReviewBoardDTO" />
+		
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">
@@ -20,5 +26,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	</environments>
 	<mappers>
 		<mapper resource="com/mybatis/MemberMapper.xml" />
+		<mapper resource="com/mybatis/CartMapper.xml" />
+		<mapper resource="com/mybatis/GoodsMapper.xml" />
+		<mapper resource="com/mybatis/OrderInfoMapper.xml" />
+		<mapper resource="com/mybatis/QnABoardMapper.xml" />
+		<mapper resource="com/mybatis/ReviewBoardMapper.xml" />
 	</mappers>
 </configuration>

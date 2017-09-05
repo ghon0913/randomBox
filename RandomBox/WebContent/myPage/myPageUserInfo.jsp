@@ -40,5 +40,10 @@
 			id="addr2" size="40" value="${login.addr2}" placeholder="지번주소">
 			<!-- 다음주소 끝 -->
 	</tr>
+	<tr>
+		<td colspan="2" align="right">
+			<input type="submit" vlaue="수정하기" translate="yes">수정하기</button>
+		</td>
+	</tr>
 </table>
 </div>
