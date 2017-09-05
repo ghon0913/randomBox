@@ -9,27 +9,39 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/ThrowMyPagekindServlet")
-public class ThrowMyPagekindServlet extends HttpServlet {
+@WebServlet("*.do")
+public class MyPageFrontServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		String kind = request.getParameter("kind");
-		System.out.println(kind);
-		
+		String requestURI =request.getRequestURI();
+		String contextPath = request.getContextPath();
+		String command = requestURI.substring(contextPath.length());
 		
 		String target = "";
 		
-		if ("userinfo".equals(kind)) {
-			System.out.println("ㅎㅎㅎㅎ");
-			target = "member/myPageUserInfo.jsp";
-		} else if ("orderinfo".equals(kind)) {
-			target = "member/myPageOrderInfo.jsp";
-		} else if ("writelist".equals(kind)) {
-			target = "member/myPageWriteList.jsp";
+		if(command.equals("/userinfo.do")) {
+			target="myPage/myPageUserInfo.jsp";
 		}
-		request.setAttribute("kind", target);
+		if(command.equals("/orderinfo.do")) {
+			target="myPage/myPageOrderInfo.jsp";
+		}
+		if(command.equals("/writelist.do")) {
+			target = "myPage/myPageWriteList.jsp";
+		}
+		if(command.equals("")) {
+			
+		}
+		if(command.equals("")) {
+			
+		}
+		if(command.equals("")) {
+			
+		}
+		
+
+
 		RequestDispatcher dis = request.getRequestDispatcher(target);
 		dis.forward(request,response);
 

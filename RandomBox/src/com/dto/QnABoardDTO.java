@@ -1,0 +1,86 @@
+package com.dto;
+
+public class QnABoardDTO {
+	
+	private int num;
+	private String state;
+	private String title;
+	private String content;
+	private String writeDay;
+	private String readCnt;
+	private String userId;
+	private String gCode;
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public String getWriteDay() {
+		return writeDay;
+	}
+	public void setWriteDay(String writeDay) {
+		this.writeDay = writeDay;
+	}
+	public String getReadCnt() {
+		return readCnt;
+	}
+	public void setReadCnt(String readCnt) {
+		this.readCnt = readCnt;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public String getgCode() {
+		return gCode;
+	}
+	public void setgCode(String gCode) {
+		this.gCode = gCode;
+	}
+	@Override
+	public String toString() {
+		return "QnABoardDTO [num=" + num + ", state=" + state + ", title=" + title + ", content=" + content
+				+ ", writeDay=" + writeDay + ", readCnt=" + readCnt + ", userId=" + userId + ", gCode=" + gCode + "]";
+	}
+	public QnABoardDTO(int num, String state, String title, String content, String writeDay, String readCnt,
+			String userId, String gCode) {
+		super();
+		this.num = num;
+		this.state = state;
+		this.title = title;
+		this.content = content;
+		this.writeDay = writeDay;
+		this.readCnt = readCnt;
+		this.userId = userId;
+		this.gCode = gCode;
+	}
+	public QnABoardDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	
+
+}
