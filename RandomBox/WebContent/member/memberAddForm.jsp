@@ -41,8 +41,8 @@
 			<tr>
 				<td>이메일</td>
 				<td id="email_td"><input type="text" name="email1" id="email1">
-					@ <input type="text" name="email2" id="email2"> <select
-					name="email" id="email">
+					@ <input type="text" name="email2" id="email2">
+					 <select name="email" id="email">
 						<option id="etc" value="etc">직접입력하기</option>
 						<option value="naver.com">naver</option>
 						<option value="daum.net">daum</option>
@@ -141,9 +141,7 @@ $(document).ready(function(){
      var ck_email = /^([\w\.-]+)@([a-z\d\.-]+)\.([a-z\.]{2,6})$/;
      var email1, email2, email;
      
-     $("select#email").on("change", function(event){
-    	 
-		$("[readonly='readonly']").attr("readonly","false");	
+     $("select#email").on("change", function(event){	
 		
 		if($("#email option:selected").attr("value")!='etc'){
 			
@@ -176,6 +174,7 @@ $(document).ready(function(){
 			
 		}else{
 			$("#email2").val("");
+			$("[readonly='readonly']").attr("readonly","false");
 		}
     });
 
