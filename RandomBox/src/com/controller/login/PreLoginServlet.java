@@ -20,37 +20,31 @@ public class PreLoginServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		Object obj = session.getAttribute("login");
-	
-		MemberDTO dto = null;
-		String sessionId = null;
-		MemberService service = new MemberService();
-		String target = "LoginServlet";
-		
-		//처음 진입
-		if (obj == null) {
-			Cookie[] Cookies = request.getCookies();
-			for (Cookie ck : Cookies) {
-				
-				if (ck.getName().equals("loginCookie1")) {
+		String cookieId = "";
+		String target = "home.jsp";
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+			
+			for (int i = 0; i < cookies.length; i++) {
+				if (cookies[i].getName().equals("cookieId")) {
+					cookieId = cookies[i].getValue();
 					
-					sessionId = ck.getValue();
-					try {
-						dto = service.checkSessionId(sessionId);
-						if (dto != null) {
-							session.setAttribute("login", dto);	
-						}
-					} catch (MyException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				
 				}
-				
-				
 			}
+			System.out.println(cookieId);
+			if (cookieId.equals("")) {
+			} else {
+				MemberService service = new MemberService();
+				MemberDTO dto = null;
+				try {
+					dto = service.checkCookieId(cookieId);
+					HttpSession session = request.getSession();
 
+					session.setAttribute("login", dto);		
+				} catch (MyException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		
 		RequestDispatcher dis = request.getRequestDispatcher(target);

@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +27,15 @@ public class LogoutServlet extends HttpServlet {
 			target = "loginForm.jsp";
 			request.setAttribute("mesg", "로그인이 필요한 작업");
 		} else {
+			Cookie cookies[] = request.getCookies();
+			
+			for (int i = 0; i < cookies.length; i++) {
+				cookies[i].setMaxAge(0);
+				cookies[i].setPath("/");
+				response.addCookie(cookies[i]);
+			}
+			
+			System.out.println("죽임?");
 			session.invalidate();
 			request.setAttribute("logout", "정상적으로 로그아웃");
 		}

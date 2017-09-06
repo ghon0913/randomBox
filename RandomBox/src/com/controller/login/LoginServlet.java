@@ -23,67 +23,72 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String target = "";
-//		if (session.getAttribute("login") != null) {
-//			session.removeAttribute("login");
-//		}
+		// if (session.getAttribute("login") != null) {
+		// session.removeAttribute("login");
+		// }
 		String userid = request.getParameter("userid");
 		String passwd = request.getParameter("passwd");
-		boolean isChecked = false; 
-				
-		if(request.getParameter("autoLogin")!=null) {
-			isChecked = true;
-		};
+		boolean isChecked = false;
 
-		System.out.println(isChecked);
-		
+		if (request.getParameter("autoLogin") != null) {
+			isChecked = true;
+		}
 		HashMap<String, String> map = new HashMap<>();
 		map.put("userid", userid);
 		map.put("passwd", passwd);
 
 		MemberService service = new MemberService();
-		MemberDTO dto=null;
+		MemberDTO dto = null;
 		try {
+
 			dto = service.searchMember(map);
+
 		} catch (MyException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(dto == null) {
-			target="error.jsp";
+	
+		if (dto == null) {
+			target = "error.jsp";
 			request.setAttribute("error", "아이디/비번 확인하세요");
-		}
-		else {
+		} else {
+
 			target = "home.jsp";
 			session.setAttribute("login", dto);
 			request.setAttribute("login", "로그인 성공");
 
-//			if (isChecked) {
-//				HashMap<String,String> map2 = new HashMap<>();
-//				map2.put("userid", userid);
-//				map2.put("sessionId", session.getId());
-//			//	map2.put("sessionLimit", session.getId());
-//				
-//				
-//				try {
-//					service.updateSession(map2);
-//					
-//					Cookie cookie = new Cookie("loginCookie1", session.getId());
-//					cookie.setPath("/");
-//					cookie.setMaxAge(60 * 60 * 24 * 7);
-//
-//					response.addCookie(cookie);
-//				} catch (MyException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-				
-			
-//			}
-		} 
+			if (isChecked) {
+				System.out.println(1111);
+				HashMap<String, String> map2 = new HashMap<>();
+				map2.put("userid", userid);
+				map2.put("cookieId", session.getId());
+				try {
+					System.out.println(2222);
+					service.updateCookieId(map2);
+					System.out.println(3333);
+					Cookie cookie = new Cookie("cookieId", session.getId());
+					cookie.setPath("/");
+					cookie.setMaxAge(60 * 60 * 24 * 7);
+
+					response.addCookie(cookie);
+				} catch (MyException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else {
+				Cookie cookies[] = request.getCookies();
+
+				for (int i = 0; i < cookies.length; i++) {
+					cookies[i].setMaxAge(0);
+					cookies[i].setPath("/");
+					response.addCookie(cookies[i]);
+				}
+			}
+		}
+
+		System.out.println(4444);
 		RequestDispatcher dis = request.getRequestDispatcher(target);
 		dis.forward(request, response);
-		
-		
 
 	}
 

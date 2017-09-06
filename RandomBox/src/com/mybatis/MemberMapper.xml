@@ -37,14 +37,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where userid=#{userid} and passwd=#{passwd}
 	</select>
 	
-	<!-- 자동로그인 설정  -->
-	<update id="updateSession" parameterType="hashmap">
-		update joinmember set sessionId = #{sessionId}, sessionLimit = #{sessionLimit} 
+	<!-- cookieId 업데이트  -->
+	<update id="updateCookieId" parameterType="hashmap">
+		update joinmember set sessionId = #{cookieId} 
 		where userid=#{userid}
 	</update>	
 	
-	<!-- 세션id 가져오기  -->
-	<select id="checkSessionId" parameterType="String" resultType="MemberDTO">
-		select * from joinmember where sessionId =#{sessionId} and sessionLimit > now()	
+	<!-- CookieId 가져오기  -->
+	<select id="checkCookieId" parameterType="String" resultType="MemberDTO">
+		select * from joinmember where sessionId =#{cookieId}
+	</select>
+	
+	<!-- 아이디 찾기 -->
+	<select id="findUserId" parameterType="hashmap" resultType="String">
+		select userid from joinmember where username =#{username} and phone =#{phone} 
+	</select>
+	<!-- 비밀번호 찾기 -->
+	<select id="findPasswd" parameterType="String" resultType="MemberDTO">
+		select passwd, email from joinmember where userid =#{userid} 
 	</select>
 </mapper>

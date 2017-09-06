@@ -10,6 +10,11 @@
 <title>로그인</title>
 </head>
 <body>
+	<c:if test="${! empty email }">
+		<script>
+			alert("가입하신 메일로 비밀번호를 보냈습니다^^");
+		</script>
+	</c:if>
 	<jsp:include page="include/top.jsp" flush="true" /><br>
 	<br>
 	<br>
@@ -18,8 +23,8 @@
 	<br>
 	<br>
 	<jsp:include page="login/loginForm.jsp" flush="true" /><br>
-	
-	
+
+
 
 </body>
 </html>

@@ -52,16 +52,26 @@ public class MemberDAO {
 		return dto;
 	}
 	
-	/* 로그인 세션 추가  */
-	public int updateSession(SqlSession session, HashMap<String, String> map) {
+	/* 쿠키아이디 변경  */
+	public int updateCookieId(SqlSession session, HashMap<String, String> map) {
 
-		int n = session.update("updateSession", map);
+		int n = session.update("updateCookieId", map);
 		return n;
 	}
 	
-	/* 세션아이디 체크 */
-	public MemberDTO checkSessionId(SqlSession session, String sessionId) {
-		MemberDTO dto = session.selectOne("checkSessionId", sessionId);
+	/* 쿠키아이디 체크 */
+	public MemberDTO checkCookieId(SqlSession session, String cookieId) {
+		MemberDTO dto = session.selectOne("checkCookieId", cookieId);
+		return dto;
+	}
+	
+	public String findUserId(SqlSession session, HashMap<String,String> map) {
+		String userid = session.selectOne("findUserId", map);
+		return userid;
+	}
+	
+	public MemberDTO findPasswd(SqlSession session, String userid) {
+		MemberDTO dto = session.selectOne("findPasswd", userid);
 		return dto;
 	}
 	
