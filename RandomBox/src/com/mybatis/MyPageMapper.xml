@@ -4,6 +4,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mybatis.MyPageMapper">
 
+<select id="logintomypage" resultType="MemberDTO" parameterType="string">
+select userid, username, passwd, email, phone,gender,
+	   birthday, post1, post2, addr1, addr2, ox, sessionid, sessionlimit
+from joinmember
+</select>
 
 <select id="mypageuserinfo" resultType="MemberDTO" parameterType="string">
 select userid, username, passwd, email, phone,gender,
