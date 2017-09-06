@@ -5,7 +5,6 @@
 	pageEncoding="UTF-8"%>
 <script type="text/javascript" src="jquery-3.2.1.js"></script>
 <script type="text/javascript">
-${login}
 	$(document).ready(function() {
 		$("#userinfo").on("click", function(event) {
 			$("#firstpage").empty();
@@ -51,8 +50,7 @@ ${login}
 				type : "get",
 				url : "writelist.do",
 				data : {
-					userid : $("#writelist").attr("id")
-
+					"userid" : "${login.userid}"
 				},
 				dataType : "text",
 				success : function(responseData, status, xhr) {
@@ -71,8 +69,7 @@ ${login}
 				type : "get",
 				url : "sellinfo.do",
 				data : {
-					userid : $("#sellinfo").attr("id")
-
+					"userid" : "${login.userid}"
 				},
 				dataType : "text",
 				success : function(responseData, status, xhr) {
@@ -90,8 +87,7 @@ ${login}
 				type : "get",
 				url : "writelist.do",
 				data : {
-					userid : $("#writelist").attr("id")
-
+					"userid" : "${login.userid}"
 				},
 				dataType : "text",
 				success : function(responseData, status, xhr) {
@@ -109,7 +105,7 @@ ${login}
 				type : "get",
 				url : "goodsinfo.do",
 				data : {
-					userid : $("#goodsinfo").attr("id")
+					"userid" : "${login.userid}"
 				},
 				dataType : "text",
 				success : function(responseData, status, xhr) {
