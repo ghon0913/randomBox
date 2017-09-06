@@ -27,7 +27,7 @@
 			<input type="button" value="검색"> 
 			<a href="LogoutServlet">로그아웃</a>&nbsp;&nbsp;
 			<a href="MyPageServlet">마이페이지</a>&nbsp;&nbsp; 
-			<a href="">장바구니</a>&nbsp;&nbsp;
+			<a href="CartListServlet">장바구니</a>&nbsp;&nbsp;
 		</div>
 	</c:if>	
 </div>

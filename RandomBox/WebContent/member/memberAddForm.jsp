@@ -10,9 +10,9 @@
 <!-- DAUM 주소 라이브러리 끝 -->
 
 <div>
+	<h3>구매 회원가입</h3>
+	<p>회원 정보를 입력해 주세요. 모두 입력하셔야 가입이 가능합니다.</p>
 	<form action="MemberAddServlet" method="post" id="memberAddForm">
-		<h3>구매 회원가입</h3>
-		<p>회원 정보를 입력해 주세요. 모두 입력하셔야 가입이 가능합니다.</p>
 		<table name="memberAddForm">
 			<tr>
 				<td colspan="2" align="center">일반 구매회원 <input type="radio"
