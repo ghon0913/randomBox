@@ -16,8 +16,8 @@ import com.service.MemberService;
 /**
  * Servlet implementation class FindUserId
  */
-@WebServlet("/FindUserId")
-public class FindUserId extends HttpServlet {
+@WebServlet("/FindUserIdServlet")
+public class FindUserIdServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

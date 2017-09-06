@@ -14,7 +14,7 @@ ddd
 				<p>
 					<span class="fleft"><input type="checkbox" name="autoLogin"
 						id="autoLogin" value="on"><label for=""> 아이디 저장</label></span> <span
-						class="fright"><a href="FindUserIdForm">아이디 찾기</a>&nbsp;|&nbsp;<a
+						class="fright"><a href="FindUserIdFormServlet">아이디 찾기</a>&nbsp;|&nbsp;<a
 						href="FindPasswdFormServlet">비밀번호 찾기</a>&nbsp;|&nbsp;<a
 						href="MemberAddFormServlet">회원가입</a></span>
 				</p>
@@ -25,7 +25,7 @@ ddd
 </div>
 <script>
 	function login(f) {
-		f.action = "PreLoginServlet";
+		f.action = "LoginServlet";
 		f.submit();
 	}
 </script>

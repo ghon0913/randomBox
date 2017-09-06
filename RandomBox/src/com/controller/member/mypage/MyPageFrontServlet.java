@@ -33,10 +33,10 @@ public class MyPageFrontServlet extends HttpServlet {
 			target = "myPage1.jsp";
 			System.out.println("front servlet"+logindto);
 			try {
-				user = (service.
+				//user = (service.
 				//userid로주고 userdto로받음
 			
-				session.setAttribute("login", user);
+				//session.setAttribute("login", user);
 			} catch (MyException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

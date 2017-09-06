@@ -85,19 +85,19 @@ public class MemberService {
 		return dto;
 	}
 
-	/* 로그인 세션 추가 */
-	public void updateSession(HashMap<String, String> map) throws MyException {
+	/* 쿠키아이디 추가 */
+	public void updateCookieId(HashMap<String, String> map) throws MyException {
 
 		SqlSession session = MybatisTemplate.openSession();
 		MemberDAO dao = new MemberDAO();
 		try {
-			int n = dao.updateSession(session, map);
+			int n = dao.updateCookieId(session, map);
 			if(n==1) {
 				session.commit();
 			}
 			
 		} catch (Exception e) {
-			throw new MyException("updateSession 실패");
+			throw new MyException("updateCookieId 실패");
 		} finally {
 			session.close();
 		}
@@ -105,14 +105,14 @@ public class MemberService {
 	}
 
 	/* 세션아이디 체크 */
-	public MemberDTO checkSessionId(String sessionId) throws MyException {
+	public MemberDTO checkCookieId(String cookieId) throws MyException {
 		SqlSession session = MybatisTemplate.openSession();
 		MemberDAO dao = new MemberDAO();
 		MemberDTO dto = null;
 		try {
-			dto = dao.checkSessionId(session, sessionId);
+			dto = dao.checkCookieId(session, cookieId);
 		} catch (Exception e) {
-			throw new MyException("checkSessionId");
+			throw new MyException("checkCookieId");
 		} finally {
 			session.close();
 		}
