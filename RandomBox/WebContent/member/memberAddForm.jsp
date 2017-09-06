@@ -230,7 +230,7 @@ $(document).ready(function(){
  		}else if($("#birthday").val().length == 0){
 			alert("입력하신 생일을 확인해주세요!");
 			e.preventDefault();
-		}else if($("#post1").val().length == 0){
+		}else if($("#post1").val().length == 0 || $("#addr2").val().length == 0){
 			alert("입력하신 주소를 확인해주세요!");
 			e.preventDefault();
 		}else if($("#phone2").val().length < 3 || $("#phone2").val().length > 4 || $("#phone3").val().length != 4){
