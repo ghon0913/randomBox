@@ -37,10 +37,9 @@ public class MyPageService {
 		}finally {
 			session.close();
 		}
-		
-		
-
 	}
+	
+
 
 }
 

@@ -5,6 +5,7 @@
 	pageEncoding="UTF-8"%>
 <script type="text/javascript" src="jquery-3.2.1.js"></script>
 <script type="text/javascript">
+${login}
 	$(document).ready(function() {
 		$("#userinfo").on("click", function(event) {
 			$("#firstpage").empty();
@@ -12,7 +13,7 @@
 				type : "get",
 				url : "userinfo.do",
 				data : {
-					"userid" : "admin"
+					"userid" : "${login.userid}"
 				},
 				dataType : "text",
 				success : function(responseData, status, xhr) {
@@ -31,7 +32,7 @@
 				type : "get",
 				url : "orderinfo.do",
 				data : {
-					userid : $("#orderinfo").attr("id")
+					"userid" : "${login.userid}"
 				},
 				dataType : "text",
 				success : function(responseData, status, xhr) {
@@ -124,7 +125,7 @@
 	});
 </script>
 
-username 님 안녕하세요.
+${login.username} 님 안녕하세요.
 <br />
 <br />
 
