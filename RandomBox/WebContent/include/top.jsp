@@ -27,7 +27,7 @@
 			<input type="button" value="검색"> 
 			<a href="LogoutServlet">로그아웃</a>&nbsp;&nbsp;
 			<a href="MyPageServlet">마이페이지</a>&nbsp;&nbsp; 
-			<a href="">장바구니</a>&nbsp;&nbsp;
+			<a href="">장바구니</a>&nbsp;&nbsp; ${sessionScope.login.username}님 안녕하세요
 		</div>
 	</c:if>	
 </div>
