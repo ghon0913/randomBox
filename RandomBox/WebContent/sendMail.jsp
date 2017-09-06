@@ -1,3 +1,6 @@
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="javax.mail.internet.MimeUtility"%>
 <%@page import="java.util.Date"%>
 <%@page import="javax.mail.MessagingException"%>
@@ -19,15 +22,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="jquery-3.2.1.js"></script>
+<script type="text/javascript">
+
+</script>
+
 </head>
 <body>
+
 	<%
 	String host = "smtp.naver.com";
     String subject = "네이버를 이용한 메일발송";
-    String from = "rara923@naver.com"; //보내는 메일
+    String from = "ghon0913@naver.com"; //보내는 메일
    String fromName = "랜덤박스관리자";
-    String to = "rara923@naver.com";
-    String content = "네이버를 이용한 메일 발송 Test입니다. 감사합니다.";
+    String to = (String)request.getAttribute("email");
+    
+    String content = "네이버를 이용한 비밀번호 발송 서비스입니다."+"비밀번호는 "+(String)request.getAttribute("passwd")+"입니다. 감사합니다.";
 
    try{
      //프로퍼티 값 인스턴스 생성과 기본세션(SMTP 서버 호스트 지정)
@@ -69,9 +79,13 @@
       System.out.println("error : "+e.getMessage());
        e.printStackTrace();
      }
-    
+    %>
 
+    <%
+	RequestDispatcher dis = request.getRequestDispatcher("LoginFormServlet");
+	dis.forward(request, response);
 	%>
 
 </body>
 </html>
+

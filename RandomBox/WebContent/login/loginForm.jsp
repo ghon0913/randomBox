@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
+
 <div align="center">
 	<div class="loginForm">
 		<form name="LoginForm" method="get" action="">
@@ -12,9 +12,11 @@
 				<br> <input type="password" name="passwd" id="" class="iText">
 				<br>
 				<p>
-					<span class="fleft"><input type="checkbox" name="autoLogin" id="autoLogin" value="on"><label
-						for=""> 아이디 저장</label></span> <span class="fright"><a href="">아이디
-							찾기</a>&nbsp;|&nbsp;<a href="">비밀번호 찾기</a>&nbsp;|&nbsp;<a href="MemberAddFormServlet">회원가입</a></span>
+					<span class="fleft"><input type="checkbox" name="autoLogin"
+						id="autoLogin" value="on"><label for=""> 아이디 저장</label></span> <span
+						class="fright"><a href="FindUserIdForm">아이디 찾기</a>&nbsp;|&nbsp;<a
+						href="FindPasswdFormServlet">비밀번호 찾기</a>&nbsp;|&nbsp;<a
+						href="MemberAddFormServlet">회원가입</a></span>
 				</p>
 			</div>
 			<a href="javascript:login(LoginForm)" id="" class="loginBtn">로그인</a>

@@ -65,4 +65,14 @@ public class MemberDAO {
 		return dto;
 	}
 	
+	public String findUserId(SqlSession session, HashMap<String,String> map) {
+		String userid = session.selectOne("findUserId", map);
+		return userid;
+	}
+	
+	public MemberDTO findPasswd(SqlSession session, String userid) {
+		MemberDTO dto = session.selectOne("findPasswd", userid);
+		return dto;
+	}
+	
 }

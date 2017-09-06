@@ -119,4 +119,34 @@ public class MemberService {
 		return dto;
 	}
 	
+	/* 아이디 찾기 */
+	public String findUserId(HashMap<String,String> map) throws MyException {
+		SqlSession session = MybatisTemplate.openSession();
+		MemberDAO dao = new MemberDAO();
+		String userid = null;
+		try {
+			userid = dao.findUserId(session, map);
+		} catch (Exception e) {
+			throw new MyException("findUserId 실패");
+		} finally {
+			session.close();
+		}
+		return userid;
+	}
+	
+	/* 비밀번호 찾기 */
+	public MemberDTO findPasswd(String userid) throws MyException {
+		SqlSession session = MybatisTemplate.openSession();
+		MemberDAO dao = new MemberDAO();
+		MemberDTO dto = null;
+		try {
+			dto = dao.findPasswd(session, userid);
+		} catch (Exception e) {
+			throw new MyException("findPasswd 실패");
+		} finally {
+			session.close();
+		}
+		return dto;
+	}
+	
 }
