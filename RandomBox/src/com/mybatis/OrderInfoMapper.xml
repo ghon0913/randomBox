@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		userid, ordername, phone, email,
 		post1, post2, addr1, addr2, gcode, gname,
 		gprice, gimage, paymethod, sellerid)
-		values(#{num}, #{userId}, #{orderName},
+		values(order_seq.nextval, #{userId}, #{orderName},
 		#{phone}, #{eMail}
 		, #{post1}, #{post2}, #{addr1}, #{addr2}, #{gCode},
 		#{gName}, #{gPrice}, #{gImage}, #{payMethod},
@@ -33,6 +33,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		gAmount = gAmount -1
 		where gCode = #{gCode}
 	</update>
+	
+	<!-- 장바구니 개병 주문 -->
+	<select id="orderConfirm" resultType="CartDTO" parameterType="int">
+		select num, userid, gCode, gName, gPrice, gImage
+		from cart
+		where num = #{num}
+	</select>
 
 	<!-- 전체 주문한 상품 정보 리스트로 받아 가져오기 -->
 	<select id="goods_orderInfoAll" parameterType="list" resultType="GoodsDTO">
@@ -49,7 +56,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- 전체 주문한 정보 리스트로 받아 저장하기 -->
-	<insert id="orderDone" parameterType="list">
+	<insert id="orderAllDone" parameterType="list">
 		insert into
 		order_Info(num,
 		userid, ordername, phone, email,
@@ -63,7 +70,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 
 	<!-- 전체 주문한 상품 모두 amount 감소 -->
-	<update id="orderAfterAmount" parameterType="list">
+	<update id="orderAfterAmountAll" parameterType="list">
 		update goods
 		set
 		gAmount = gAmount -1

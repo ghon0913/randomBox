@@ -26,13 +26,13 @@ public class OrderConfirmServlet extends HttpServlet {
 		String num = request.getParameter("num");
 		String userid = request.getParameter("userid");
 		
-		CartService c_service = new CartService();
+		OrderService o_service = new OrderService();
 		MyPageService m_service = new MyPageService();
 		
 		String target = "orderConfirm.jsp";
 		
 		try {
-			CartDTO c_dto = c_service.orderConfirm(Integer.parseInt(num));
+			CartDTO c_dto = o_service.orderConfirm(Integer.parseInt(num));
 			MemberDTO m_dto = m_service.myPageUserInfo(userid);
 			request.setAttribute("cDTO", c_dto);
 			request.setAttribute("mDTO", m_dto);

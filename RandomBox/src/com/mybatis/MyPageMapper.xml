@@ -25,5 +25,21 @@ set passwd=#{passwd}, email=#{email}, phone=#{phone},
 where userid=#{userid}
 
 </update>
+
+<select id="myPageBoardList" parameterType="string" resultType="BoardDTO">
+select num, category, title, content, 
+to_char(writeday, 'mm/dd') "writeday", readcnt, userid, gcode, state
+from board
+where userid=#{userid}
+</select>
+
+<select id="myPageBoardRetrieve" parameterType="int" resultType="BoardDTO">
+select num, category, title, content, 
+to_char(writeday, 'mm/dd') "writeday", readcnt, userid, gcode, state
+from board
+where num=#{num}
+</select>
+
+
 	
 </mapper>

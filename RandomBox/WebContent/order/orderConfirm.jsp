@@ -53,7 +53,7 @@
 						<tr>
 							<td class="td_default" width="80">${cDTO.num }</td>
 							<td class="td_default" width="80"><img
-								src="images/goods/${cDTO.gImage }.gif" border="0" align="center"
+								src="images/goods/${cDTO.gImage }" border="0" align="center"
 								width="80" /></td>
 							<td class="td_default" width="300" style='padding-left: 30px'>${cDTO.gName }</td>
 							<td class="td_default" align="center" width="110">${cDTO.gPrice }

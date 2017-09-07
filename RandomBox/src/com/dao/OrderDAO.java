@@ -8,6 +8,13 @@ import com.dto.OrderInfoDTO;
 
 public class OrderDAO {
 	
+	/* 개별 주문 */
+	public CartDTO orderConfirm(SqlSession session, int num){
+		
+		CartDTO dto = session.selectOne("orderConfirm", num);
+		return dto;
+	}
+	
 	/* 주문한 상품 정보 가져오기 */
 	public GoodsDTO goods_orderInfo(SqlSession session, String gCode) {
 

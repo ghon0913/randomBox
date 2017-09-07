@@ -12,6 +12,25 @@ import com.mybatis.MybatisTemplate;
 
 public class OrderService {
 	
+	/* 개별 주문 정보 */
+	public CartDTO orderConfirm(int num) throws MyException{
+		
+		SqlSession session = MybatisTemplate.openSession();
+		OrderDAO dao = new OrderDAO();
+		CartDTO dto = null;
+		
+		try {
+			dto = dao.orderConfirm(session, num);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException("orderConfirm 실패");
+		}finally {
+			session.close();
+		}
+		
+		return dto;
+	}// end orderConfirm
+	
 	/* 주문한 상품 정보 가져오기 */
 	public GoodsDTO goods_orderInfo(String gCode) throws MyException{
 		

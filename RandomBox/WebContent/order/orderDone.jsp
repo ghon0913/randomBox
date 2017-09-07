@@ -75,7 +75,7 @@
 				</tr>
 				<tr>
 					<td height="35" class="td_default" align="center">
-						<img src="images/goods/${orderDTO.gImage }.gif" border="0" align="center"
+						<img src="images/goods/${orderDTO.gImage }" border="0" align="center"
 								width="80" />
 					</td>
 					<td height="35" class="td_default">

@@ -63,7 +63,7 @@
 					</td>
 					<td class="td_default" width="80" id="num">${xxx.num}</td>
 					<td class="td_default" width="80"><img
-						src="images/goods/${xxx.gImage}.gif" border="0" align="center"
+						src="images/goods/${xxx.gImage}" border="0" align="center"
 						width="80" /></td>
 					<td class="td_default" width="300" style='padding-left: 30px'>${xxx.gName}</td>
 					<td class="td_default" align="center" width="110"><fmt:formatNumber

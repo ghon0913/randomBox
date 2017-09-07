@@ -68,24 +68,6 @@ public class CartService {
 			session.close();
 		}
 	}
-	
-	/* 개별 주문 정보 */
-	public CartDTO orderConfirm(int num) throws MyException{
-		
-		SqlSession session = MybatisTemplate.openSession();
-		CartDAO dao = new CartDAO();
-		CartDTO dto = null;
-		
-		try {
-			dto = dao.orderConfirm(session, num);
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new MyException("orderConfirm 실패");
-		}finally {
-			session.close();
-		}
-		
-		return dto;
-	}// end orderConfirm
+
 	
 }

@@ -1,8 +1,9 @@
 package com.dto;
 
-public class QnABoardDTO {
+public class BoardDTO {
 	
 	private int num;
+	private String category;
 	private String state;
 	private String title;
 	private String content;
@@ -15,6 +16,12 @@ public class QnABoardDTO {
 	}
 	public void setNum(int num) {
 		this.num = num;
+	}
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	public String getState() {
 		return state;
@@ -58,15 +65,11 @@ public class QnABoardDTO {
 	public void setgCode(String gCode) {
 		this.gCode = gCode;
 	}
-	@Override
-	public String toString() {
-		return "QnABoardDTO [num=" + num + ", state=" + state + ", title=" + title + ", content=" + content
-				+ ", writeDay=" + writeDay + ", readCnt=" + readCnt + ", userId=" + userId + ", gCode=" + gCode + "]";
-	}
-	public QnABoardDTO(int num, String state, String title, String content, String writeDay, String readCnt,
-			String userId, String gCode) {
+	public BoardDTO(int num, String category, String state, String title, String content, String writeDay,
+			String readCnt, String userId, String gCode) {
 		super();
 		this.num = num;
+		this.category = category;
 		this.state = state;
 		this.title = title;
 		this.content = content;
@@ -75,11 +78,16 @@ public class QnABoardDTO {
 		this.userId = userId;
 		this.gCode = gCode;
 	}
-	public QnABoardDTO() {
+	public BoardDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+	@Override
+	public String toString() {
+		return "BoardDTO [num=" + num + ", category=" + category + ", state=" + state + ", title=" + title
+				+ ", content=" + content + ", writeDay=" + writeDay + ", readCnt=" + readCnt + ", userId=" + userId
+				+ ", gCode=" + gCode + "]";
+	}
 	
 	
 
