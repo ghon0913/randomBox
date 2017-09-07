@@ -14,20 +14,21 @@
 <table border="1">
 	<tr colspan="2">
 		<td>이름</td>
-		<td><input type="text" id="userName" value="${mdto.username}" readonly="readonly"></td>
+		<td><input type="text" id="userName" name="userName" value="${mdto.username}" readonly="readonly"></td>
 	</tr>
 	<tr>
 		<td>아이디</td>
-		<td><input type="text" id="userid" value="${mdto.userid}" readonly="readonly"></td>
-	</tr>
+		<td><input type="text" id="userid" name="userid" value="${mdto.userid}" readonly="readonly"></td>
+	</tr><!-- name으로 servlet에서 파라미터받아라 -->
 	<tr>
 		<td>비밀번호</td>
-		<td><input type="password" id="passwd"><br /> <input
-			type="password" id="checkPasswd"></td>
+		<td><input type="password" name="passwd" id="passwd" value="${mdto.passwd }"><br />
+			<input type="password" id="checkPasswd"></td>
+			<!-- 비밀번호확인j쿼리추가하기 -->
 	</tr>
 	<tr>
 		<td>휴대전화</td>
-		<td><input type="text" id="phoneNumber" value="${mdto.phone}"></td>
+		<td><input type="text"  name="phoneNumber" id="phoneNumber" value="${mdto.phone}"></td>
 	</tr>
 	<tr>
 		<td>주소</td>
@@ -44,7 +45,7 @@
 	</tr>
 	<tr>
 		<td colspan="2" align="right">
-			<input type="submit" value="전송">
+			<input type="submit" action="userinfoupdate.do" value="수정">
 		</td>
 	</tr>
 </table>

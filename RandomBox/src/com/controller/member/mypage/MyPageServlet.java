@@ -14,8 +14,8 @@ import com.dto.MemberDTO;
 import com.exception.MyException;
 import com.service.MyPageService;
 
-@WebServlet("/myPageServlet")
-public class myPageServlet extends HttpServlet {
+@WebServlet("/MyPageServlet")
+public class MyPageServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

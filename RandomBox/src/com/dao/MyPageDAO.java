@@ -15,8 +15,8 @@ public class MyPageDAO {
 		return dto;
 	}
 	
-	public int updateuserinfo(SqlSession session, MemberDTO dto) {
-		int n = session.update("com.mybatis.MyPageMapper.updateuserinfo",dto);
+	public int updateuserinfo(SqlSession session, MemberDTO updto) {
+		int n = session.update("com.mybatis.MyPageMapper.updateuserinfo",updto);
 		return n;
 	}
 	
