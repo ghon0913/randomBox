@@ -90,17 +90,27 @@ public class MyPageFrontServlet extends HttpServlet {
 				request.setAttribute("page", "myPage/myPageSellInfo.jsp");
 
 			} else if (command.equals("/goodsinfo.do")) {
-
 				request.setAttribute("page", "myPage/myPageGoodsInfo.jsp");
-
+				
+				
+				
 			} else if (command.equals("/userinfoupdate.do")) {
-
+				
 				String passwd = request.getParameter("passwd");
-				MemberDTO dto = new MemberDTO();
-				dto.setPasswd(passwd);
-
+				String phoneNumber = request.getParameter("phoneNumber");
+				String post1 = request.getParameter("post1");
+				String post2 = request.getParameter("post2");
+				String addr1 = request.getParameter("addr1");
+				String addr2 = request.getParameter("addr2");
+			
+				login.setPasswd(passwd);
+				login.setAddr1(addr1);
+				login.setAddr2(addr2);
+				login.setPost1(post1);
+				login.setPost2(post2);
+				login.setPhone(phoneNumber);
 				try {
-					service.updateuserinfo(dto);
+					service.updateuserinfo(login);
 				} catch (MyException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

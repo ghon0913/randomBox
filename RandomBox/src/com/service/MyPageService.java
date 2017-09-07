@@ -25,11 +25,11 @@ public class MyPageService {
 		}
 	}
 
-	public void updateuserinfo(MemberDTO dto) throws MyException {
+	public void updateuserinfo(MemberDTO updto) throws MyException {
 		MyPageDAO dao = new MyPageDAO();
 		SqlSession session = MybatisTemplate.openSession();
 		try {
-			int n = dao.updateuserinfo(session, dto);
+			int n = dao.updateuserinfo(session, updto);
 			if (n == 1) {
 				session.commit();
 			}

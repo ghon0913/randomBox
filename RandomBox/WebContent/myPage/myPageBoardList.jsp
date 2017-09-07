@@ -21,7 +21,7 @@
 			<c:forEach var="a" items="${bdto}">
 				<tr>
 					<td>${a.num }</td>
-					<td><a href="BoardRetrieve.do?bnum=${a.num}" } target="_blank">${a.title}</a></td>
+					<td><a href="BoardRetrieve.do?bnum=${a.num}" target="_blank">${a.title}</a></td>
 					<td>${a.state}</td>
 					<td>${a.writeDay }</td>
 				</tr>

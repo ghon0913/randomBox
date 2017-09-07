@@ -1,1 +1,1 @@
-sellinfo
+sellsinfo
