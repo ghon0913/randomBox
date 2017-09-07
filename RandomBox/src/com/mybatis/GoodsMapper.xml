@@ -4,6 +4,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mybatis.GoodsMapper">
 
-
+<insert id="insertGoods" parameterType="GoodsDTO">
+	insert into goods(gCode,gCategory,gName,gPrice,gImage,gContent_image,gAmount,sellerId)
+	values(#{gCode},#{gCategory},#{gName},#{gPrice},#{gImage},#{gContentImage},#{gAmount},#{sellerId})
+</insert>
 	
 </mapper>
