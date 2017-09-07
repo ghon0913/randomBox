@@ -27,6 +27,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        				#{item}
        			</foreach>
        		</where>
-       		
        </delete>
+       
+		<!-- 장바구니 개병 주문 -->
+		<select id="orderConfirm" resultType="CartDTO" parameterType="int">
+			select num, userid, gCode, gName, gPrice, gImage
+			from cart
+			where num = #{num}
+		</select>
 </mapper>

@@ -28,4 +28,12 @@ public class CartDAO {
 		int n = session.delete("delAllCart", list);
 		return n;
 	}
+	
+	/* 개별 주문 */
+	public CartDTO orderConfirm(SqlSession session, int num){
+		
+		CartDTO dto = session.selectOne("orderConfirm", num);
+		return dto;
+	}
+	
 }

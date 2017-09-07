@@ -7,19 +7,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>나의 장바구니</title>
+<title>주문 하기</title>
 </head>
 <body>
 	<jsp:include page="include/top.jsp" flush="true" /><br>
-	<c:if test="${empty sessionScope.login }">
-		<script type="text/javascript">
-			alert("로그인이 필요한 메뉴입니다.");
-		</script>
-		<br><br><br><br><br><br>
-		<jsp:include page="login/loginForm.jsp" flush="true" /><br>
-	</c:if>
-	<c:if test="${! empty sessionScope.login }">
-		<jsp:include page="cart/cart.jsp" flush="true" /><br>
-	</c:if>
+	<jsp:include page="order/orderConfirm.jsp" flush="true" /><br>
 </body>
 </html>

@@ -61,7 +61,7 @@
 						type="checkbox" name="check" id="check${xxx.num}" class="check"
 						value="${xxx.num}">
 					</td>
-					<td class="td_default" width="80">${xxx.num}</td>
+					<td class="td_default" width="80" id="num">${xxx.num}</td>
 					<td class="td_default" width="80"><img
 						src="images/goods/${xxx.gImage}.gif" border="0" align="center"
 						width="80" /></td>
@@ -70,7 +70,7 @@
 							value="${xxx.gPrice}" type="currency" /></td>
 					<td class="td_default" align="center" width="30"
 						style='padding-left: 10px'><input type="button" value="주문"
-						onclick="oder('${xxx.num}','${xxx.userId}')"></td>
+						onclick="order('${xxx.num}','${xxx.userId}')"></td>
 					<td class="td_default" align="center" width="30"
 						style='padding-left: 10px'><input type="button" value="삭제"
 						onclick="delCart('${xxx.num}')"></td>
@@ -92,9 +92,9 @@
 
 			<tr>
 				<td align="center" colspan="5"><a class="a_black"
-					href="javascript:orderAllConfirm(myForm)"> 전체 주문하기 </a>&nbsp;&nbsp;&nbsp;&nbsp;
+					href="javascript:orderAllConfirm(cartListForm)"> 전체 주문하기 </a>&nbsp;&nbsp;&nbsp;&nbsp;
 					<a class="a_black" href="javascript:delAllCart(cartListForm)"> 전체
-						삭제하기 </a>&nbsp;&nbsp;&nbsp;&nbsp; <a class="a_black" href="index.jsp">
+						삭제하기 </a>&nbsp;&nbsp;&nbsp;&nbsp; <a class="a_black" href="start.jsp">
 						계속 쇼핑하기 </a>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 			</tr>
 			<tr>
@@ -123,6 +123,15 @@
 	
 	function delAllCart(f){
 		f.action = "CartDelAllServlet";
+		f.submit();
+	}
+	
+	function order(num, userid){
+		location.href = "OrderConfirmServlet?num="+num+"&userid="+userid;
+	}
+	
+	function orderAllConfirm(f){
+		f.action = "OrderAllConfirmServlet";
 		f.submit();
 	}
 </script>

@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
  pageEncoding="UTF-8"%>
-
+<script type="text/javascript" src="jquery-3.2.1.js"></script>
 <hr>
 <div style="height: 200">
  <div>
@@ -16,7 +16,12 @@
    <input type="button" value="검색"> 
    <a href="LoginFormServlet">로그인</a>&nbsp;&nbsp;
    <a href="MemberAddFormServlet">회원가입</a>&nbsp;&nbsp; 
-   <a href="">장바구니</a>&nbsp;&nbsp;
+   <a href="LoginFormServlet" id="cart">장바구니</a>&nbsp;&nbsp;
+   	<script type="text/javascript">
+   		$("#cart").on("click", function(){
+   			alert("로그인이 필요한 메뉴입니다.");
+   		});
+	</script>
   </div>
  </c:if> 
  
@@ -26,7 +31,7 @@
    <input type="button" value="검색"> 
    <a href="LogoutServlet">로그아웃</a>&nbsp;&nbsp;
    <a href="MyPageServlet">마이페이지</a>&nbsp;&nbsp; 
-   <a href="">장바구니</a>&nbsp;&nbsp; ${sessionScope.login.username}님 안녕하세요
+   <a href="CartListServlet">장바구니</a>&nbsp;&nbsp; ${sessionScope.login.username}님 안녕하세요
   </div>
  </c:if> 
 </div>
