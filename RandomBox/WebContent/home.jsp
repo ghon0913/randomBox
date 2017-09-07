@@ -21,7 +21,6 @@
 	       </script>
 	</c:if>
 	
-
 	<jsp:include page="include/top.jsp" flush="true" /><br>
 	<jsp:include page="include/category.jsp" flush="true" /><br>
 	<jsp:include page="goods/goodsList.jsp" flush="true" /><br>

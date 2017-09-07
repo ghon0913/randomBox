@@ -9,8 +9,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.dto.CartDTO" alias="CartDTO" />
 		<typeAlias type="com.dto.GoodsDTO" alias="GoodsDTO" />
 		<typeAlias type="com.dto.OrderInfoDTO" alias="OrderInfoDTO" />
-		<typeAlias type="com.dto.QnABoardDTO" alias="QnABoardDTO" />
-		<typeAlias type="com.dto.ReviewBoardDTO" alias="ReviewBoardDTO" />
+		<typeAlias type="com.dto.BoardDTO" alias="BoardDTO" />
 		
 	</typeAliases>
 	<environments default="development">
