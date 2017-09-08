@@ -70,30 +70,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 전체 주문한 정보 리스트로 받아 저장하기 -->
 	<insert id="orderAllDone" parameterType="list">
 		insert all
-		<foreach collection="list" item="item" index="index" open="("
-			separator="," close=")">
+		<foreach collection="list" item="item">
 			into order_Info (num, userid, ordername, phone, email,
 						post1, post2, addr1, addr2, gcode, gname,
 						gprice, gimage, paymethod, sellerid)
 			values
-			(order_seq.nextval, #{item.userId}, #{item.orderName}, #{item.phone},
+			(orderAll_seq(), #{item.userId}, #{item.orderName}, #{item.phone},
 			#{item.eMail}, #{item.post1}, #{item.post2}, #{item.addr1},
 			#{item.addr2}, #{item.gCode},
 			#{item.gName}, #{item.gPrice},
 			#{item.gImage}, #{item.payMethod}, #{item.sellerId})
 		</foreach>
+		select * from dual
 	</insert>
-
+	
 	<!-- 전체 주문한 상품 모두 amount 감소 -->
-	<update id="orderAfterAmountAll" parameterType="list">
+	<update id="orderAfterAmountAll" parameterType="String">
 		update goods
-		<foreach collection="list" item="item" index="index" open="("
-			separator="," close=")">
-			<set>
-				<if test="gAmount != null">#{item.gAmount} = #{item.gAmount} -1</if>
-			</set>
-			where
-			#{item.gCode} = #{item.gCode}
+		set gAmount = gAmount -1
+		where gCode IN
+		<foreach collection="list" item="item" open="(" separator="," close=")">
+			#{item}
 		</foreach>
 	</update>
 

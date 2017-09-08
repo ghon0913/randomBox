@@ -6,11 +6,22 @@
 
 <div>
 	<h3>나의 장바구니</h3>
-	<table width="90%" cellspacing="0" cellpadding="0" border="0">
+	<table width="70%" cellspacing="0" cellpadding="0" border="0">
 		<tr>
-			<td class="td_default" align="center"><input type="checkbox"
-				name="allCheck" id="allCheck" onchange="allCheck()"> <strong>전체선택</strong></td>
-			<td class="td_default" align="center"><strong>주문번호</strong></td>
+		<td height="30">
+	</tr>
+	<tr>
+		<td colspan="10">
+			<hr size="1" color="CCCCCC">
+		</td>
+	</tr>
+	<tr>
+		<td height="7">
+	</tr>
+		<tr>
+			<td class="td_default" align="center" width="100"><input type="checkbox"
+				name="allCheck" id="allCheck"> <strong>전체선택</strong></td>
+			<td class="td_default" align="center" width="100"><strong>주문번호</strong></td>
 			<td class="td_default" align="center" colspan="2"><strong>상품정보</strong></td>
 			<td class="td_default" align="center"><strong>판매가</strong></td>
 			<td colspan="3"></td>
@@ -30,7 +41,7 @@
 				<td height="5">
 			</tr>
 			<tr>
-				<td class="td_default" align="center">카트에 추가된 상품이 없습니다.</td>
+				<td class="td_default" align="center" colspan="7">카트에 추가된 상품이 없습니다.</td>
 			</tr>
 		</c:if>
 		
@@ -42,7 +53,7 @@
 					<hr size="1" color="CCCCCC">
 				</td>
 			</tr>
-		<form name="cartListForm">
+		<form name="cartListForm" id="cartListForm">
 			<c:forEach var="xxx" items="${cartList}">
 				<input type="hidden" name="num${xxx.num}" value="${xxx.num}"
 					id="num${xxx.num}">
@@ -70,10 +81,10 @@
 							value="${xxx.gPrice}" type="currency" /></td>
 					<td class="td_default" align="center" width="30"
 						style='padding-left: 10px'><input type="button" value="주문"
-						onclick="order('${xxx.num}','${xxx.userId}')"></td>
+						id="order"></td>
 					<td class="td_default" align="center" width="30"
 						style='padding-left: 10px'><input type="button" value="삭제"
-						onclick="delCart('${xxx.num}')"></td>
+						id="delCart"></td>
 					<td height="10"></td>
 				</tr>
 			</c:forEach>
@@ -92,8 +103,8 @@
 
 			<tr>
 				<td align="center" colspan="5"><a class="a_black"
-					href="javascript:orderAllConfirm(cartListForm)"> 전체 주문하기 </a>&nbsp;&nbsp;&nbsp;&nbsp;
-					<a class="a_black" href="javascript:delAllCart(cartListForm)"> 전체
+					href="#" id="orderAllConfirm"> 전체 주문하기 </a>&nbsp;&nbsp;&nbsp;&nbsp;
+					<a class="a_black" id="delAllCart" href="#"> 전체
 						삭제하기 </a>&nbsp;&nbsp;&nbsp;&nbsp; <a class="a_black" href="start.jsp">
 						계속 쇼핑하기 </a>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 			</tr>
@@ -101,6 +112,11 @@
 				<td height="20">
 			</tr>
 		</c:if>
+			<tr>
+				<td colspan="10">
+					<hr size="1" color="CCCCCC">
+				</td>
+			</tr>
 	</table>
 </div>
 
@@ -108,30 +124,34 @@
 
 <script type="text/javascript" src="jquery-3.2.1.js"></script>
 <script>
-	function delCart(num){
-		location.href = "CartDelServlet?num=" + num;
-	}
 	
-	function allCheck(){
+	$("#delCart").on("click", function(){
+		$(location).href("CartDelServlet?num="+$("#num").text());
+	})
+	
+	$("#allCheck").on("change", function(){
 		
 		if($("#allCheck").prop("checked")){
 			$(".check").prop("checked", true);
 		}else{
 			$(".check").prop("checked", false);
 		}
-	}
+	});
 	
-	function delAllCart(f){
-		f.action = "CartDelAllServlet";
-		f.submit();
-	}
+	$("#delAllCart").on("click", function(){
+		
+		$("#cartListForm").attr("action", "CartDelAllServlet");
+		$("#cartListForm").submit();
+	});
 	
-	function order(num, userid){
-		location.href = "OrderConfirmServlet?num="+num+"&userid="+userid;
-	}
+	$("#order").on("click", function(){
+		$(location).href("OrderConfirmServlet?num="+$("#num").text()+"&userid="+$("#userid").val());
+	});
 	
-	function orderAllConfirm(f){
-		f.action = "OrderAllConfirmServlet";
-		f.submit();
-	}
+	$("#orderAllConfirm").on("click", function(){
+		
+		$("#cartListForm").attr("action", "OrderAllConfirmServlet");
+		$("#cartListForm").submit();
+	});
+
 </script>

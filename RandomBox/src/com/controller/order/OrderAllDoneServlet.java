@@ -35,7 +35,7 @@ public class OrderAllDoneServlet extends HttpServlet {
 		String gPrice = request.getParameter("gPrice");
 		String [] gCodeList = request.getParameterValues("gCode");
 		
-		String target = "start.jsp";
+		String target = "orderAllDone.jsp";
 		
 		// GoodsDTO 가져오기
 		OrderService o_service = new OrderService();
@@ -48,31 +48,30 @@ public class OrderAllDoneServlet extends HttpServlet {
 		}
 		
 		List<OrderInfoDTO> orderDTOList = new ArrayList<>();
-		for (OrderInfoDTO orderInfoDTO : orderDTOList) {
-			orderInfoDTO.setUserId(userId);
-			orderInfoDTO.setOrderName(orderName);
-			orderInfoDTO.setPhone(phone);
-			orderInfoDTO.seteMail(eMail);
-			orderInfoDTO.setPost1(post1);
-			orderInfoDTO.setPost2(post2);
-			orderInfoDTO.setAddr1(addr1);
-			orderInfoDTO.setAddr2(addr2);
-			orderInfoDTO.setPayMethod(payMethod);
-			orderInfoDTO.setgPrice(Integer.parseInt(gPrice));
+		
+		for (GoodsDTO GoodsDTO : goodsDTOList) {
 			
-			for (GoodsDTO GoodsDTO : goodsDTOList) {
+			//for (OrderInfoDTO orderInfoDTO : orderDTOList) {
+			OrderInfoDTO orderInfoDTO = new OrderInfoDTO(); 
+				orderInfoDTO.setUserId(userId);
+				orderInfoDTO.setOrderName(orderName);
+				orderInfoDTO.setPhone(phone);
+				orderInfoDTO.seteMail(eMail);
+				orderInfoDTO.setPost1(post1);
+				orderInfoDTO.setPost2(post2);
+				orderInfoDTO.setAddr1(addr1);
+				orderInfoDTO.setAddr2(addr2);
+				orderInfoDTO.setPayMethod(payMethod);
+				orderInfoDTO.setgPrice(Integer.parseInt(gPrice));
 				orderInfoDTO.setgCode(GoodsDTO.getgCode());
 				orderInfoDTO.setgName(GoodsDTO.getgName());
 				orderInfoDTO.setgImage(GoodsDTO.getgImage());
 				orderInfoDTO.setSellerId(GoodsDTO.getSellerId());
-			}
-		}
-		
-		for (OrderInfoDTO orderInfoDTO : orderDTOList) {
-			System.out.println(orderInfoDTO.getAddr1()+"%%%%");
+			//}
+				orderDTOList.add(orderInfoDTO);
 		}
 
-		/* *********************************** orderDTO 저장 끝*/
+		/* *********************************** orderDTO 저장 끝 */
 		
 		try {
 			o_service.orderAllDone(orderDTOList, Arrays.asList(numList), Arrays.asList(gCodeList));

@@ -116,7 +116,7 @@ public class OrderService {
 	
 	/* 주문 정보 저장하고 카드에서 삭제, 수량 감소시키기 */
 	public void orderAllDone(List<OrderInfoDTO> orderDTO, List<String> numList, List<String> gCodeList) throws MyException{
-		
+		//List<String> gCodeList
 		SqlSession session = MybatisTemplate.openSession();
 		OrderDAO oDAO = new OrderDAO();
 		CartDAO cDAO = new CartDAO();
