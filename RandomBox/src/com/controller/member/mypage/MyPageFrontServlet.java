@@ -1,6 +1,7 @@
 package com.controller.member.mypage;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.dto.BoardDTO;
 import com.dto.MemberDTO;
+import com.dto.MyPageBoardPageDTO;
 import com.exception.MyException;
 import com.service.MyPageService;
 
@@ -49,14 +51,41 @@ public class MyPageFrontServlet extends HttpServlet {
 			}
 
 			// 어떤 .do로 왔는지 구분
+			////////////////////////////////////////////////
 			if (command.equals("/userinfo.do")) {
+
 				request.setAttribute("page", "myPage/myPageUserInfo.jsp");
 
-			} else if (command.equals("/orderinfo.do")) {
+			} else if (command.equals("/userinfoupdate.do")) {
 
-				request.setAttribute("page", "myPage/myPageorderinfo.jsp");
+				String passwd = request.getParameter("passwd");
+				String phoneNumber = request.getParameter("phoneNumber");
+				String post1 = request.getParameter("post1");
+				String post2 = request.getParameter("post2");
+				String addr1 = request.getParameter("addr1");
+				String addr2 = request.getParameter("addr2");
 
-			} else if (command.equals("/myboard.do")) {
+				login.setPasswd(passwd);
+				login.setAddr1(addr1);
+				login.setAddr2(addr2);
+				login.setPost1(post1);
+				login.setPost2(post2);
+				login.setPhone(phoneNumber);
+				try {
+					service.updateuserinfo(login);
+				} catch (MyException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				request.setAttribute("page", "myPage/myPageUserInfo.jsp");
+
+			} //////////////////////////////////////////////
+			else if (command.equals("/orderinfo.do")) {
+
+				request.setAttribute("page", "myPage/myPageOrderInfo.jsp");
+
+			} ///////////////////////////////////////////////////
+			/*else if (command.equals("/myboard.do")) {
 
 				List<BoardDTO> bdto;
 				try {
@@ -64,10 +93,40 @@ public class MyPageFrontServlet extends HttpServlet {
 					request.setAttribute("page", "myPage/myPageBoardList.jsp");
 					request.setAttribute("bdto", bdto);
 				} catch (MyException e) {
+					e.printStackTrace();
+				}
+			}*/ else if (command.equals("/searchmyboard.do")) {
+
+				String curPage = request.getParameter("curPage");
+				if (curPage == null) {
+					curPage = "1";
+				}
+				String searchName = request.getParameter("searchName");
+				String searchValue = request.getParameter("searchValue");
+
+				HashMap<String, String> map = new HashMap();
+				map.put("searchName", searchName);
+				map.put("searchValue", searchValue);
+				map.put("userId", login.getUserid());
+
+				try {
+					MyPageBoardPageDTO pagedto = service.boardpage(map, Integer.parseInt(curPage));
+					request.setAttribute("pagedto", pagedto);
+					request.setAttribute("page", "myPage/myPageBoardList.jsp");
+
+				} catch (NumberFormatException | MyException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
+				/*
+				 * 기존 페이지 전체출력 페이징 ㄴㄴ
+				 * 
+				 * List<BoardDTO> bdto; try { bdto = service.myPageBoardList(login.getUserid());
+				 * request.setAttribute("page", "myPage/myPageBoardList.jsp");
+				 * request.setAttribute("bdto", bdto); } catch (MyException e) { // TODO
+				 * Auto-generated catch block e.printStackTrace(); }
+				 */
 			} else if (command.equals("/BoardRetrieve.do")) {
 
 				BoardDTO bndto;
@@ -76,7 +135,7 @@ public class MyPageFrontServlet extends HttpServlet {
 					String bnum = request.getParameter("bnum");
 					bndto = service.myPageBoardRetrieve(Integer.parseInt(bnum));
 					bdto = service.myPageBoardList(login.getUserid());
-					
+
 					request.setAttribute("page", "myPage/myPageBoardRetrieve.jsp");
 					request.setAttribute("bndto", bndto);
 					request.setAttribute("bdto", bdto);
@@ -91,30 +150,6 @@ public class MyPageFrontServlet extends HttpServlet {
 
 			} else if (command.equals("/goodsinfo.do")) {
 				request.setAttribute("page", "myPage/myPageGoodsInfo.jsp");
-				
-				
-				
-			} else if (command.equals("/userinfoupdate.do")) {
-				
-				String passwd = request.getParameter("passwd");
-				String phoneNumber = request.getParameter("phoneNumber");
-				String post1 = request.getParameter("post1");
-				String post2 = request.getParameter("post2");
-				String addr1 = request.getParameter("addr1");
-				String addr2 = request.getParameter("addr2");
-			
-				login.setPasswd(passwd);
-				login.setAddr1(addr1);
-				login.setAddr2(addr2);
-				login.setPost1(post1);
-				login.setPost2(post2);
-				login.setPhone(phoneNumber);
-				try {
-					service.updateuserinfo(login);
-				} catch (MyException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 
 			}
 

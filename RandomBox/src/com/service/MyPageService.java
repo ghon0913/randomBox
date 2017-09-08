@@ -1,5 +1,6 @@
 package com.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -7,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.dao.MyPageDAO;
 import com.dto.BoardDTO;
 import com.dto.MemberDTO;
+import com.dto.MyPageBoardPageDTO;
 import com.exception.MyException;
 import com.mybatis.MybatisTemplate;
 
@@ -68,6 +70,22 @@ public class MyPageService {
 			session.close();
 		}
 		return bdto;
+	}
+
+	public MyPageBoardPageDTO boardpage(HashMap<String, String> map, int curPage) throws MyException {
+		SqlSession session = MybatisTemplate.openSession();
+		MyPageDAO dao = new MyPageDAO();
+		MyPageBoardPageDTO pagedto = null;
+		try {
+			pagedto = dao.boardpage(session,map,curPage);
+			System.out.println(pagedto+"service");
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new MyException("boardpage 예외");
+		}finally {
+			session.close();
+		}
+		return pagedto;
 	}
 
 	
