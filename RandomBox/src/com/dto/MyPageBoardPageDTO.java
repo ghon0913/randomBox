@@ -3,19 +3,60 @@ package com.dto;
 import java.util.List;
 
 public class MyPageBoardPageDTO {
-	private List<BoardDTO> list;// 전체데이터
-
-	private int curPage;// 현재페이지
-
-	private int totalCount;// 전체페이지
-
-	private static int perPage = 3;// 보여줄행 개수
-
+	
+	private List<BoardDTO> blist;
+	private int curPage;
+	private int totalPage;
+	private static int perPage = 3;
+	private int perBlock;
 	private String searchName;
 	private String searchValue;
-	private int perBlock = 5; // 페이지 당 보여줄 페이지 번호 갯수
-
-	
+	private String userId;
+	public MyPageBoardPageDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public MyPageBoardPageDTO(List<BoardDTO> blist, int curPage, int totalPage, int perBlock, String searchName,
+			String searchValue, String userId) {
+		super();
+		this.blist = blist;
+		this.curPage = curPage;
+		this.totalPage = totalPage;
+		this.perBlock = perBlock;
+		this.searchName = searchName;
+		this.searchValue = searchValue;
+		this.userId = userId;
+	}
+	@Override
+	public String toString() {
+		return "MyPageBoardPageDTO [blist=" + blist + ", curPage=" + curPage + ", totalPage=" + totalPage
+				+ ", perBlock=" + perBlock + ", searchName=" + searchName + ", searchValue=" + searchValue + ", userId="
+				+ userId + "]";
+	}
+	public List<BoardDTO> getBlist() {
+		return blist;
+	}
+	public void setBlist(List<BoardDTO> blist) {
+		this.blist = blist;
+	}
+	public int getCurPage() {
+		return curPage;
+	}
+	public void setCurPage(int curPage) {
+		this.curPage = curPage;
+	}
+	public int getTotalPage() {
+		return totalPage;
+	}
+	public void setTotalPage(int totalPage) {
+		this.totalPage = totalPage;
+	}
+	public static int getPerPage() {
+		return perPage;
+	}
+	public static void setPerPage(int perPage) {
+		MyPageBoardPageDTO.perPage = perPage;
+	}
 	public int getPerBlock() {
 		return perBlock;
 	}
@@ -34,28 +75,14 @@ public class MyPageBoardPageDTO {
 	public void setSearchValue(String searchValue) {
 		this.searchValue = searchValue;
 	}
-	public List<BoardDTO> getList() {
-		return list;
+	public String getUserId() {
+		return userId;
 	}
-	public void setList(List<BoardDTO> list) {
-		this.list = list;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
-	public int getCurPage() {
-		return curPage;
-	}
-	public void setCurPage(int curPage) {
-		this.curPage = curPage;
-	}
-	public int getTotalCount() {
-		return totalCount;
-	}
-	public void setTotalCount(int totalCount) {
-		this.totalCount = totalCount;
-	}
-	public static int getPerPage() { //STATIC으로 하면 PERSERVLET에서 예외사라짐
-		return perPage;
-	}
-	public static void setPerPage(int perPage) {
-		MyPageBoardPageDTO.perPage = perPage;
-	}
+	
+	
+	
+	
 }

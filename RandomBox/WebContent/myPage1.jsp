@@ -17,7 +17,7 @@
 		})
 		$("#myboard").on("click", function() {
 			//console.log(">>>>>>>>>>",'${login}');
-			location.href = "myboard.do";
+			location.href = "searchmyboard.do";
 		})
 		$("#sellinfo").on("click", function() {
 			//console.log(">>>>>>>>>>",'${login}');
