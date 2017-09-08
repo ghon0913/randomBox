@@ -1,6 +1,9 @@
 package com.controller.order;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,12 +17,12 @@ import com.dto.OrderInfoDTO;
 import com.exception.MyException;
 import com.service.OrderService;
 
-@WebServlet("/OrderDoneServlet")
-public class OrderDoneServlet extends HttpServlet {
+@WebServlet("/OrderAllDoneServlet")
+public class OrderAllDoneServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String num = request.getParameter("num");
+		String [] numList = request.getParameterValues("num");
 		String userId = request.getParameter("userId");
 		String orderName = request.getParameter("orderName");
 		String phone = request.getParameter("phone");
@@ -29,50 +32,59 @@ public class OrderDoneServlet extends HttpServlet {
 		String addr1 = request.getParameter("addr1");
 		String addr2 = request.getParameter("addr2");
 		String payMethod = request.getParameter("payMethod");
-		String gCode = request.getParameter("gCode");
 		String gPrice = request.getParameter("gPrice");
+		String [] gCodeList = request.getParameterValues("gCode");
 		
-		OrderInfoDTO orderDTO = new OrderInfoDTO();
-		orderDTO.setUserId(userId);
-		orderDTO.setOrderName(orderName);
-		orderDTO.setPhone(phone);
-		orderDTO.seteMail(eMail);
-		orderDTO.setPost1(post1);
-		orderDTO.setPost2(post2);
-		orderDTO.setAddr1(addr1);
-		orderDTO.setAddr2(addr2);
-		orderDTO.setPayMethod(payMethod);
-		orderDTO.setgPrice(Integer.parseInt(gPrice));
-
-		OrderService service = new OrderService();
-		GoodsDTO goodsDTO = null;
-		String target = "orderDone.jsp";
+		String target = "start.jsp";
 		
+		// GoodsDTO 가져오기
+		OrderService o_service = new OrderService();
+		List<GoodsDTO> goodsDTOList = null;
 		try {
-			goodsDTO = service.goods_orderInfo(gCode);
+			goodsDTOList = o_service.goods_orderInfoAll(Arrays.asList(gCodeList));
 		} catch (MyException e) {
 			e.printStackTrace();
 			target = "error.jsp";
 		}
 		
-		orderDTO.setgCode(goodsDTO.getgCode());
-		orderDTO.setgName(goodsDTO.getgName());
-		orderDTO.setgImage(goodsDTO.getgImage());
-		orderDTO.setSellerId(goodsDTO.getSellerId());
+		List<OrderInfoDTO> orderDTOList = new ArrayList<>();
+		for (OrderInfoDTO orderInfoDTO : orderDTOList) {
+			orderInfoDTO.setUserId(userId);
+			orderInfoDTO.setOrderName(orderName);
+			orderInfoDTO.setPhone(phone);
+			orderInfoDTO.seteMail(eMail);
+			orderInfoDTO.setPost1(post1);
+			orderInfoDTO.setPost2(post2);
+			orderInfoDTO.setAddr1(addr1);
+			orderInfoDTO.setAddr2(addr2);
+			orderInfoDTO.setPayMethod(payMethod);
+			orderInfoDTO.setgPrice(Integer.parseInt(gPrice));
+			
+			for (GoodsDTO GoodsDTO : goodsDTOList) {
+				orderInfoDTO.setgCode(GoodsDTO.getgCode());
+				orderInfoDTO.setgName(GoodsDTO.getgName());
+				orderInfoDTO.setgImage(GoodsDTO.getgImage());
+				orderInfoDTO.setSellerId(GoodsDTO.getSellerId());
+			}
+		}
 		
+		for (OrderInfoDTO orderInfoDTO : orderDTOList) {
+			System.out.println(orderInfoDTO.getAddr1()+"%%%%");
+		}
+
 		/* *********************************** orderDTO 저장 끝*/
 		
 		try {
-			service.orderDone(orderDTO, Integer.parseInt(num), gCode);
-			request.setAttribute("orderDTO", orderDTO);
-		} catch (NumberFormatException | MyException e) {
+			o_service.orderAllDone(orderDTOList, Arrays.asList(numList), Arrays.asList(gCodeList));
+			request.setAttribute("orderList", orderDTOList);
+		} catch (MyException e) {
 			e.printStackTrace();
 			target = "error.jsp";
 		}
-		
+
 		RequestDispatcher dis = request.getRequestDispatcher(target);
 		dis.forward(request, response);
-
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

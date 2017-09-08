@@ -7,14 +7,8 @@
 <div>
 	<h3>주문 페이지</h3>
 
-	<FORM name="orderConfirmForm" method="get" action="">
+	<FORM name="orderConfirmForm" method="get" action="" id="orderConfirmForm">
 		<table width="80%" cellspacing="0" cellpadding="0">
-			<input type="hidden" name="gCode" value="${cDTO.gCode }">
-			<input type="hidden" name="userId" value="${mDTO.userid }">
-			<input type="hidden" name="eMail" value="${mDTO.email }">
-			<input type="hidden" name="num" value="${cDTO.num }">
-			<input type="hidden" name="gPrice" value="${cDTO.gPrice }">
-
 			<tr>
 				<td height="30">
 			</tr>
@@ -50,15 +44,24 @@
 								<hr size="1" color="CCCCCC">
 							</td>
 						</tr>
+						<c:set var="totalPrice" value="0"></c:set>
+						<c:forEach var="oList" items="${orderList}">
+							<input type="hidden" name="gCode" value="${oList.gCode }">
+							<input type="hidden" name="userId" value="${mDTO.userid }">
+							<input type="hidden" name="eMail" value="${mDTO.email }">
+							<input type="hidden" name="num" value="${oList.num }">
+							<input type="hidden" name="gPrice" value="${oList.gPrice }">
+							<c:set var="totalPrice" value="${totalPrice + oList.gPrice}"></c:set>
 						<tr>
-							<td class="td_default" width="80">${cDTO.num }</td>
+							<td class="td_default" width="80">${oList.num }</td>
 							<td class="td_default" width="80"><img
-								src="images/goods/${cDTO.gImage }.gif" border="0" align="center"
+								src="images/goods/${oList.gImage }" border="0" align="center"
 								width="80" /></td>
-							<td class="td_default" width="300" style='padding-left: 30px'>${cDTO.gName }</td>
-							<td class="td_default" align="center" width="110">${cDTO.gPrice }
+							<td class="td_default" width="300" style='padding-left: 30px'>${oList.gName }</td>
+							<td class="td_default" align="center" width="110">${oList.gPrice }
 								원</td>
 						</tr>
+						</c:forEach>
 						<tr>
 							<td colspan="4">
 								<hr size="1" color="CCCCCC">
@@ -66,8 +69,8 @@
 						</tr>
 						<tr>
 							<td height="30" colspan="2"></td>
-							<td class="td_default" align="right">결제 금액 :</td>
-							<td class="td_default" align='right'>${cDTO.gPrice}원</td>
+							<td class="td_default" align="right">총 결제 금액 :</td>
+							<td class="td_default" align='right'>${totalPrice} 원</td>
 						</tr>
 					</table>
 			<tr>
@@ -133,7 +136,7 @@
 
 			<tr>
 				<td class="td_default"><input type="checkbox" name="same"
-					onclick="javascript:sameAddress(this);"> 배송지가 동일할 경우 선택하세요.
+					id="sameAddress"> 배송지가 동일할 경우 선택하세요.
 				</td>
 			</tr>
 			<!--  배송지 정보 시작-->
@@ -217,41 +220,36 @@
 			<tr>
 				<td class="td_default" align="center"><input type='button'
 					value='취소' onclick="javascript:history.back()"> <input
-					type='button' value='결제하기' onclick="orderDone(orderConfirmForm)"></td>
+					type='button' value='결제하기' id="orderAllDone"></td>
 			</tr>
 
 		</table>
 	</FORM>
 </div>
 <script>
-	function sameAddress(chk) {
 
-		if (chk.checked) {
-			document.getElementById("orderName").value = document
-					.getElementById("mname").value;
-			document.getElementById("post1").value = document
-					.getElementById("mpost1").value;
-			document.getElementById("post2").value = document
-					.getElementById("mpost2").value;
-			document.getElementById("addr1").value = document
-					.getElementById("maddress1").value;
-			document.getElementById("addr2").value = document
-					.getElementById("maddress2").value;
-			document.getElementById("phone").value = document
-					.getElementById("mphone").value;
-		} else {
-			document.getElementById("orderName").value = "";
-			document.getElementById("post1").value = "";
-			document.getElementById("post2").value = "";
-			document.getElementById("addr1").value = "";
-			document.getElementById("addr2").value = "";
-			document.getElementById("phone").value = "";
-		}
+	$("#sameAddress").on("change", function(){
+		 if($("#sameAddress").prop("checked")){
+			$("#orderName").val($("#mname").val());
+			$("#post1").val($("#mpost1").val());
+			$("#post2").val($("#mpost2").val());
+			$("#addr1").val($("#maddress1").val());
+			$("#addr2").val($("#maddress2").val());
+			$("#phone").val($("#mphone").val());	
+		}else{
+			$("#orderName").val("");
+			$("#post1").val("");
+			$("#post2").val("");
+			$("#addr1").val("");
+			$("#addr2").val("");
+			$("#phone").val("");	
+		} 
+	});
+	
+	$("#orderAllDone").on("click", function(){
 
-	}
+		$("#orderConfirmForm").attr("action", "OrderAllDoneServlet");
+		$("#orderConfirmForm").submit();
+	});
 
-	function orderDone(f) {
-		f.action = "OrderDoneServlet";
-		f.submit();
-	}
 </script>
