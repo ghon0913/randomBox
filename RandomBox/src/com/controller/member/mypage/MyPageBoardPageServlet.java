@@ -11,24 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dto.MyPageBoardPageDTO;
 
-/**
- * Servlet implementation class MyPageBoardPageServlet
- */
 @WebServlet("/MyPageBoardPageServlet")
 public class MyPageBoardPageServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public MyPageBoardPageServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 			String perPage = request.getParameter("perPage");

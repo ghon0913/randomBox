@@ -5,7 +5,9 @@
 	pageEncoding="UTF-8"%>
 
 <script type="text/javascript" src="jquery-3.2.1.js"></script>
-<script>
+
+<script type="text/javascript">
+
 	$(document).ready(function() {
 		$("#userinfo").on("click", function() {
 			//console.log(">>>>>>>>>>",'${login}');
