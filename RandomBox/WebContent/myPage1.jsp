@@ -15,7 +15,7 @@
 		})
 		$("#orderinfo").on("click", function() {
 			//console.log(">>>>>>>>>>",'${login}');
-			location.href = "orderinfo.do";
+			location.href = "orderinfopage.do";
 		})
 		$("#myboard").on("click", function() {
 			//console.log(">>>>>>>>>>",'${login}');

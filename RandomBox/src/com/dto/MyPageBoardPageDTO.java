@@ -12,27 +12,6 @@ public class MyPageBoardPageDTO {
 	private String searchName;
 	private String searchValue;
 	private String userId;
-	public MyPageBoardPageDTO() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public MyPageBoardPageDTO(List<BoardDTO> blist, int curPage, int totalPage, int perBlock, String searchName,
-			String searchValue, String userId) {
-		super();
-		this.blist = blist;
-		this.curPage = curPage;
-		this.totalPage = totalPage;
-		this.perBlock = perBlock;
-		this.searchName = searchName;
-		this.searchValue = searchValue;
-		this.userId = userId;
-	}
-	@Override
-	public String toString() {
-		return "MyPageBoardPageDTO [blist=" + blist + ", curPage=" + curPage + ", totalPage=" + totalPage
-				+ ", perBlock=" + perBlock + ", searchName=" + searchName + ", searchValue=" + searchValue + ", userId="
-				+ userId + "]";
-	}
 	public List<BoardDTO> getBlist() {
 		return blist;
 	}
@@ -81,8 +60,22 @@ public class MyPageBoardPageDTO {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	
-	
+	public MyPageBoardPageDTO(List<BoardDTO> blist, int curPage, int totalPage, int perBlock, String searchName,
+			String searchValue, String userId) {
+		super();
+		this.blist = blist;
+		this.curPage = curPage;
+		this.totalPage = totalPage;
+		this.perBlock = perBlock;
+		this.searchName = searchName;
+		this.searchValue = searchValue;
+		this.userId = userId;
+	}
+	public MyPageBoardPageDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	
 	
 }

@@ -16,6 +16,7 @@ import com.dto.BoardDTO;
 import com.dto.MemberDTO;
 import com.dto.MyPageBoardPageDTO;
 import com.dto.OrderInfoDTO;
+import com.dto.OrderInfoPageDTO;
 import com.exception.MyException;
 import com.service.MyPageService;
 
@@ -158,23 +159,49 @@ public class MyPageFrontServlet extends HttpServlet {
 			} else if (command.equals("/orderinfo.do")) {
 
 				request.setAttribute("page", "myPage/myPageOrderInfo.jsp");
-				
+
 				try {
 					List<OrderInfoDTO> orderdto = service.myPageOrderInfo(login.getUserid());
 					request.setAttribute("orderdto", orderdto);
-					
+
 				} catch (MyException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+
+			} else if (command.equals("/orderinfopage.do")) {
+
 				
-				
+				String curPage = request.getParameter("curPage");
+				if (curPage == null) {
+					curPage = "1";
+				}
+								
+				String startdate = request.getParameter("startdate");
+				String finaldate = request.getParameter("finaldate");
+
+				HashMap<String, String> map = new HashMap();
+				map.put("startdate", startdate);
+				System.out.println(">>>>>>>>>>>>>>>>>>"+startdate);
+				map.put("finaldate", finaldate);
+				map.put("userId", login.getUserid());
+
+				try {
+					OrderInfoPageDTO pagedto = service.myPageOrderInfoPage(map, Integer.parseInt(curPage));
+					request.setAttribute("pagedto", pagedto);
+					request.setAttribute("page", "myPage/myPageOrderInfo.jsp");
+
+				} catch (NumberFormatException | MyException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
 			} else if (command.equals("/orderinforetrieve.do")) {
 
 				request.setAttribute("page", "myPage/myPageOrderInfo.jsp");
-				target="myPage/myPageOrderInfoRetrieve.jsp";
+				target = "myPage/myPageOrderInfoRetrieve.jsp";
 				String num = request.getParameter("num");
-				
+
 				try {
 					OrderInfoDTO orderretrieve = service.orderinforetrieve(Integer.parseInt(num));
 					request.setAttribute("orderretrieve", orderretrieve);
@@ -183,7 +210,6 @@ public class MyPageFrontServlet extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
 
 			} else if (command.equals("/sellinfo.do")) {
 

@@ -112,4 +112,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from order_info
 		where num=#{num}
 	</select>
+	
+	<select id="myPageOrderInfoPage" parameterType="hashmap"
+		resultType="OrderInfoDTO">
+		
+		select num, userid, ordername, phone, email, post1, post2, addr1, addr2, gcode, gname, gprice, gimage, paymethod,
+		to_char(orderday, 'mm/dd') "orderday" , sellerid
+		from order_info
+		where userid=#{userId}
+		<if test="startdate != null">
+			and orderday between #{startdate} and #{finaldate}
+		</if>
+		order by num desc
+
+	</select>
+	
+		<select id="totalorderPage" resultType="int" parameterType="string">
+		select
+		count(*)
+		from order_info
+		where userid = #{userId}
+	</select>
+
+	<select id="searchorderPage" resultType="int" parameterType="hashmap">
+		select count(*)
+		from order_info
+		where userid = #{userId}
+		<if test="startdate !=null">
+			and orderday between #{startdate} and #{finaldate} 
+		</if>
+	</select>
+	
 </mapper>
