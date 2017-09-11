@@ -14,7 +14,7 @@
 				<tr height="30">
 					<td align="center"><a href="">구매페이지</a></td>
 					<td align="center"><a href="">상품설명</a></td>
-					<td align="center"><a href="">Q&A</a></td>
+					<td align="center"><a href="InquiryListServlet">Q&A</a></td>
 					<td align="center"><a href="">후기</a></td>
 				<tr>
 

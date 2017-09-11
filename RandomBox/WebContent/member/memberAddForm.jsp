@@ -153,7 +153,6 @@ $(document).ready(function(){
 	    		email2 = $("#email2").val();
 	    	}
 	    	email = email1+"@"+email2;
-	    	console.log(email+"***");
 	
 	    	$.ajax({
         		
@@ -179,7 +178,6 @@ $(document).ready(function(){
     });
 
     	$("#email2").on("keyUp", function(){
-    		console.log("%%%%");
     		
     		if($("#email1").val() != null){
 	    		email1 = $("#email1").val();

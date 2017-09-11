@@ -29,5 +29,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="com/mybatis/GoodsMapper.xml" />
 		<mapper resource="com/mybatis/OrderInfoMapper.xml" />
 		<mapper resource="com/mybatis/MyPageMapper.xml" />
+		<mapper resource="com/mybatis/BoardMapper.xml" />
 	</mappers>
 </configuration>

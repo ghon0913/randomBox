@@ -126,7 +126,7 @@
 <script>
 	
 	$("#delCart").on("click", function(){
-		$(location).href("CartDelServlet?num="+$("#num").text());
+		$(location).attr("href", "CartDelServlet?num="+$("#num").text());
 	})
 	
 	$("#allCheck").on("change", function(){
@@ -145,7 +145,7 @@
 	});
 	
 	$("#order").on("click", function(){
-		$(location).href("OrderConfirmServlet?num="+$("#num").text()+"&userid="+$("#userid").val());
+		$(location).attr("href", "OrderConfirmServlet?num="+$("#num").text()+"&userid="+$("#userid").val());
 	});
 	
 	$("#orderAllConfirm").on("click", function(){

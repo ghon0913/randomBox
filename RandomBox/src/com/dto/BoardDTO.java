@@ -88,7 +88,4 @@ public class BoardDTO {
 				+ ", content=" + content + ", writeDay=" + writeDay + ", readCnt=" + readCnt + ", userId=" + userId
 				+ ", gCode=" + gCode + "]";
 	}
-	
-	
-
 }
