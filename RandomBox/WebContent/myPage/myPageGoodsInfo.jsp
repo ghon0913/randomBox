@@ -5,7 +5,6 @@
 	pageEncoding="UTF-8"%>
 	
 	<table border="1">
-	
 		<tr>
 			<td> 등록중인 상품
 			</td>
