@@ -16,11 +16,11 @@ public class MyPageBoardPageServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-			String perPage = request.getParameter("perPage");
+			String perPage = request.getParameter("perpage");
 
 			MyPageBoardPageDTO.setPerPage(Integer.parseInt(perPage));
 			
-			String page = "myboard.do";
+			String page = "searchmyboard.do";
 			RequestDispatcher p = request.getRequestDispatcher(page);
 			p.forward(request, response);
 			
