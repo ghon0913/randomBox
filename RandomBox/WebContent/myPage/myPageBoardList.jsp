@@ -8,9 +8,9 @@
 	<table border="1">
 		<tr>
 			<td colspan="4">
-				<form action="MyPageBoardPageServlet">
+				<form action="searchmyboard.do">
 					<select name="searchName">
-						<option value="state">문의중</option>
+						<option value="state">상태</option>
 						<option value="title">제목</option>
 						<option value="content">내용</option>
 					</select>
@@ -18,19 +18,20 @@
 					<input type="submit" value="검색">
 				</form>
 			</td>
-			<!-- 검색항목을 선택해주세요 스크립트 -->
 		</tr>
 		<tr>
-			<form action="MyPageBoardPageServlet" >
+			
 			<td colspan="4">
+			<form action="MyPageBoardPageServlet" >
 				<select name="perpage" ><!-- change함수주기 -->
 					<option value="3">3개씩보기</option>
 					<option value="5">5개씩보기</option>
 					<option value="7">7개씩보기</option>
 				</select>
 				<input type="submit">
+				</form>
 			</td>
-			</form>
+			
 		</tr>
 		
 		<tr>
@@ -44,8 +45,6 @@
 				<td colspan="4">레코드가없습니다.</td>
 			</tr>
 		</c:if>
-
-		${pagedto}
 		
 		<c:if test="${! empty pagedto}">
 			<c:forEach var="a" items="${pagedto.getBlist()}">
@@ -58,8 +57,8 @@
 			</c:forEach>
 		</c:if>
 		<tr>
-			<%-- <td colspan="4" align="center"><jsp:include
-					page="myPageBoardPage.jsp" flush="true" /></td> --%>
+			<td colspan="4" align="center"><jsp:include
+					page="myPageBoardPage.jsp" flush="true" /></td>
 		</tr>
 	</table>
 </div>

@@ -8,7 +8,7 @@ public class MyPageBoardPageDTO {
 	private int curPage;
 	private int totalPage;
 	private static int perPage = 3;
-	private int perBlock;
+	private int perBlock = 3;
 	private String searchName;
 	private String searchValue;
 	private String userId;

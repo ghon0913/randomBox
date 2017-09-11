@@ -62,6 +62,12 @@ public class MyPageDAO {
 		
 		return pagedto;
 	}
+	
+	public int myPageboardupdate(SqlSession session, HashMap<String, Object> map) {
+		int n =session.update("myPageboardupdate",map);
+		return n;
+	}
+	
 }
 
 

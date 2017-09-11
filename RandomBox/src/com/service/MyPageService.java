@@ -87,6 +87,22 @@ public class MyPageService {
 		}
 		return pagedto;
 	}
+	
+	public void myPageboardupdate(HashMap<String, Object> map) throws MyException {
+		SqlSession session = MybatisTemplate.openSession();
+		MyPageDAO dao = new MyPageDAO();
+		
+		try {
+			int n = dao.myPageboardupdate(session, map);
+			if(n==1) session.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+			session.rollback();
+			throw new MyException("myPageboardupdate 예외");
+		}finally {
+			session.close();
+		}
+	}
 
 	
 

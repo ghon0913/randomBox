@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.mail.search.IntegerComparisonTerm;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -85,17 +86,14 @@ public class MyPageFrontServlet extends HttpServlet {
 				request.setAttribute("page", "myPage/myPageOrderInfo.jsp");
 
 			} ///////////////////////////////////////////////////
-			/*else if (command.equals("/myboard.do")) {
-
-				List<BoardDTO> bdto;
-				try {
-					bdto = service.myPageBoardList(login.getUserid());
-					request.setAttribute("page", "myPage/myPageBoardList.jsp");
-					request.setAttribute("bdto", bdto);
-				} catch (MyException e) {
-					e.printStackTrace();
-				}
-			}*/ else if (command.equals("/searchmyboard.do")) {
+			/*
+			 * else if (command.equals("/myboard.do")) {
+			 * 
+			 * List<BoardDTO> bdto; try { bdto = service.myPageBoardList(login.getUserid());
+			 * request.setAttribute("page", "myPage/myPageBoardList.jsp");
+			 * request.setAttribute("bdto", bdto); } catch (MyException e) {
+			 * e.printStackTrace(); } }
+			 */ else if (command.equals("/searchmyboard.do")) {
 
 				String curPage = request.getParameter("curPage");
 				if (curPage == null) {
@@ -144,6 +142,24 @@ public class MyPageFrontServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 
+			} else if (command.equals("/boardupdate.do")) {
+				
+				String dto = request.getParameter("retrievedto");
+				String num = request.getParameter("num");
+				String content = request.getParameter("content");
+				
+				HashMap<String, Object> map = new HashMap<>();
+				map.put("num", Integer.parseInt(num));
+				map.put("content", content);
+				
+				try {
+					service.myPageboardupdate(map);
+				} catch (MyException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
 			} else if (command.equals("/sellinfo.do")) {
 
 				request.setAttribute("page", "myPage/myPageSellInfo.jsp");
