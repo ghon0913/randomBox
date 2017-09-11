@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.dto.BoardDTO;
 import com.dto.MemberDTO;
 import com.dto.MyPageBoardPageDTO;
+import com.dto.OrderInfoDTO;
 
 public class MyPageDAO {
 	//...("com.mybatis.OrderMapper.orderDone",para)...
@@ -66,6 +67,11 @@ public class MyPageDAO {
 	public int myPageboardupdate(SqlSession session, HashMap<String, Object> map) {
 		int n =session.update("myPageboardupdate",map);
 		return n;
+	}
+	
+	public List<OrderInfoDTO> myPageOrderInfo(SqlSession session, String userid){
+		List<OrderInfoDTO> orderdto= session.selectList("myPageOrderInfo",userid);
+		return orderdto;
 	}
 	
 }

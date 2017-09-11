@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.mail.search.IntegerComparisonTerm;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import com.dto.BoardDTO;
 import com.dto.MemberDTO;
 import com.dto.MyPageBoardPageDTO;
+import com.dto.OrderInfoDTO;
 import com.exception.MyException;
 import com.service.MyPageService;
 
@@ -81,11 +81,7 @@ public class MyPageFrontServlet extends HttpServlet {
 				request.setAttribute("page", "myPage/myPageUserInfo.jsp");
 
 			} //////////////////////////////////////////////
-			else if (command.equals("/orderinfo.do")) {
-
-				request.setAttribute("page", "myPage/myPageOrderInfo.jsp");
-
-			} ///////////////////////////////////////////////////
+				///////////////////////////////////////////////////
 			/*
 			 * else if (command.equals("/myboard.do")) {
 			 * 
@@ -143,23 +139,42 @@ public class MyPageFrontServlet extends HttpServlet {
 				}
 
 			} else if (command.equals("/boardupdate.do")) {
-				
+
 				String dto = request.getParameter("retrievedto");
 				String num = request.getParameter("num");
 				String content = request.getParameter("content");
-				
+
 				HashMap<String, Object> map = new HashMap<>();
 				map.put("num", Integer.parseInt(num));
 				map.put("content", content);
-				
+
 				try {
 					service.myPageboardupdate(map);
 				} catch (MyException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+
+			} else if (command.equals("/orderinfo.do")) {
+
+				request.setAttribute("page", "myPage/myPageOrderInfo.jsp");
+				
+				try {
+					List<OrderInfoDTO> orderdto = service.myPageOrderInfo(login.getUserid());
+					request.setAttribute("orderdto", orderdto);
+					
+				} catch (MyException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 				
+			} else if (command.equals("/orderinforetrieve.do")) {
+
+				request.setAttribute("page", "myPage/myPageOrderInfo.jsp");
+
+				String num = request.getParameter("num");
+
 			} else if (command.equals("/sellinfo.do")) {
 
 				request.setAttribute("page", "myPage/myPageSellInfo.jsp");

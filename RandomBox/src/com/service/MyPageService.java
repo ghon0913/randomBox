@@ -9,6 +9,7 @@ import com.dao.MyPageDAO;
 import com.dto.BoardDTO;
 import com.dto.MemberDTO;
 import com.dto.MyPageBoardPageDTO;
+import com.dto.OrderInfoDTO;
 import com.exception.MyException;
 import com.mybatis.MybatisTemplate;
 
@@ -102,6 +103,22 @@ public class MyPageService {
 		}finally {
 			session.close();
 		}
+	}
+	
+	public List<OrderInfoDTO> myPageOrderInfo(String userid) throws MyException{
+		SqlSession session = MybatisTemplate.openSession();
+		MyPageDAO dao = new MyPageDAO();
+		List<OrderInfoDTO> orderdto = null;
+		try {
+			orderdto = dao.myPageOrderInfo(session, userid);
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new MyException("myPageOrderInfo 예외");
+			
+		}finally {
+			session.close();
+		}
+		return orderdto;
 	}
 
 	
