@@ -21,7 +21,7 @@ public class PreLoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String cookieId = "";
-		String target = "home.jsp";
+		String target = "GoodsListServlet";
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
 			
