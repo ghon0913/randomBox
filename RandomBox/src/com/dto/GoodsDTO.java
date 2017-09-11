@@ -10,6 +10,23 @@ public class GoodsDTO {
 	private String gContentImage;
 	private int gAmount;
 	private String sellerId;
+	public GoodsDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public GoodsDTO(int gPrice, String gCode, String gCategory, String gName, String gImage, String gContentImage,
+			int gAmount, String sellerId) {
+		super();
+		this.gPrice = gPrice;
+		this.gCode = gCode;
+		this.gCategory = gCategory;
+		this.gName = gName;
+		this.gImage = gImage;
+		this.gContentImage = gContentImage;
+		this.gAmount = gAmount;
+		this.sellerId = sellerId;
+	}
+
 	
 	public int getgPrice() {
 		return gPrice;
@@ -64,22 +81,6 @@ public class GoodsDTO {
 		return "GoodsDTO [gPrice=" + gPrice + ", gCode=" + gCode + ", gCategory=" + gCategory + ", gName=" + gName
 				+ ", gImage=" + gImage + ", gContentImage=" + gContentImage + ", gAmount=" + gAmount + ", sellerId="
 				+ sellerId + "]";
-	}
-	public GoodsDTO(int gPrice, String gCode, String gCategory, String gName, String gImage, String gContentImage,
-			int gAmount, String sellerId) {
-		super();
-		this.gPrice = gPrice;
-		this.gCode = gCode;
-		this.gCategory = gCategory;
-		this.gName = gName;
-		this.gImage = gImage;
-		this.gContentImage = gContentImage;
-		this.gAmount = gAmount;
-		this.sellerId = sellerId;
-	}
-	public GoodsDTO() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	

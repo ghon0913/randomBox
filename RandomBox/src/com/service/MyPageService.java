@@ -7,8 +7,12 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.dao.MyPageDAO;
 import com.dto.BoardDTO;
+import com.dto.GoodsDTO;
+import com.dto.GoodsPageDTO;
 import com.dto.MemberDTO;
 import com.dto.MyPageBoardPageDTO;
+import com.dto.OrderInfoDTO;
+import com.dto.OrderInfoPageDTO;
 import com.exception.MyException;
 import com.mybatis.MybatisTemplate;
 
@@ -87,7 +91,104 @@ public class MyPageService {
 		}
 		return pagedto;
 	}
+	
+	public void myPageboardupdate(HashMap<String, Object> map) throws MyException {
+		SqlSession session = MybatisTemplate.openSession();
+		MyPageDAO dao = new MyPageDAO();
+		
+		try {
+			int n = dao.myPageboardupdate(session, map);
+			if(n==1) session.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+			session.rollback();
+			throw new MyException("myPageboardupdate 예외");
+		}finally {
+			session.close();
+		}
+	}
+	
+	public List<OrderInfoDTO> myPageOrderInfo(String userid) throws MyException{
+		SqlSession session = MybatisTemplate.openSession();
+		MyPageDAO dao = new MyPageDAO();
+		List<OrderInfoDTO> orderdto = null;
+		try {
+			orderdto = dao.myPageOrderInfo(session, userid);
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new MyException("myPageOrderInfo 예외");
+			
+		}finally {
+			session.close();
+		}
+		return orderdto;
+	}
+	
+	public OrderInfoDTO orderinforetrieve(int num) throws MyException{
+		SqlSession session = MybatisTemplate.openSession();
+		MyPageDAO dao = new MyPageDAO();
+		OrderInfoDTO orderdto = null;
+		try {
+			orderdto = dao.orderinforetrieve(session, num);
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new MyException("orderinforetrieve 예외");
+			
+		}finally {
+			session.close();
+		}
+		return orderdto;
+	}
 
+	public OrderInfoPageDTO myPageOrderInfoPage(HashMap<String, String> map, int curPage) throws MyException {
+		SqlSession session = MybatisTemplate.openSession();
+		MyPageDAO dao = new MyPageDAO();
+		OrderInfoPageDTO pagedto = null;
+		try {
+			pagedto = dao.myPageOrderInfoPage(session,map,curPage);
+			System.out.println(pagedto+"service");
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new MyException("myPageOrderInfoPage 예외");
+		}finally {
+			session.close();
+		}
+		return pagedto;
+	}
+	
+	public GoodsPageDTO goodsinfo(HashMap<String, String> map, int curPage) throws MyException {
+		SqlSession session = MybatisTemplate.openSession();
+		MyPageDAO dao = new MyPageDAO();
+		GoodsPageDTO pagedto = null;
+		try {
+			pagedto = dao.goodsinfo(session,map,curPage);
+			System.out.println(pagedto+"service");
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new MyException("goodsinfo 예외");
+		}finally {
+			session.close();
+		}
+		return pagedto;
+	}
+	
+	public GoodsDTO goodsretrieve(String gCode) throws MyException {
+		SqlSession session = MybatisTemplate.openSession();
+		GoodsDTO dto = null;
+		MyPageDAO dao = new MyPageDAO();
+		try {
+			dto = dao.goodsretrieve(session, gCode);
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new MyException("goodsretrieve 예외");
+		}finally {
+			session.close();
+		}
+		
+		
+		return dto;
+		
+	}
 	
 
 }

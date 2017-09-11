@@ -10,21 +10,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dto.MyPageBoardPageDTO;
+import com.dto.OrderInfoPageDTO;
 
-@WebServlet("/MyPageBoardPageServlet")
-public class MyPageBoardPageServlet extends HttpServlet {
+
+@WebServlet("/MyPageOrderInfoPageServlet")
+public class MyPageOrderInfoPageServlet extends HttpServlet {
+       
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String perPage = request.getParameter("perpage");
 
-			String perPage = request.getParameter("perpage");
-
-			MyPageBoardPageDTO.setPerPage(Integer.parseInt(perPage));
-			
-			String page = "searchmyboard.do";
-			RequestDispatcher p = request.getRequestDispatcher(page);
-			p.forward(request, response);
-			
-
+		OrderInfoPageDTO.setPerPage(Integer.parseInt(perPage));
+		
+		String page = "orderinfopage.do";
+		RequestDispatcher p = request.getRequestDispatcher(page);
+		p.forward(request, response);
 	}
 
 	/**

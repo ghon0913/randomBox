@@ -2,9 +2,9 @@ package com.dto;
 
 import java.util.List;
 
-public class MyPageBoardPageDTO {
+public class GoodsPageDTO {
 	
-	private List<BoardDTO> blist;
+	private List<GoodsDTO> glist;
 	private int curPage;
 	private int totalPage;
 	private static int perPage = 3;
@@ -12,11 +12,11 @@ public class MyPageBoardPageDTO {
 	private String searchName;
 	private String searchValue;
 	private String userId;
-	public List<BoardDTO> getBlist() {
-		return blist;
+	public List<GoodsDTO> getGlist() {
+		return glist;
 	}
-	public void setBlist(List<BoardDTO> blist) {
-		this.blist = blist;
+	public void setGlist(List<GoodsDTO> glist) {
+		this.glist = glist;
 	}
 	public int getCurPage() {
 		return curPage;
@@ -34,7 +34,7 @@ public class MyPageBoardPageDTO {
 		return perPage;
 	}
 	public static void setPerPage(int perPage) {
-		MyPageBoardPageDTO.perPage = perPage;
+		GoodsPageDTO.perPage = perPage;
 	}
 	public int getPerBlock() {
 		return perBlock;
@@ -60,10 +60,15 @@ public class MyPageBoardPageDTO {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public MyPageBoardPageDTO(List<BoardDTO> blist, int curPage, int totalPage, int perBlock, String searchName,
+	@Override
+	public String toString() {
+		return "GoodsPageDTO [glist=" + glist + ", curPage=" + curPage + ", totalPage=" + totalPage + ", perBlock="
+				+ perBlock + ", searchName=" + searchName + ", searchValue=" + searchValue + ", userId=" + userId + "]";
+	}
+	public GoodsPageDTO(List<GoodsDTO> glist, int curPage, int totalPage, int perBlock, String searchName,
 			String searchValue, String userId) {
 		super();
-		this.blist = blist;
+		this.glist = glist;
 		this.curPage = curPage;
 		this.totalPage = totalPage;
 		this.perBlock = perBlock;
@@ -71,10 +76,12 @@ public class MyPageBoardPageDTO {
 		this.searchValue = searchValue;
 		this.userId = userId;
 	}
-	public MyPageBoardPageDTO() {
+	public GoodsPageDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
 
 	
 	

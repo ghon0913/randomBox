@@ -4,9 +4,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <div align="center">
-
+	<form action="boardupdate.do">
 	<table border="1">
-
+	<input type="hidden" name="num" value="${bndto.num }">
+	<input type="hidden" name="retrievedto" value="${bndto }">
 		<tr>
 			<td>NUM.${bndto.num }</td>
 			<td>카테고리: ${bndto.category }</td>
@@ -18,14 +19,14 @@
 		</tr>
 		<tr>
 			<td colspan="5">내용<br /> <input type="text" height="100%"
-				width="100%" value="${bndto.content }">
+				width="100%" name="content" value="${bndto.content }">
 			</td>
 		</tr>
 		<tr>
-			<td colspan="5" align="right"><input type="button" value="돌아가기"
-				id=""></td>
+			<td colspan="5"	align="right">
+				<input type="submit" value="수정">
+			</td>
 		</tr>
-
 	</table>
-
+	</form>
 </div>

@@ -9,18 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dto.GoodsPageDTO;
 import com.dto.MyPageBoardPageDTO;
 
-@WebServlet("/MyPageBoardPageServlet")
-public class MyPageBoardPageServlet extends HttpServlet {
+@WebServlet("/MyPageGoodsInfoPageServlet")
+public class MyPageGoodsInfoPageServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 			String perPage = request.getParameter("perpage");
 
-			MyPageBoardPageDTO.setPerPage(Integer.parseInt(perPage));
+			GoodsPageDTO.setPerPage(Integer.parseInt(perPage));
 			
-			String page = "searchmyboard.do";
+			String page = "goodsinfo.do";
 			RequestDispatcher p = request.getRequestDispatcher(page);
 			p.forward(request, response);
 			

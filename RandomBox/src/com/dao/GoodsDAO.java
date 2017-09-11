@@ -1,5 +1,7 @@
 package com.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.dto.GoodsDTO;
@@ -10,5 +12,15 @@ public class GoodsDAO {
 		int n = session.insert("insertGoods",dto);
 		return n;
 		
+	}
+	
+	public List<GoodsDTO> selectAllGoods(SqlSession session){
+		List<GoodsDTO> list = session.selectList("selectAllGoods");
+		return list;
+	}
+	
+	public List<GoodsDTO> selectByCategory(SqlSession session, String category){
+		List<GoodsDTO> list = session.selectList("selectAllGoods", category);
+		return list;
 	}
 }

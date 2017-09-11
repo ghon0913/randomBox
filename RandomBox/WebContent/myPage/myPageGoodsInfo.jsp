@@ -3,86 +3,59 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<div align="center">	
+<table border="1">
+
+
+<tr>
+<td colspan="10">
+<form action="goodsinfo.do">
+<select name="searchName">
+	<option value="gCode">상품코드</option>
+	</select>
+	<input type="text" name="searchValue">
+	<input type="submit" value="검색"> 
 	
-	<table border="1">
-		<tr>
-			<td> 등록중인 상품
-			</td>
-			<td align="right">
-				 <input type="button" onclick="GoodsRegisterFormServlet
-				 추가" value="상품등록하기">
-			</td>
-		</tr>
-		<c:if test="${gdto.size()}">
-		</c:if>
-		<tr>
-		<td>
-		</tr>
-		
-	</table>
-	
-<table width="100%" cellspacing="0" cellpadding="0">
-	<tr height="10" />
+</form>	
+</td>
+</tr>
+<c:if test="${empty pagedto.glist }">
+<tr>
+	<td colspan="10"	> 레코드가없습니다.</td>
+</tr>
+</c:if>
+<c:if test="${! empty pagedto.glist }">
 
-	<tr>
-		<td>
-		</td>
-		</tr>
-			<table align="center" width="710" cellspacing="0" cellpadding="0"
-				border=1>
+<tr>
+	<td>상품코드</td>
+	<td>상품명</td>
+	<td>카테고리</td>
+	<td>가격</td>
+</tr>
 
-				<tr height="30">
-					<td align="center"></td>
-				</tr>
-				<tr>
+<c:forEach var="goods" items="${pagedto.glist }">
+<tr>
+	<td> <a href="goodsinforetrieve.do?gCode=${goods.gCode }" target="blank">${goods.gCode }</a>
+	</td>
+	<td>${goods.gImage }${goods.gName }
+	</td>
+	<td>${goods.gCategory }
+	</td>
+	<td>${goods.gPrice }
+	</td>
+</tr>
 
-					<td>
-						<table style='padding: 15px'>
+</c:forEach>
 
-							<tr>
-								<td><a href=""> <img src="images/items/basicImage.png"
-										border="0" align="center" width="200">
-								</a></td>
-							</tr>
+<tr>
+	<td  colspan="10"><jsp:include page="myPageGoodsInfoPage.jsp"></jsp:include>
+</tr>
+</c:if>
+<tr>
+<td colspan="10" align="right"> <a href="GoodsRegisterFormServlet">상품등록</a>
+</tr>
 
-						</table>
-					</td>
-										<td>
-						<table style='padding: 15px'>
 
-							<tr>
-								<td><a href=""> <img src="images/items/basicImage.png"
-										border="0" align="center" width="200">
-								</a></td>
-							</tr>
 
-						</table>
-					</td>
-										<td>
-						<table style='padding: 15px'>
-
-							<tr>
-								<td><a href=""> <img src="images/items/basicImage.png"
-										border="0" align="center" width="200">
-								</a></td>
-							</tr>
-
-						</table>
-					</td>
-										<td>
-						<table style='padding: 15px'>
-
-							<tr>
-								<td><a href=""> <img src="images/items/basicImage.png"
-										border="0" align="center" width="200">
-								</a></td>
-							</tr>
-
-						</table>
-					</td>
-					
-				</tr>
-				<tr height="10" />
-			</table>
-	<tr height="10" />
 </table>
+</div>

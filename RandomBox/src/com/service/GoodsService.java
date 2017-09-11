@@ -1,5 +1,7 @@
 package com.service;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.dao.GoodsDAO;
@@ -22,6 +24,38 @@ public class GoodsService {
 		} finally {
 			session.close();
 		}
+	}
+
+	public List<GoodsDTO> selectAllGoods() throws MyException {
+		SqlSession session = MybatisTemplate.openSession();
+		GoodsDAO dao = new GoodsDAO();
+
+		List<GoodsDTO> list = null;
+		try {
+			list = dao.selectAllGoods(session);
+		} catch (Exception e) {
+			throw new MyException("selectAllGoods 실패");
+		} finally {
+			session.close();
+		}
+		return list;
+
+	}
+	
+	public List<GoodsDTO> selectByCategory(String category) throws MyException {
+		SqlSession session = MybatisTemplate.openSession();
+		GoodsDAO dao = new GoodsDAO();
+
+		List<GoodsDTO> list = null;
+		try {
+			list = dao.selectByCategory(session, category);
+		} catch (Exception e) {
+			throw new MyException("selectByCategory 실패");
+		} finally {
+			session.close();
+		}
+		return list;
+
 	}
 
 }
