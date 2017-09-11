@@ -20,10 +20,11 @@
 	<c:forEach var="order" items="${orderdto }">
 	<tr>
 		<td>${order.orderDay }<br/>
-		<a href="orderinforetrieve.do?num=${order.num }">${order.num }</a>
+		<a href="orderinforetrieve.do?num=${order.num }" target="blank">${order.num }</a>
 		<br />
 		</td>
-		<td>${order.gImage }${order.gName }${order.gPrice }</td>
+		<td>
+		<img src="images/goods/${order.gImage }" height="100" width="100"> ${order.gName }${order.gPrice }</td>
 		<td>배송중/배송완료</td> 
 	</tr>
 	</c:forEach>

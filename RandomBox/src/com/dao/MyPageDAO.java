@@ -74,6 +74,11 @@ public class MyPageDAO {
 		return orderdto;
 	}
 	
+	public OrderInfoDTO orderinforetrieve(SqlSession session, int num){
+		OrderInfoDTO orderdto= session.selectOne("orderinforetrieve",num);
+		return orderdto;
+	}
+	
 }
 
 

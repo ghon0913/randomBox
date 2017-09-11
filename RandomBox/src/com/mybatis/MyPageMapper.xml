@@ -99,8 +99,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<select id="myPageOrderInfo" parameterType="string" resultType="OrderInfoDTO">
-		select num, userid, ordername, phone, email, post1, post2, addr1, addr2, gcode, gname, gprice, gimage, paymethod, orderday, sellerid
+		select num, userid, ordername, phone, email, post1, post2, addr1, addr2, gcode, gname, gprice, gimage, paymethod,
+		to_char(orderday, 'mm/dd') "orderday" , sellerid
 		from order_info
 		where userid=#{userid}
+		order by num desc
+	</select>
+	
+		<select id="orderinforetrieve" parameterType="int" resultType="OrderInfoDTO">
+		select num, userid, ordername, phone, email, post1, post2, addr1, addr2, gcode, gname, gprice, gimage, paymethod,
+		orderday , sellerid
+		from order_info
+		where num=#{num}
 	</select>
 </mapper>

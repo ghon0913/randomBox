@@ -172,8 +172,18 @@ public class MyPageFrontServlet extends HttpServlet {
 			} else if (command.equals("/orderinforetrieve.do")) {
 
 				request.setAttribute("page", "myPage/myPageOrderInfo.jsp");
-
+				target="myPage/myPageOrderInfoRetrieve.jsp";
 				String num = request.getParameter("num");
+				
+				try {
+					OrderInfoDTO orderretrieve = service.orderinforetrieve(Integer.parseInt(num));
+					request.setAttribute("orderretrieve", orderretrieve);
+					System.out.println(orderretrieve);
+				} catch (NumberFormatException | MyException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 
 			} else if (command.equals("/sellinfo.do")) {
 

@@ -10,24 +10,25 @@
 	<tr>
 		<td>주문정보<br /> (주문번호)
 		</td>
-		<td>주문상품<input name="" value="꾜꾜" readonly=""> <br />
-			결제금액<input name="" value="100만원" readonly=""> <br /> <input
-			name="" value="상태" readonly=""> <br />
+		<td>주문상품<input name="" value="${orderretrieve.gName }" readonly="readonly"> <br />
+			배송상태<input name="" value="상태" readonly="readonly"> <br />
 		</td>
 	</tr>
 	<tr>
 		<td>결제정보</td>
-		<td>결제방식:<input name="" value="결제방식" readonly=""> <br />
-			금액:<input name="" value="금액" readonly=""> <br /> 결제시간:<input
-			name="" value="결제시간" readonly=""> <br />
+		<td>결제방식:<input name="" value="${orderretrieve.payMethod }" readonly="readonly"> <br />
+			금액:<input name="" value="${orderretrieve.gPrice }" readonly="readonly"> <br />
+			결제시간:<input name="" value="${orderretrieve.orderDay }" readonly="readonly"> <br />
 		</td>
 	</tr>
 	<tr>
 		<td>배송정보</td>
-		<td>이름:<input name="" value="수취인이름" readonly=""> <br />
-			연락처:<input name="" value="phone" readonly=""><br /> 주소:<input
-			name="" value="address" readonly=""><br /> 배송요청사항:<input
-			name="" value="mes" readonly=""><br />
+		<td>이름:<input name="" value="${orderretrieve.orderName }" readonly="readonly"> <br />
+			연락처:<input name="" value="${orderretrieve.phone }" readonly="readonly"><br />
+			주소:<textarea readonly="readonly" rows="4" cols="50">${orderretrieve.post1 }-${orderretrieve.post1 }
+${orderretrieve.addr1 }${orderretrieve.addr2 }
+				</textarea><br />
+			 배송요청사항:<input name="" value="mes" readonly="readonly"><br />
 		</td>
 	</tr>
 </table>

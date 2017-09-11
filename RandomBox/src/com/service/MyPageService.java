@@ -120,6 +120,22 @@ public class MyPageService {
 		}
 		return orderdto;
 	}
+	
+	public OrderInfoDTO orderinforetrieve(int num) throws MyException{
+		SqlSession session = MybatisTemplate.openSession();
+		MyPageDAO dao = new MyPageDAO();
+		OrderInfoDTO orderdto = null;
+		try {
+			orderdto = dao.orderinforetrieve(session, num);
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new MyException("orderinforetrieve 예외");
+			
+		}finally {
+			session.close();
+		}
+		return orderdto;
+	}
 
 	
 
