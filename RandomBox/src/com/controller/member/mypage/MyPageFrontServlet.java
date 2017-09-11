@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.dto.BoardDTO;
+import com.dto.GoodsPageDTO;
 import com.dto.MemberDTO;
 import com.dto.MyPageBoardPageDTO;
 import com.dto.OrderInfoDTO;
@@ -216,8 +217,34 @@ public class MyPageFrontServlet extends HttpServlet {
 				request.setAttribute("page", "myPage/myPageSellInfo.jsp");
 
 			} else if (command.equals("/goodsinfo.do")) {
-				request.setAttribute("page", "myPage/myPageGoodsInfo.jsp");
+				String curPage = request.getParameter("curPage");
+				if (curPage == null) {
+					curPage = "1";
+				}
+								
+				String searchName = request.getParameter("searchName");
+				String searchValue = request.getParameter("searchValue");
 
+				HashMap<String, String> map = new HashMap();
+				map.put("searchName", searchName);
+				System.out.println(">>>>>>>>>>>>>>>>>>"+searchValue);
+				map.put("searchValue", searchValue);
+				map.put("userId", login.getUserid());
+
+				try {
+					GoodsPageDTO pagedto = service.goodsinfo(map, Integer.parseInt(curPage));
+					request.setAttribute("pagedto", pagedto);
+					request.setAttribute("page", "myPage/myPageGoodsInfo.jsp");
+
+				} catch (NumberFormatException | MyException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}else if (command.equals("/goodsinforetrieve.do")) {
+
+				request.setAttribute("page", "myPage/goodsinforetrieve.jsp");
+				target="myPage/myPageGoodsInforetrieve.jsp";
 			}
 
 			RequestDispatcher dis = request.getRequestDispatcher(target);

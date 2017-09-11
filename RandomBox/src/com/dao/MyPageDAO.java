@@ -7,6 +7,8 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import com.dto.BoardDTO;
+import com.dto.GoodsDTO;
+import com.dto.GoodsPageDTO;
 import com.dto.MemberDTO;
 import com.dto.MyPageBoardPageDTO;
 import com.dto.OrderInfoDTO;
@@ -104,6 +106,34 @@ public class MyPageDAO {
 		pagedto.setTotalPage(totalPage);
 		pagedto.setStartdate(map.get("startdate"));
 		pagedto.setFinaldate(map.get("finaldate"));
+
+		return pagedto;
+	}
+	
+	public GoodsPageDTO goodsinfo(SqlSession session, HashMap<String, String> map, int curPage) {
+		// TODO Auto-generated method stub
+
+		GoodsPageDTO pagedto = new GoodsPageDTO();
+
+		int sIndex = (curPage - 1) * GoodsPageDTO.getPerPage();
+		int length = GoodsPageDTO.getPerPage();
+
+		List<GoodsDTO> list = session.selectList("com.mybatis.MyPageMapper.goodsinfo", map,new RowBounds(sIndex, length));
+		System.out.println(list + "dao list");
+		System.out.println(pagedto.getGlist());
+		// pagedto에 저장하기
+		int totalPage = 0;
+		pagedto.setGlist(list);
+		pagedto.setCurPage(curPage);
+		if (map.get("searchName") == null) {
+			totalPage = session.selectOne("com.mybatis.MyPageMapper.totalgoodsinfo", map.get("userId"));
+		} else {
+			totalPage = session.selectOne("com.mybatis.MyPageMapper.searchgoodsinfo", map);
+		}
+
+		pagedto.setTotalPage(totalPage);
+		pagedto.setSearchName(map.get("searchName"));
+		pagedto.setSearchValue(map.get("searchValue"));
 
 		return pagedto;
 	}

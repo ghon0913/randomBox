@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.dao.MyPageDAO;
 import com.dto.BoardDTO;
+import com.dto.GoodsPageDTO;
 import com.dto.MemberDTO;
 import com.dto.MyPageBoardPageDTO;
 import com.dto.OrderInfoDTO;
@@ -148,6 +149,22 @@ public class MyPageService {
 		}catch(Exception e) {
 			e.printStackTrace();
 			throw new MyException("myPageOrderInfoPage 예외");
+		}finally {
+			session.close();
+		}
+		return pagedto;
+	}
+	
+	public GoodsPageDTO goodsinfo(HashMap<String, String> map, int curPage) throws MyException {
+		SqlSession session = MybatisTemplate.openSession();
+		MyPageDAO dao = new MyPageDAO();
+		GoodsPageDTO pagedto = null;
+		try {
+			pagedto = dao.goodsinfo(session,map,curPage);
+			System.out.println(pagedto+"service");
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new MyException("goodsinfo 예외");
 		}finally {
 			session.close();
 		}

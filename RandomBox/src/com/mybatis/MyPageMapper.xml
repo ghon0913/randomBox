@@ -143,4 +143,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 	</select>
 	
+	<select id="goodsinfo" resultType="GoodsDTO" parameterType="hashmap">
+	
+	select GPRICE, GCODE, GCATEGORY, GNAME, GIMAGE, gcontent_image, GAMOUNT, SELLERID
+	from goods
+	where SELLERID = #{userId}
+
+	</select>
+	
+			<select id="totalgoodsinfo" resultType="int" parameterType="string">
+		select
+		count(*)
+		from goods
+		where SELLERID = #{userId}
+	</select>
+
+	<select id="searchgoodsinfo" resultType="int" parameterType="hashmap">
+		select count(*)
+		from goods
+		where SELLERID = #{userId}
+		
+	</select>
 </mapper>
