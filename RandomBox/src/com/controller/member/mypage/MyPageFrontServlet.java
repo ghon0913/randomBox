@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.dto.BoardDTO;
+import com.dto.GoodsDTO;
 import com.dto.GoodsPageDTO;
 import com.dto.MemberDTO;
 import com.dto.MyPageBoardPageDTO;
@@ -244,7 +245,19 @@ public class MyPageFrontServlet extends HttpServlet {
 			}else if (command.equals("/goodsinforetrieve.do")) {
 
 				request.setAttribute("page", "myPage/goodsinforetrieve.jsp");
+				String gCode = request.getParameter("gCode");
+				
+				try {
+					GoodsDTO dto = service.goodsretrieve(gCode);
+					request.setAttribute("dto", dto);
+					System.out.println(dto);
+				} catch (MyException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 				target="myPage/myPageGoodsInforetrieve.jsp";
+				
 			}
 
 			RequestDispatcher dis = request.getRequestDispatcher(target);

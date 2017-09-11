@@ -35,7 +35,7 @@
 
 <c:forEach var="goods" items="${pagedto.glist }">
 <tr>
-	<td> <a href="goodsinforetrieve.do" target="blank">${goods.gCode }</a>
+	<td> <a href="goodsinforetrieve.do?gCode=${goods.gCode }" target="blank">${goods.gCode }</a>
 	</td>
 	<td>${goods.gImage }${goods.gName }
 	</td>
@@ -52,15 +52,10 @@
 </tr>
 </c:if>
 <tr>
-<td colspan="10" align="right"> <input type="button" value="등록하기" onclick="goodsadd(f)">
+<td colspan="10" align="right"> <a href="GoodsRegisterFormServlet">상품등록</a>
 </tr>
 
 
 
 </table>
 </div>
-<script>
- function cartAdd(f){
-    f.action="GoodsRegisterFormServlet";	
- }
- </script>

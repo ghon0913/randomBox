@@ -164,4 +164,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where SELLERID = #{userId}
 		
 	</select>
+	
+	<select id="goodsretrieve" resultType="GoodsDTO" parameterType="string">
+	
+	select GPRICE, GCODE, GCATEGORY, GNAME, GIMAGE, gcontent_image, GAMOUNT, SELLERID
+	from goods
+	where gCode = #{gCode}
+	
+	</select>
 </mapper>

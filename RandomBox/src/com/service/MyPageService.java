@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.dao.MyPageDAO;
 import com.dto.BoardDTO;
+import com.dto.GoodsDTO;
 import com.dto.GoodsPageDTO;
 import com.dto.MemberDTO;
 import com.dto.MyPageBoardPageDTO;
@@ -169,6 +170,24 @@ public class MyPageService {
 			session.close();
 		}
 		return pagedto;
+	}
+	
+	public GoodsDTO goodsretrieve(String gCode) throws MyException {
+		SqlSession session = MybatisTemplate.openSession();
+		GoodsDTO dto = null;
+		MyPageDAO dao = new MyPageDAO();
+		try {
+			dto = dao.goodsretrieve(session, gCode);
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new MyException("goodsretrieve 예외");
+		}finally {
+			session.close();
+		}
+		
+		
+		return dto;
+		
 	}
 	
 

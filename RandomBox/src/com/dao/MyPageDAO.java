@@ -137,4 +137,14 @@ public class MyPageDAO {
 
 		return pagedto;
 	}
+	
+	
+	public GoodsDTO goodsretrieve(SqlSession session,String gCode) {
+		GoodsDTO dto = session.selectOne("goodsretrieve",gCode);
+		return dto;
+		
+	}
+	
+	
+	
 }
