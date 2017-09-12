@@ -42,13 +42,13 @@ public class GoodsService {
 
 	}
 	
-	public List<GoodsDTO> selectByCategory(String category) throws MyException {
+	public List<GoodsDTO> selectByCategory(String gCategory) throws MyException {
 		SqlSession session = MybatisTemplate.openSession();
 		GoodsDAO dao = new GoodsDAO();
 
 		List<GoodsDTO> list = null;
 		try {
-			list = dao.selectByCategory(session, category);
+			list = dao.selectByCategory(session, gCategory);
 		} catch (Exception e) {
 			throw new MyException("selectByCategory 실패");
 		} finally {

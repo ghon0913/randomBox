@@ -14,47 +14,41 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.dto.GoodsDTO;
-import com.service.GoodsService;
 
-@WebServlet("/GoodsByCategoryServelt")
-public class GoodsByCategoryServelt extends HttpServlet {
+@WebServlet("/GoodsMixListByCategoryServlet")
+public class GoodsMixListByCategoryServlet extends HttpServlet {
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		// 전체(category = null)인지 아닌지 확인
-		String target = "home.jsp";
-		List<GoodsDTO> list = null;
-		List<GoodsDTO> list16 = new ArrayList<>();
-		if (session.getAttribute("goodsList") == null) {
-			GoodsService service = new GoodsService();
-			
-			try {
-
-				list = service.selectAllGoods();
-				session.setAttribute("goodsList", list);	
-				
-
-			} catch (Exception e) {
-
-			}
-		}
-		
+		String target="home.jsp";
+		String gCategory = request.getParameter("category");
+		System.out.println(gCategory);
+		List<GoodsDTO> list = (List<GoodsDTO>) session.getAttribute(gCategory);
+		System.out.println(list);
 		Random rand = new Random();
-		List<GoodsDTO> tempList = list;
-		for (int i = 0; i < 16; i++) {
-			int idx = rand.nextInt(tempList.size());
-			list16.add(tempList.get(idx));
-			tempList.remove(idx);			
-		}
-		session.setAttribute("goodsList16", list16);
+		
+		List<GoodsDTO> listByCategory16 = new ArrayList<>();
 
+		for (int i = 0; i < 16; i++) {
+			int idx = rand.nextInt(list.size());
+			listByCategory16.add(list.get(idx));
+		}
+		String listByCategory = "listBy"+gCategory;
+		System.out.println("전"+session.getAttribute(listByCategory));
+		session.setAttribute(listByCategory, listByCategory16);
+		System.out.println("후"+session.getAttribute(listByCategory));
+		System.out.println(listByCategory);
+		
+		request.setAttribute("isCategory", session.getAttribute(listByCategory));
+		request.setAttribute("gCategory", gCategory);
 		RequestDispatcher dis = request.getRequestDispatcher(target);
 		dis.forward(request, response);
-
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		doGet(request, response);
 	}
 
