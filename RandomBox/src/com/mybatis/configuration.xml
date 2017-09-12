@@ -11,6 +11,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.dto.OrderInfoDTO" alias="OrderInfoDTO" />
 		<typeAlias type="com.dto.BoardDTO" alias="BoardDTO" />
 		<typeAlias type="com.dto.MyPageBoardPageDTO" alias="MyPageBoardPageDTO" />
+		<typeAlias type="com.dto.SalesStatusDTO" alias="SalesStatusDTO" />
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">

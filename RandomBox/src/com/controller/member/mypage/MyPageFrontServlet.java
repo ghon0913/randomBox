@@ -19,8 +19,10 @@ import com.dto.MemberDTO;
 import com.dto.MyPageBoardPageDTO;
 import com.dto.OrderInfoDTO;
 import com.dto.OrderInfoPageDTO;
+import com.dto.SalesStatusDTO;
 import com.exception.MyException;
 import com.service.MyPageService;
+import com.sun.javafx.collections.MappingChange.Map;
 
 @WebServlet("*.do")
 public class MyPageFrontServlet extends HttpServlet {
@@ -211,10 +213,6 @@ public class MyPageFrontServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 
-			} else if (command.equals("/sellinfo.do")) {
-
-				request.setAttribute("page", "myPage/myPageSellInfo.jsp");
-
 			} else if (command.equals("/goodsinfo.do")) {
 				String curPage = request.getParameter("curPage");
 				if (curPage == null) {
@@ -247,19 +245,17 @@ public class MyPageFrontServlet extends HttpServlet {
 					GoodsDTO dto = service.goodsretrieve(gCode);
 					request.setAttribute("dto", dto);
 					target = "myPage/myPageGoodsInforetrieve.jsp";
-					
+
 				} catch (MyException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
-				
-
 			} else if (command.equals("/goodsdelete.do")) {
 				String gCode = request.getParameter("gCode");
 				try {
 					service.goodsdelete(gCode);
-					target="goodsinfo.do";
+					target = "goodsinfo.do";
 					request.setAttribute("goodsdelete", "삭제되었습니다.");
 				} catch (MyException e) {
 					// TODO Auto-generated catch block
@@ -287,13 +283,28 @@ public class MyPageFrontServlet extends HttpServlet {
 
 				try {
 					service.goodsupdate(map);
-					target="goodsinfo.do";
+					target = "goodsinfo.do";
 					request.setAttribute("goodsupdate", "수정되었습니다.");
 				} catch (MyException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
+			} else if (command.equals("/sellinfo.do")) {
+
+				request.setAttribute("page", "myPage/myPageSellInfo.jsp");
+				
+				try {
+					List<SalesStatusDTO> sdto = service.sellinfo(login.getUserid());
+					request.setAttribute("sdto", sdto);
+					for (SalesStatusDTO s : sdto) {
+						System.out.println(s);
+					}
+					
+				} catch (MyException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 
@@ -301,8 +312,6 @@ public class MyPageFrontServlet extends HttpServlet {
 		dis.forward(request, response);
 
 	}
-
-	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

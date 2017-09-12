@@ -13,6 +13,8 @@ import com.dto.MemberDTO;
 import com.dto.MyPageBoardPageDTO;
 import com.dto.OrderInfoDTO;
 import com.dto.OrderInfoPageDTO;
+import com.dto.SalesStatusDTO;
+import com.sun.javafx.collections.MappingChange.Map;
 
 public class MyPageDAO {
 	// ...("com.mybatis.OrderMapper.orderDone",para)...
@@ -153,6 +155,12 @@ public class MyPageDAO {
 	public int goodsupdate(SqlSession session, HashMap<String, Object> map) {
 		int n = session.update("goodsupdate",map);
 		return n;
+	}
+	
+	public List<SalesStatusDTO> sellinfo(SqlSession session, String userid) {
+		List<SalesStatusDTO> sdto = session.selectList("sellinfo",userid);
+		System.out.println(sdto);
+		return sdto;
 	}
 	
 	

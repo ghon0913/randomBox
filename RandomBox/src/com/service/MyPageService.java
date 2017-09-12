@@ -13,8 +13,10 @@ import com.dto.MemberDTO;
 import com.dto.MyPageBoardPageDTO;
 import com.dto.OrderInfoDTO;
 import com.dto.OrderInfoPageDTO;
+import com.dto.SalesStatusDTO;
 import com.exception.MyException;
 import com.mybatis.MybatisTemplate;
+import com.sun.javafx.collections.MappingChange.Map;
 
 public class MyPageService {
 
@@ -215,6 +217,21 @@ public class MyPageService {
 		}finally {
 			session.close();
 		}
+	}
+	
+	public List<SalesStatusDTO> sellinfo(String userid) throws MyException{
+		SqlSession session = MybatisTemplate.openSession();
+		List<SalesStatusDTO> sdto = null;
+		MyPageDAO dao = new MyPageDAO();
+		try {
+			sdto = dao.sellinfo(session, userid);
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new MyException("sellinfo 예외");
+		}finally {
+			session.close();
+		}
+		return sdto;
 	}
 	
 

@@ -58,14 +58,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		to_char(writeday, 'mm/dd')
 		"writeday", readcnt, userid, gcode, state
 		from board
-		where userid = #{userId}
+		where userid =
+		#{userId}
 		<if test="searchName == 'title'">
 			and title like
-				'%'||#{searchValue}||'%'
+			'%'||#{searchValue}||'%'
 		</if>
 		<if test="searchName == 'author'">
 			and author like
-				'%'||#{searchValue}||'%'
+			'%'||#{searchValue}||'%'
 		</if>
 		order by num desc
 	</select>
@@ -91,33 +92,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			'%'||#{searchValue}||'%'
 		</if>
 	</select>
-	
+
 	<update id="myPageboardupdate" parameterType="hashmap">
 		update board
-		set content=#{content}
+		set
+		content=#{content}
 		where num=#{num}
 	</update>
-	
+
 	<select id="myPageOrderInfo" parameterType="string" resultType="OrderInfoDTO">
-		select num, userid, ordername, phone, email, post1, post2, addr1, addr2, gcode, gname, gprice, gimage, paymethod,
-		to_char(orderday, 'mm/dd') "orderday" , sellerid
+		select num, userid, ordername, phone, email, post1, post2, addr1,
+		addr2, gcode, gname, gprice, gimage, paymethod,
+		to_char(orderday,
+		'mm/dd') "orderday" , sellerid
 		from order_info
 		where userid=#{userid}
 		order by num desc
 	</select>
-	
-		<select id="orderinforetrieve" parameterType="int" resultType="OrderInfoDTO">
-		select num, userid, ordername, phone, email, post1, post2, addr1, addr2, gcode, gname, gprice, gimage, paymethod,
+
+	<select id="orderinforetrieve" parameterType="int" resultType="OrderInfoDTO">
+		select num, userid, ordername, phone, email, post1, post2, addr1,
+		addr2, gcode, gname, gprice, gimage, paymethod,
 		orderday , sellerid
 		from order_info
 		where num=#{num}
 	</select>
-	
+
 	<select id="myPageOrderInfoPage" parameterType="hashmap"
 		resultType="OrderInfoDTO">
-		
-		select num, userid, ordername, phone, email, post1, post2, addr1, addr2, gcode, gname, gprice, gimage, paymethod,
-		to_char(orderday, 'mm/dd') "orderday" , sellerid
+
+		select num, userid, ordername, phone, email, post1, post2, addr1,
+		addr2, gcode, gname, gprice, gimage, paymethod,
+		to_char(orderday,
+		'mm/dd') "orderday" , sellerid
 		from order_info
 		where userid=#{userId}
 		<if test="startdate != null">
@@ -126,8 +133,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by num desc
 
 	</select>
-	
-		<select id="totalorderPage" resultType="int" parameterType="string">
+
+	<select id="totalorderPage" resultType="int" parameterType="string">
 		select
 		count(*)
 		from order_info
@@ -139,19 +146,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from order_info
 		where userid = #{userId}
 		<if test="startdate !=null">
-			and orderday between #{startdate} and #{finaldate} 
+			and orderday between #{startdate} and #{finaldate}
 		</if>
 	</select>
-	
+
 	<select id="goodsinfo" resultType="GoodsDTO" parameterType="hashmap">
-	
-	select GPRICE, GCODE, GCATEGORY, GNAME, GIMAGE, gcontent_image, GAMOUNT, SELLERID
-	from goods
-	where SELLERID = #{userId}
+
+		select GPRICE, GCODE, GCATEGORY, GNAME, GIMAGE, gcontent_image,
+		GAMOUNT, SELLERID
+		from goods
+		where SELLERID = #{userId}
 
 	</select>
-	
-			<select id="totalgoodsinfo" resultType="int" parameterType="string">
+
+	<select id="totalgoodsinfo" resultType="int" parameterType="string">
 		select
 		count(*)
 		from goods
@@ -162,27 +170,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*)
 		from goods
 		where SELLERID = #{userId}
-		
+
 	</select>
-	
+
 	<select id="goodsretrieve" resultType="GoodsDTO" parameterType="string">
-	
-	select GPRICE, GCODE, GCATEGORY, GNAME, GIMAGE, gcontent_image, GAMOUNT, SELLERID
-	from goods
-	where gCode = #{gCode}
-	
+
+		select GPRICE, GCODE, GCATEGORY, GNAME, GIMAGE, gcontent_image,
+		GAMOUNT, SELLERID
+		from goods
+		where gCode = #{gCode}
+
 	</select>
-	
+
 	<delete id="goodsdelete" parameterType="String">
-	 delete GOODS
-	 where GCODE=#{gCode}
+		delete GOODS
+		where GCODE=#{gCode}
 	</delete>
-	
+
 	<update id="goodsupdate" parameterType="hashmap">
-	 update GOODS
-	 set GCATEGORY=#{gCategory},GNAME=#{gName}, GPRICE=#{gPrice},
-	 GAMOUNT=#{gAmount}
-	 where GCODE=#{gCode}
+		update GOODS
+		set GCATEGORY=#{gCategory},GNAME=#{gName}, GPRICE=#{gPrice},
+		GAMOUNT=#{gAmount}
+		where GCODE=#{gCode}
 	</update>
-	
+
+	<select id="sellinfo" parameterType="String" resultType="salesStatusDTO">
+		select to_char(ORDERDAY,'mm/dd') orderDay , sum(gprice) gPrice
+		from order_info
+		where sellerid=#{userid}
+		group by to_char(ORDERDAY,'mm/dd')
+	</select>
 </mapper>
