@@ -19,8 +19,8 @@ public class GoodsDAO {
 		return list;
 	}
 	
-	public List<GoodsDTO> selectByCategory(SqlSession session, String category){
-		List<GoodsDTO> list = session.selectList("selectAllGoods", category);
+	public List<GoodsDTO> selectByCategory(SqlSession session, String gCategory){
+		List<GoodsDTO> list = session.selectList("selectByCategory", gCategory);
 		return list;
 	}
 }

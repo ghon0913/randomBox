@@ -2,7 +2,6 @@ package com.controller.goods;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -15,41 +14,44 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.dto.GoodsDTO;
+import com.exception.MyException;
 import com.service.GoodsService;
 
-@WebServlet("/GoodsListServlet")
-public class GoodsListServlet extends HttpServlet {
-
+@WebServlet("/GoodsByCategoryServlet")
+public class GoodsByCategoryServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		HttpSession session = request.getSession();
-		
+		String gCategory = request.getParameter("category");
+		request.setAttribute("gCategory", gCategory);
+		String listByCategory = "listBy"+gCategory;
 		String target = "home.jsp";
-		List<GoodsDTO> list = null;
 		List<GoodsDTO> tempList = null;
-		
-		if (session.getAttribute("goodsList") == null) {
+		List<GoodsDTO> listByCategory16 = new ArrayList<>();
+		Random rand = new Random();
+		if (session.getAttribute(gCategory) == null) {
+
 			GoodsService service = new GoodsService();
+			List<GoodsDTO> list = null;
 			try {
 
-				list = service.selectAllGoods();
-				session.setAttribute("goodsList", list);	
+				list = service.selectByCategory(gCategory);
+				session.setAttribute(gCategory, list);
 				tempList = list;
-				
-				Random rand = new Random();
-				List<GoodsDTO> list16 = new ArrayList<>();
-				
 				for (int i = 0; i < 16; i++) {
 					int idx = rand.nextInt(tempList.size());
-					list16.add(tempList.get(idx));		
+					listByCategory16.add(tempList.get(idx));
 				}
-				session.setAttribute("goodsList16", list16);
+				session.setAttribute(listByCategory, listByCategory16);
 
-			} catch (Exception e) {
+			} catch (MyException e) {
 
+				e.printStackTrace();
 			}
 		} 
 
+		request.setAttribute("isCategory", session.getAttribute(listByCategory));
 		RequestDispatcher dis = request.getRequestDispatcher(target);
 		dis.forward(request, response);
 
