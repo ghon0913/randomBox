@@ -194,7 +194,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where GCODE=#{gCode}
 	</update>
 
-	<select id="sellinfo" parameterType="String" resultType="salesStatusDTO">
+	<select id="sellinfo" parameterType="String" resultType="SalesStatusDTO">
 		select to_char(ORDERDAY,'mm/dd') orderDay , sum(gprice) gPrice
 		from order_info
 		where sellerid=#{userid}
