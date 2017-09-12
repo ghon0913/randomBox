@@ -19,7 +19,7 @@
 		<jsp:include page="login/loginForm.jsp" flush="true" /><br>
 	</c:if>
 	<c:if test="${! empty sessionScope.login }">
-		<jsp:include page="board/inquiryList.jsp" flush="true" /><br>
+		<jsp:include page="board/reviewList.jsp" flush="true" /><br>
 	</c:if>
 </body>
 </html>

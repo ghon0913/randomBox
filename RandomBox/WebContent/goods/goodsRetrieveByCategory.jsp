@@ -12,17 +12,17 @@
 				border=1>
 
 				<tr height="30">
-					<td align="center"><a href="home.jsp">구매페이지</a></td>
-					<td align="center"><a href="home.jsp">상품설명</a></td>
+					<td align="center"><a href="GoodsByCategoryServlet?category=${category}">구매페이지</a></td>
+					<td align="center"><a href="GoodsRetrieveByCategoryServlet?category=${category}">상품설명</a></td>
 					<td align="center"><a href="">후기</a></td>
 				</tr>
 				<tr>
-				<td colspan="4">구성품에 대한 상세설명입니다. 물품에 대한 자세한 사항을 확인하세요.</td>
+				<td colspan="4">${category}구성품에 대한 상세설명입니다. 물품에 대한 자세한 사항을 확인하세요.</td>
 				</tr>
 				<tr>
 					
 					<td colspan="4" align="center"><c:forEach var="list16"
-							items="${sessionScope.goodsList16}">
+							items="${isCategory}">
 							상품명 : ${list16.gName}<br>
 							상세설명 : ${list16.gContentImage}
 							<hr>

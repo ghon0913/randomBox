@@ -15,13 +15,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%
-		String a = request.getParameter("a");
-		String b = request.getParameter("b");
-
-		System.out.println(a);
-		System.out.println(b);
-	%>
 	<c:if test="${! empty result }">
 		<script>
 			alert('${result}');
@@ -30,11 +23,23 @@
 
 	<jsp:include page="include/top.jsp" flush="true" /><br>
 	<jsp:include page="include/category.jsp" flush="true" /><br>
-	<c:if test="${ empty retrieve }">
-		<jsp:include page="goods/goodsList.jsp" flush="true" /><br>
+	<c:if test="${empty isCategory }">
+		<c:if test="${ empty retrieve }">
+			<jsp:include page="goods/goodsList.jsp" flush="true" /><br>
+		</c:if>
+
+		<c:if test="${! empty retrieve }">
+			<jsp:include page="goods/goodsRetrieve.jsp" flush="true" /><br>
+		</c:if>
 	</c:if>
-	<c:if test="${! empty retrieve }">
-		<jsp:include page="goods/goodsRetrieve.jsp" flush="true" /><br>
+	<c:if test="${!empty isCategory }">
+		<c:if test="${ empty retrieve }">
+			<jsp:include page="goods/goodsListByCategory.jsp" flush="true" /><br>
+		</c:if>
+
+		<c:if test="${! empty retrieve }">
+			<jsp:include page="goods/goodsRetrieveByCategory.jsp" flush="true" /><br>
+		</c:if>
 	</c:if>
 
 </body>

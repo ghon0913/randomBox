@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+
 <table width="100%" cellspacing="0" cellpadding="0">
 	<tr height="10" />
 
@@ -13,12 +15,12 @@
 
 				<tr height="30">
 					<td align="center"><a href="home.jsp">구매페이지</a></td>
-					<td align="center"><a href="GoodsRetrieveServlet">상품설명</a></td>
-					<td align="center"><a href="ReviewListServlet">후기</a></td>
+					<td align="center"><a href="GoodsRetrieveByCategoryServlet?category=${gCategory}">상품설명</a></td>
+					<td align="center"><a href="ReviewListServlet?searchCategory=${gCategory}">후기</a></td>
 				</tr>
 				<tr>
 
-					<td colspan="3" align="center">
+					<td colspan="4" align="center">
 						<table style='padding: 15px' align="center">
 
 							<tr>
@@ -31,16 +33,16 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="3">
-						구성품(총16개의 상품)<br>
-						<c:forEach var="list16" items="${sessionScope.goodsList16}">
+					<td colspan="4">
+						카테고리 구성품(총16개의 상품)<br>
+						<c:forEach var="list16" items="${isCategory}">
 							${list16.gName} &nbsp;
 						</c:forEach>
 					</td>
 				</tr>
 				<tr>
-					<td colspan="3" align="center">
-						<a href="GoodsMixListServlet"><input type="button" value="새로 구성하기"/></a>
+					<td colspan="4" align="center">
+						<a href="GoodsMixListByCategoryServlet?category=${gCategory}"><input type="button" value="새로 구성하기"/></a>
 						<a href=""><input type="button" value="장바구니 넣기"/></a>
 						<a href=""><input type="button" value="주문하기"/></a>
 					</td>

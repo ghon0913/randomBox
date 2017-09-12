@@ -14,10 +14,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select gCode,gCategory,gName,gPrice,gImage,gContent_image,gAmount,sellerId
 		from goods
 	</select>
-	<select id="selectByCategory" parameterType="string" resultType="GoodsDTO">
+	<select id="selectByCategory" parameterType="String" resultType="GoodsDTO">
 		select gCode,gCategory,gName,gPrice,gImage,gContent_image,gAmount,sellerId
 		from goods
-		where category = #{category} 
+		where gCategory = #{gCategory} 
 	</select>
 
 </mapper>

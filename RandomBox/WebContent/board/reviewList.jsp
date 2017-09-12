@@ -5,7 +5,7 @@
 	pageEncoding="UTF-8"%>
 
 <div>
-	<h3>Q & A</h3>
+	<h3>상품 후기</h3>
 	<table>
 		<tr>
 			<td colspan="2">
@@ -16,11 +16,6 @@
 					<option value="category3">category3</option>
 					<option value="category4">category4</option>
 				</select>
-			</td>
-			<td height="30">
-					<td colspan="6" align="right">
-						<input type="button" id="inquiry" value="문의하기">
-					</td>
 			</td>
 		</tr>
 		<tr>
@@ -38,7 +33,6 @@
 			<th>작성일</th>
 			<th width="80">작성자</th>
 			<th>조회수</th>
-			<th>처리상태</th>
 		</tr>
 		<tr>
 			<td colspan="10">
@@ -51,22 +45,21 @@
 <!-- ----------------------------------------------------------------리스트 목록 없을 때 -------------------------------->
 		<c:if test="${ boardList.getList().size() == 0 }">
 			<tr>
-				<td colspan="7" align="center">
-					해당하는 글 목록이 없습니다.
+				<td colspan="6" align="center">
+					해당하는 후기가 없습니다.
 				</td>
 			</tr>
 		</c:if>
 <!-- ----------------------------------------------------------------리스트 목록 보여주기 -------------------------------->
 		<c:if test="${ boardList.getList().size() != 0 }">
-			<c:forEach var="bList" items="${ boardList.getList()}">
+			<c:forEach var="rList" items="${ boardList.getList()}">
 				<tr>
-					<td>${bList.num }</td>
-					<td>${bList.category }</td>
-					<td style="padding-left: 30px"><a href="InquiryRetrieveServlet?num=${bList.num }">${bList.title }</a></td>
-					<td>${bList.writeDay }</td>
-					<td align="center">${bList.userId }</td>
-					<td>${bList.readCnt }</td>
-					<td>${bList.state }</td>
+					<td>${rList.num }</td>
+					<td>${rList.category }</td>
+					<td style="padding-left: 30px"><a href="InquiryRetrieveServlet?num=${rList.num }">${rList.title }</a></td>
+					<td>${rList.writeDay }</td>
+					<td align="center">${rList.userId }</td>
+					<td>${rList.readCnt }</td>
 				</tr>
 			</c:forEach>
 			<tr>
@@ -86,7 +79,7 @@
 			</td>
 		</tr>
 		<tr>
-			<form action="InquiryListServlet">
+			<form action="ReviewListServlet">
 			<td colspan="7" style="padding-left: 10px" align="center">
 				<select id="searchName" name="searchName">
 					<option value="title">제목으로 검색</option>
@@ -104,16 +97,10 @@
 <script>
 $(document).ready(function(){
 	
-	/* 문의글 작성 */
-	$("#inquiry").on("click", function() {
-
-		$(location).attr("href", "InquiryFormServlet");
-	});
-	
 	/* 카테고리별로 보기 */
 	$("#searchCategory").on("change", function(){
 		var searchCategory = $("option:selected").val();
-		$(location).attr("href", "InquiryListServlet?searchCategory="+searchCategory);
+		$(location).attr("href", "ReviewListServlet?searchCategory="+searchCategory);
 	});
 	
 });
