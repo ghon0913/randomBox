@@ -41,3 +41,8 @@
 	</c:if>
 </div>
 <hr>
+<div align="right" style="padding-right: 250px">
+	<a href="InquiryListServlet">Q & A</a>
+	&nbsp;&nbsp;|&nbsp;&nbsp;
+	<a href="ReviewListServlet">랜덤박스 후기</a>
+</div>

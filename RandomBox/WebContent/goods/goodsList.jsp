@@ -14,12 +14,11 @@
 				<tr height="30">
 					<td align="center"><a href="home.jsp">구매페이지</a></td>
 					<td align="center"><a href="GoodsRetrieveServlet">상품설명</a></td>
-					<td align="center"><a href="InquiryListServlet">Q&A</a></td>
-					<td align="center"><a href="">후기</a></td>
+					<td align="center"><a href="ReviewListServlet">후기</a></td>
 				</tr>
 				<tr>
 
-					<td colspan="4" align="center">
+					<td colspan="3" align="center">
 						<table style='padding: 15px' align="center">
 
 							<tr>
@@ -32,7 +31,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="4">
+					<td colspan="3">
 						구성품(총16개의 상품)<br>
 						<c:forEach var="list16" items="${sessionScope.goodsList16}">
 							${list16.gName} &nbsp;
@@ -40,7 +39,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="4" align="center">
+					<td colspan="3" align="center">
 						<a href="GoodsMixListServlet"><input type="button" value="새로 구성하기"/></a>
 						<a href=""><input type="button" value="장바구니 넣기"/></a>
 						<a href=""><input type="button" value="주문하기"/></a>

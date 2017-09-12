@@ -3,24 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<script type="text/javascript" src="jquery-3.2.1.js"></script>
-<script>
-$(document).ready(function(){
-	$("inquiryList").on("click", function(){
-		$(location).attr("href", "InquiryListServlet");
-	});
-	
-	var category = '${retrieveDTO.category }';
-	console.log($("option [value='"+category+"']"));
-	$("option [value='"+category+"']").attr("selected", "selected");
 
-});
-</script>
 <div>
 	<form action="InquiryUpdateServlet" method="post">
 		<table>
 			<tr>
-				<td>글번호 : ${retrieveDTO.num }</td>
+				<td>글번호 : ${retrieveDTO.num }
+				<input type="hidden" name="num" value="${retrieveDTO.num }"></td>
 				<td id="writer">작성자 : ${retrieveDTO.userId }</td>
 				<td>작성일 : ${retrieveDTO.writeDay }</td>
 				<td>조회수 : ${retrieveDTO.readCnt }</td>
@@ -50,7 +39,9 @@ $(document).ready(function(){
 				</tr>
 				<tr>
 					<td colspan="2" align="center">
-						<input type="submit" value="수정하기" id="update">&nbsp;<input type="button" value="목록보기">
+						<input type="submit" value="수정하기" id="update">&nbsp;
+						<input type="button" value="삭제하기" id="delete">&nbsp;
+						<input type="button" value="목록보기" id="inquiryList">
 					</td>
 				</tr>
 			</c:if>
@@ -75,3 +66,25 @@ $(document).ready(function(){
 		</table>
 	</form>
 </div>
+
+<script type="text/javascript" src="jquery-3.2.1.js"></script>
+<script>
+$(document).ready(function(){
+
+	/* 목록보기 */
+	$("#inquiryList").on("click", function(){
+		$(location).attr("href", "InquiryListServlet");
+	});
+	
+	/* 지정한 카테고리로 설정되도록 */
+	var category = '${retrieveDTO.category }';
+	console.log(category);
+	$("#category").find("[value='"+category+"']").attr("selected", "selected");
+	
+	/* 삭제하기 */
+	$("#delete").on("click", function(){
+		$(location).attr("href", "InquiryDeleteServlet?num=${retrieveDTO.num }");
+	});
+});
+
+</script>

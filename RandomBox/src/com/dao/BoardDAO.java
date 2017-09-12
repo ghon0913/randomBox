@@ -1,5 +1,6 @@
 package com.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
@@ -12,15 +13,15 @@ import com.dto.CartDTO;
 public class BoardDAO {
 
 	/* 문의게시판 전체 목록  + 페이징*/	
-	public BoardPageDTO inquiryListPage(SqlSession session, int curPage) {
+	public BoardPageDTO inquiryListPage(SqlSession session, int curPage, HashMap<String, String> searchMap) {
 		
 		BoardPageDTO dto = new BoardPageDTO();
 		
 		int sIndex = (curPage - 1) * dto.getPerPage();
         int length = dto.getPerPage();
         List<BoardDTO> list =
-           session.selectList("inquiryList", null, new RowBounds(sIndex, length));
-        int totalCount = session.selectOne("inquiryList_totalCount");
+           session.selectList("inquiryList", searchMap, new RowBounds(sIndex, length));
+        int totalCount = session.selectOne("inquiryList_totalCount", searchMap);
         
         //pageDTO에 4개의 저장
         dto.setList(list);
@@ -49,4 +50,37 @@ public class BoardDAO {
 		return n;
 	}
 	
+	/* 문의글 수정하기 */
+	public int inquiryUpdate(SqlSession session, BoardDTO dto) {
+		
+		int n = session.update("inquiryUpdate", dto);
+		return n;
+	}
+	
+	/* 문의글 삭제하기 */
+	public int inquiryDelete(SqlSession session, int num) {
+		
+		int n = session.delete("inquiryDelete", num);
+		return n;
+	}
+	
+	/* 후기게시판 전체 목록  + 페이징*/	
+	public BoardPageDTO reviewListPage(SqlSession session, int curPage, HashMap<String, String> searchMap) {
+		
+		BoardPageDTO dto = new BoardPageDTO();
+		
+		int sIndex = (curPage - 1) * dto.getPerPage();
+        int length = dto.getPerPage();
+        List<BoardDTO> list =
+           session.selectList("reviewList", searchMap, new RowBounds(sIndex, length));
+        int totalCount = session.selectOne("reviewList_totalCount", searchMap);
+        
+        //pageDTO에 4개의 저장
+        dto.setList(list);
+        dto.setCurPage(curPage);
+        dto.setTotalCount(totalCount);
+        
+        return dto;
+	}
+
 }

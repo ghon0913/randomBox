@@ -5,23 +5,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.mybatis.GoodsMapper">
 
 	<!-- 문의게시판 전체 리스트 보기 -->
-	<select id="inquiryList" resultType="BoardDTO">
+	<select id="inquiryList" resultType="BoardDTO" parameterType="hashmap">
 		select num, category, title, to_Char(writeday, 'yyyy/mm/dd') writeday, readcnt, userid, state
 		from board
+		where state in('답변완료','처리중')
+		<if test="searchCategory != null">
+			and category = #{searchCategory}
+		</if>
+		<choose>
+			<when test="searchName == 'title'">
+				and title Like '%' ||  #{searchWord} || '%'
+			</when>
+			<when test="searchName == 'content'">
+				and content Like '%' ||  #{searchWord} || '%'
+			</when>
+		</choose>
 		order by num desc
 	</select>
 
 	<!-- 문의 게시판 전체리스트 수 -->
-	<select id="inquiryList_totalCount" resultType="int">
+	<select id="inquiryList_totalCount" parameterType="hashmap" resultType="int">
 		select count(*)
 		from board
+		where state in('답변완료','처리중')
+		<if test="searchCategory != null">
+			and category = #{searchCategory}
+		</if>
+		<choose>
+			<when test="searchName == 'title'">
+				and title Like '%' ||  #{searchWord} || '%'
+			</when>
+			<when test="searchName == 'content'">
+				and content Like '%' ||  #{searchWord} || '%'
+			</when>
+		</choose>
 	</select>
 	
 	<!-- 문의글 작성하기 -->
 	<insert id="inquiryWrite" parameterType="BoardDTO">
 		insert into
 		board(num, category, title, content, readcnt, userid, state)
-		values (25, #{category}, #{title}, #{content}, 0, #{userId}, '처리중')
+		values (27, #{category}, #{title}, #{content}, 0, #{userId}, '처리중')
 	</insert>
 	
 	<!-- 문의글 자세히 보기 -->
@@ -35,4 +59,58 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		set readCnt = readCnt +1
 		where num = #{num}
 	</update>
+	
+	<!-- 문의글 수정하기 -->
+	<update id="inquiryUpdate" parameterType="BoardDTO">
+		update board
+		set category = #{category}, title = #{title}, content = #{content}
+		where num = #{num}
+	</update>
+	
+	<!-- 문의글 삭제하기 -->
+	<delete id="inquiryDelete" parameterType="int">
+		delete from board
+		where num = #{num}
+	</delete>
+
+<!-- ********** -->
+<!-- 후기게시판 SQL -->
+
+	<!-- 후기게시판 전체 리스트 -->
+	<select id="reviewList" resultType="BoardDTO" parameterType="hashmap">
+		select num, category, title, to_Char(writeday, 'yyyy/mm/dd') writeday, readcnt, userid
+		from board
+		where state = '상품후기'
+		<if test="searchCategory != null">
+			and category = #{searchCategory}
+		</if>
+		<choose>
+			<when test="searchName == 'title'">
+				and title Like '%' ||  #{searchWord} || '%'
+			</when>
+			<when test="searchName == 'content'">
+				and content Like '%' ||  #{searchWord} || '%'
+			</when>
+		</choose>
+		order by num desc
+	</select>
+	
+	<!-- 후기 게시판 전체리스트 수 -->
+	<select id="reviewList_totalCount" parameterType="hashmap" resultType="int">
+		select count(*)
+		from board
+		where state = '상품후기'
+		<if test="searchCategory != null">
+			and category = #{searchCategory}
+		</if>
+		<choose>
+			<when test="searchName == 'title'">
+				and title Like '%' ||  #{searchWord} || '%'
+			</when>
+			<when test="searchName == 'content'">
+				and content Like '%' ||  #{searchWord} || '%'
+			</when>
+		</choose>
+	</select>
+	
 </mapper>
