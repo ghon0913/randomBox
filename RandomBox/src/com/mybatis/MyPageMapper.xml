@@ -172,4 +172,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	where gCode = #{gCode}
 	
 	</select>
+	
+	<delete id="goodsdelete" parameterType="String">
+	 delete GOODS
+	 where GCODE=#{gCode}
+	</delete>
+	
+	<update id="goodsupdate" parameterType="hashmap">
+	 update GOODS
+	 set GCATEGORY=#{gCategory},GNAME=#{gName}, GPRICE=#{gPrice},
+	 GAMOUNT=#{gAmount}
+	 where GCODE=#{gCode}
+	</update>
+	
 </mapper>

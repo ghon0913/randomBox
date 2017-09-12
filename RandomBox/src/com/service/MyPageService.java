@@ -190,5 +190,32 @@ public class MyPageService {
 		
 	}
 	
+	public void goodsdelete(String gCode) throws MyException {
+		SqlSession session = MybatisTemplate.openSession();
+		MyPageDAO dao = new MyPageDAO();
+		try {
+			int n = dao.goodsdelete(session, gCode);
+			if(n==1) session.commit();
+		}catch(Exception e) {
+			throw new MyException("goodsdelete 예외");
+		}finally {
+			session.close();
+		}
+	}
+	
+	public void goodsupdate(HashMap<String, Object> map) throws MyException {
+		SqlSession session = MybatisTemplate.openSession();
+		MyPageDAO dao = new MyPageDAO();
+		try {
+			int n = dao.goodsupdate(session, map);
+			if(n==1) session.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new MyException("goodsupdate 예외");
+		}finally {
+			session.close();
+		}
+	}
+	
 
 }

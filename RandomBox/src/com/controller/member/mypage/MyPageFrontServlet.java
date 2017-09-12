@@ -28,14 +28,15 @@ public class MyPageFrontServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// 1.세션받기
+		// 세션받기
 		HttpSession session = request.getSession();
-		// 2.target초기화
+		// target초기화
 		String target = "myPage1.jsp";
-		// 3.login세션확인
+		// login세션확인
 		MemberDTO login = (MemberDTO) session.getAttribute("login");
 		System.out.println(login);
 
+		// login 세션 없을경우 loginform으로 redirect
 		if (login == null) {
 			response.sendRedirect("LoginFormServlet");
 		} else {
@@ -44,24 +45,23 @@ public class MyPageFrontServlet extends HttpServlet {
 			String requestURI = request.getRequestURI();
 			String contextPath = request.getContextPath();
 			String command = requestURI.substring(contextPath.length());
-			// 서비스초기화
+
+			// 서비스선언
 			MyPageService service = new MyPageService();
+
 			try {
 				MemberDTO xxx = service.myPageUserInfo(login.getUserid());
-				request.setAttribute("mdto", xxx);
+				request.setAttribute("mdto", xxx);// login세션의 memberdto 를 mdto에 저장
 			} catch (MyException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
 			// 어떤 .do로 왔는지 구분
-			////////////////////////////////////////////////
 			if (command.equals("/userinfo.do")) {
-
 				request.setAttribute("page", "myPage/myPageUserInfo.jsp");
 
 			} else if (command.equals("/userinfoupdate.do")) {
-
 				String passwd = request.getParameter("passwd");
 				String phoneNumber = request.getParameter("phoneNumber");
 				String post1 = request.getParameter("post1");
@@ -83,8 +83,7 @@ public class MyPageFrontServlet extends HttpServlet {
 				}
 				request.setAttribute("page", "myPage/myPageUserInfo.jsp");
 
-			} //////////////////////////////////////////////
-				///////////////////////////////////////////////////
+			}
 			/*
 			 * else if (command.equals("/myboard.do")) {
 			 * 
@@ -173,18 +172,17 @@ public class MyPageFrontServlet extends HttpServlet {
 
 			} else if (command.equals("/orderinfopage.do")) {
 
-				
 				String curPage = request.getParameter("curPage");
 				if (curPage == null) {
 					curPage = "1";
 				}
-								
+
 				String startdate = request.getParameter("startdate");
 				String finaldate = request.getParameter("finaldate");
 
 				HashMap<String, String> map = new HashMap();
 				map.put("startdate", startdate);
-				System.out.println(">>>>>>>>>>>>>>>>>>"+startdate);
+				System.out.println(">>>>>>>>>>>>>>>>>>" + startdate);
 				map.put("finaldate", finaldate);
 				map.put("userId", login.getUserid());
 
@@ -222,13 +220,12 @@ public class MyPageFrontServlet extends HttpServlet {
 				if (curPage == null) {
 					curPage = "1";
 				}
-								
+
 				String searchName = request.getParameter("searchName");
 				String searchValue = request.getParameter("searchValue");
 
 				HashMap<String, String> map = new HashMap();
 				map.put("searchName", searchName);
-				System.out.println(">>>>>>>>>>>>>>>>>>"+searchValue);
 				map.put("searchValue", searchValue);
 				map.put("userId", login.getUserid());
 
@@ -242,29 +239,70 @@ public class MyPageFrontServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 
-			}else if (command.equals("/goodsinforetrieve.do")) {
+			} else if (command.equals("/goodsinforetrieve.do")) {
 
-				request.setAttribute("page", "myPage/goodsinforetrieve.jsp");
 				String gCode = request.getParameter("gCode");
-				
+
 				try {
 					GoodsDTO dto = service.goodsretrieve(gCode);
 					request.setAttribute("dto", dto);
-					System.out.println(dto);
+					target = "myPage/myPageGoodsInforetrieve.jsp";
+					
 				} catch (MyException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
-				target="myPage/myPageGoodsInforetrieve.jsp";
-				
-			}
 
-			RequestDispatcher dis = request.getRequestDispatcher(target);
-			dis.forward(request, response);
+				
+
+			} else if (command.equals("/goodsdelete.do")) {
+				String gCode = request.getParameter("gCode");
+				try {
+					service.goodsdelete(gCode);
+					target="goodsinfo.do";
+					request.setAttribute("goodsdelete", "삭제되었습니다.");
+				} catch (MyException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			} else if (command.equals("/goodsupdate.do")) {
+				String gCode = request.getParameter("gCode");
+				String gCategory = request.getParameter("gCategory");
+				String gName = request.getParameter("gName");
+				String gPrice = request.getParameter("gPrice");
+				/*
+				 * String gImage = request.getParameter("gImage"); String gContentImage=
+				 * request.getParameter("gContentImage");
+				 */
+				String gAmount = request.getParameter("gAmount");
+				System.out.println(gAmount);
+
+				HashMap<String, Object> map = new HashMap<>();
+				map.put("gCode", gCode);
+				map.put("gCategory", gCategory);
+				map.put("gName", gName);
+				map.put("gPrice", Integer.parseInt(gPrice));
+				map.put("gAmount", Integer.parseInt(gAmount));
+
+				try {
+					service.goodsupdate(map);
+					target="goodsinfo.do";
+					request.setAttribute("goodsupdate", "수정되었습니다.");
+				} catch (MyException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
 		}
 
+		RequestDispatcher dis = request.getRequestDispatcher(target);
+		dis.forward(request, response);
+
 	}
+
+	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

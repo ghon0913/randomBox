@@ -35,7 +35,7 @@
 
 <c:forEach var="goods" items="${pagedto.glist }">
 <tr>
-	<td> <a href="goodsinforetrieve.do?gCode=${goods.gCode }" target="blank">${goods.gCode }</a>
+	<td> <a href="goodsinforetrieve.do?gCode=${goods.gCode }" >${goods.gCode }</a>
 	</td>
 	<td>${goods.gImage }${goods.gName }
 	</td>
@@ -59,3 +59,4 @@
 
 </table>
 </div>
+

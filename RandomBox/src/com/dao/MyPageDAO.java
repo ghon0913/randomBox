@@ -145,6 +145,16 @@ public class MyPageDAO {
 		
 	}
 	
+	public int goodsdelete(SqlSession session, String gCode) {
+		int n = session.delete("goodsdelete",gCode);
+		return n;
+	}
+	
+	public int goodsupdate(SqlSession session, HashMap<String, Object> map) {
+		int n = session.update("goodsupdate",map);
+		return n;
+	}
+	
 	
 	
 }

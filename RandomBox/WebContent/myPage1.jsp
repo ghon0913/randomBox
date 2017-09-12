@@ -74,3 +74,14 @@
 	%>
 </body>
 </html>
+
+<c:if test="${!empty requestScope.goodsdelete}" >
+<script>
+	alert('${requestScope.goodsdelete}');
+</script>
+</c:if>
+<c:if test="${!empty requestScope.goodsupdate}" >
+<script>
+	alert('${requestScope.goodsupdate}');
+</script>
+</c:if>
