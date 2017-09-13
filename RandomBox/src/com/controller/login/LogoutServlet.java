@@ -18,13 +18,13 @@ public class LogoutServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String target = "home.jsp";
+		String target = "loginForm.jsp";
 
 		HttpSession session = request.getSession();
 		MemberDTO dto = (MemberDTO) session.getAttribute("login");
 		// 로그인하지 않고 직접 LogoutServlet으로 요청한 경우에 처리
 		if (dto == null) {
-			target = "loginForm.jsp";
+			
 			request.setAttribute("mesg", "로그인이 필요한 작업");
 		} else {
 			Cookie cookies[] = request.getCookies();
@@ -34,8 +34,7 @@ public class LogoutServlet extends HttpServlet {
 				cookies[i].setPath("/");
 				response.addCookie(cookies[i]);
 			}
-			
-			System.out.println("죽임?");
+
 			session.invalidate();
 			request.setAttribute("logout", "정상적으로 로그아웃");
 		}

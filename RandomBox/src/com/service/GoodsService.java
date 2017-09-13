@@ -57,5 +57,21 @@ public class GoodsService {
 		return list;
 
 	}
+	
+	public List<GoodsDTO> selectBySearch(String searchWord) throws MyException {
+		SqlSession session = MybatisTemplate.openSession();
+		GoodsDAO dao = new GoodsDAO();
+
+		List<GoodsDTO> list = null;
+		try {
+			list = dao.selectBySearch(session, searchWord);
+		} catch (Exception e) {
+			throw new MyException("selectBySearch 실패");
+		} finally {
+			session.close();
+		}
+		return list;
+
+	}
 
 }
