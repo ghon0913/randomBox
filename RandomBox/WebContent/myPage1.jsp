@@ -7,9 +7,12 @@
 <script type="text/javascript" src="jquery-3.2.1.js"></script>
 
 <script type="text/javascript">
-
 	$(document).ready(function() {
-		$("#userinfo").on("click", function() {
+		$("#userinfo1").on("click", function() {
+			//console.log(">>>>>>>>>>",'${login}');
+			location.href = "userinfo.do";
+		})
+		$("#userinfo2").on("click", function() {
 			//console.log(">>>>>>>>>>",'${login}');
 			location.href = "userinfo.do";
 		})
@@ -30,10 +33,8 @@
 			location.href = "goodsinfo.do";
 		})
 		
-		
-		
+
 	});
-	
 </script>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -49,8 +50,9 @@
 	${login.username} 님 안녕하세요.
 	<br />
 	<br />
-	<img src="images/mypage/userinfo.png" id="userinfo" width="100">
+	
 	<c:if test="${login.ox=='N'}">
+		<img src="images/mypage/userinfo.png" id="userinfo1" width="100">
 		<img src="images/mypage/orderinfo.png" id="orderinfo" width="100">
 		<img src="images/mypage/writelist.png" id="myboard" width="100">
 		<br />
@@ -58,30 +60,32 @@
 
 
 	<c:if test="${login.ox=='Y'}">
+		<img src="images/mypage/userinfo.png" id="userinfo2" width="100">
 		<img src="images/mypage/sellinfo.png" id="sellinfo" width="100">
 		<img src="images/mypage/goodsinfo.png" id="goodsinfo" width="100">
-		<br/>
+		<br />
 	</c:if>
 
+	<c:if test="${login.ox=='Z' }">
+		<a id="salesStatus" href="salesStatus.admin">매출현황</a>
+		<a id="userInfo" href="userInfo.admin">회원관리</a>
+		<a id="goodsInfo" href="goodsInfo.admin">상품관리</a>
+	</c:if>
 	<hr />
-	
-	<jsp:include page="${page}"/>
-	
-	<%
-		response.setHeader("Pragma", "no-cache");
-		response.setDateHeader("Expries", 0);
-		response.setHeader("Cache-Control", "no-cache");
-	%>
+
+
+	<jsp:include page="${page}" />
+
 </body>
 </html>
 
-<c:if test="${!empty requestScope.goodsdelete}" >
-<script>
-	alert('${requestScope.goodsdelete}');
-</script>
+<c:if test="${!empty requestScope.goodsdelete}">
+	<script>
+		alert('${requestScope.goodsdelete}');
+	</script>
 </c:if>
-<c:if test="${!empty requestScope.goodsupdate}" >
-<script>
-	alert('${requestScope.goodsupdate}');
-</script>
+<c:if test="${!empty requestScope.goodsupdate}">
+	<script>
+		alert('${requestScope.goodsupdate}');
+	</script>
 </c:if>
