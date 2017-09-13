@@ -1,4 +1,4 @@
-package com.controller.board;
+package com.controller.cart;
 
 import java.io.IOException;
 
@@ -9,35 +9,34 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dto.BoardDTO;
+import com.dto.CartDTO;
 import com.exception.MyException;
-import com.service.BoardService;
+import com.service.CartService;
 
-@WebServlet("/InquiryUpdateServlet")
-public class InquiryUpdateServlet extends HttpServlet {
+@WebServlet("/CartAddServlet")
+public class CartAddServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setCharacterEncoding("UTF-8");
+		String gCode = request.getParameter("gCode");
+		String userId = request.getParameter("userId");
+		String gName = request.getParameter("gName");
+		String gPrice = request.getParameter("gPrice");
+		String gImage = request.getParameter("gImage");
+		String gCategory = request.getParameter("gCategory");
 		
-		String num = request.getParameter("num");
-		String category = request.getParameter("category");
-		String title = request.getParameter("title");
-		String content = request.getParameter("content");
-		String open = request.getParameter("open");
+		CartDTO dto = new CartDTO();
+		dto.setgCode(gCode);
+		dto.setgImage(gImage);
+		dto.setgName("["+gCategory+"]랜덤");
+		dto.setgPrice(Integer.parseInt(gPrice));
+		dto.setUserId(userId);
 		
-		BoardDTO dto = new BoardDTO();
-		dto.setNum(Integer.parseInt(num));
-		dto.setCategory(category);
-		dto.setTitle(title);
-		dto.setContent(content);
-		dto.setOpen(open);
-		
-		BoardService service = new BoardService();
-		String target = "InquiryListServlet";
+		CartService service = new CartService();
+		String target = "CartListServlet";
 		
 		try {
-			service.inquiryUpdate(dto);
+			service.addCart(dto);
 		} catch (MyException e) {
 			e.printStackTrace();
 			target = "error.jsp";

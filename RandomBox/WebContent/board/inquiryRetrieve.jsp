@@ -30,12 +30,17 @@
 					</td>
 				</tr>
 				<tr>
+					<td>문의글 공개여부 :</td>
+					<td id="open"><input type="radio" name="open" value="N">비공개글로 작성&nbsp;&nbsp;
+					<input type="radio" name="open" value="Y" checked="checked">공개글로 작성</td>
+				</tr>
+				<tr>
 					<td>제목 :</td>
 					<td><input type="text" name="title" id="title" value="${retrieveDTO.title }"></td>
 				</tr>
 				<tr>
 					<td>내용 :</td>
-					<td><textarea rows="18" cols="25" name="content" id="content">${retrieveDTO.content }</textarea></td>
+					<td><textarea rows="10" cols="30" name="content" id="content">${retrieveDTO.content }</textarea></td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center">
@@ -78,13 +83,17 @@ $(document).ready(function(){
 	
 	/* 지정한 카테고리로 설정되도록 */
 	var category = '${retrieveDTO.category }';
-	console.log(category);
 	$("#category").find("[value='"+category+"']").attr("selected", "selected");
 	
 	/* 삭제하기 */
 	$("#delete").on("click", function(){
 		$(location).attr("href", "InquiryDeleteServlet?num=${retrieveDTO.num }");
 	});
+	
+	/* 지정했던 공개여부 선택되도록 */
+	var open = '${retrieveDTO.open }';
+	$("#open").find("[value='"+open+"']").attr("checked", "checked");
+	
 });
 
 </script>

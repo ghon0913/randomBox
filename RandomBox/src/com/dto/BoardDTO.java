@@ -11,6 +11,14 @@ public class BoardDTO {
 	private String readCnt;
 	private String userId;
 	private String gCode;
+	private String open;
+	
+	public String getOpen() {
+		return open;
+	}
+	public void setOpen(String open) {
+		this.open = open;
+	}
 	public int getNum() {
 		return num;
 	}
@@ -66,7 +74,7 @@ public class BoardDTO {
 		this.gCode = gCode;
 	}
 	public BoardDTO(int num, String category, String state, String title, String content, String writeDay,
-			String readCnt, String userId, String gCode) {
+			String readCnt, String userId, String gCode, String open) {
 		super();
 		this.num = num;
 		this.category = category;
@@ -77,6 +85,7 @@ public class BoardDTO {
 		this.readCnt = readCnt;
 		this.userId = userId;
 		this.gCode = gCode;
+		this.open = open;
 	}
 	public BoardDTO() {
 		super();
@@ -86,6 +95,6 @@ public class BoardDTO {
 	public String toString() {
 		return "BoardDTO [num=" + num + ", category=" + category + ", state=" + state + ", title=" + title
 				+ ", content=" + content + ", writeDay=" + writeDay + ", readCnt=" + readCnt + ", userId=" + userId
-				+ ", gCode=" + gCode + "]";
+				+ ", gCode=" + gCode + ", open=" + open + "]";
 	}
 }

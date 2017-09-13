@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <div>
 	<h3>Q & A</h3>
 	<table>
@@ -62,7 +61,21 @@
 				<tr>
 					<td>${bList.num }</td>
 					<td>${bList.category }</td>
-					<td style="padding-left: 30px"><a href="InquiryRetrieveServlet?num=${bList.num }">${bList.title }</a></td>
+					<td style="padding-left: 30px">
+						<c:if test="${bList.open == 'N' }">
+							<c:if test="${bList.userId == sessionScope.login.userid }">
+								<a href="InquiryRetrieveServlet?num=${bList.num }" class="ck_writer" >${bList.title }
+								<img src="images/items/lock.png" width="12px" height="12px"/></a>
+							</c:if>
+							<c:if test="${bList.userId != sessionScope.login.userid }">
+								<a href="#" class="ck_writer" >${bList.title }
+								<img src="images/items/lock.png" width="12px" height="12px"/></a>
+							</c:if>
+						</c:if>
+						<c:if test="${bList.open == null || bList.open == 'Y' }">
+							<a href="InquiryRetrieveServlet?num=${bList.num }">${bList.title }</a>
+						</c:if>
+					</td>
 					<td>${bList.writeDay }</td>
 					<td align="center">${bList.userId }</td>
 					<td>${bList.readCnt }</td>

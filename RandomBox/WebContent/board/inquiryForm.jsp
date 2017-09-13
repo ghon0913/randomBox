@@ -23,12 +23,17 @@
 				</td>
 			</tr>
 			<tr>
+				<td>문의글 공개여부 :</td>
+				<td><input type="radio" name="open" value="N">비공개글로 작성&nbsp;&nbsp;
+				<input type="radio" name="open" value="Y" checked="checked">공개글로 작성</td>
+			</tr>
+			<tr>
 				<td>제목 :</td>
 				<td><input type="text" name="title"></td>
 			</tr>
 			<tr>
-				<td>내용 :</td>
-				<td><textarea rows="18" cols="25" name="content"></textarea></td>
+				<td>문의 내용 :</td>
+				<td><textarea rows="10" cols="30" name="content"></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">

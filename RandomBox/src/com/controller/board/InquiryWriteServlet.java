@@ -24,12 +24,15 @@ public class InquiryWriteServlet extends HttpServlet {
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		String category = request.getParameter("category");
+		String open = request.getParameter("open");
+		System.out.println(open+"####");
 		
 		BoardDTO dto = new BoardDTO();
 		dto.setCategory(category);
 		dto.setContent(content);
 		dto.setTitle(title);
 		dto.setUserId(userId);
+		dto.setOpen(open);
 		
 		BoardService service = new BoardService();
 		String target = "InquiryListServlet";

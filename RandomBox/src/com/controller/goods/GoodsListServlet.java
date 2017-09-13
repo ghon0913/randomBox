@@ -38,12 +38,24 @@ public class GoodsListServlet extends HttpServlet {
 				
 				Random rand = new Random();
 				List<GoodsDTO> list16 = new ArrayList<>();
+				int totalPrice = 0;
 				
 				for (int i = 0; i < 16; i++) {
 					int idx = rand.nextInt(tempList.size());
-					list16.add(tempList.get(idx));		
+					list16.add(tempList.get(idx));
+					totalPrice += list16.get(i).getgPrice();
 				}
 				session.setAttribute("goodsList16", list16);
+				
+				// 최종 랜덤 상품 저장 ******
+				int randomGoods_idx = rand.nextInt(list16.size());
+				GoodsDTO randomGoods = list16.get(randomGoods_idx);
+				
+				int resultPrice = (totalPrice / 16)/10*10;
+				randomGoods.setgPrice(resultPrice);
+				
+				session.setAttribute("randomGoods", randomGoods);
+				// ******************
 
 			} catch (Exception e) {
 

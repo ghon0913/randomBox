@@ -16,7 +16,13 @@
 						href="GoodsByCategoryServlet?category=${category}">구매페이지</a></td>
 					<td align="center"><a
 						href="GoodsRetrieveByCategoryServlet?category=${category}">상품설명</a></td>
-					<td align="center"><a href="#">후기</a></td>
+					<td align="center">
+						<c:if test="${empty searchCategory}">
+							<a href="GoodsReviewListServlet">후기</a></td>
+						</c:if>
+						<c:if test="${!empty searchCategory}">
+							<a href="GoodsReviewListServlet?searchCategory=${searchCategory }">후기</a></td>
+						</c:if>
 				</tr>
 				<tr>
 					<td colspan="3" align="center">
@@ -95,7 +101,10 @@
 								</td>
 							</tr>
 							<tr>
-								<form action="ReviewListServlet">
+								<form action="GoodsReviewListServlet">
+									<c:if test="${!empty searchCategory}">
+										<input type="hidden" name="searchCategory" value="${searchCategory }">
+									</c:if>
 									<td colspan="4" style="padding-left: 10px" align="center">
 										<select id="searchName" name="searchName">
 											<option value="title">제목으로 검색</option>

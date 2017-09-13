@@ -29,4 +29,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        		</where>
        </delete>
        
+       <!-- 장바구니 추가 -->
+       <insert id="addCart" parameterType="CartDTO">
+       		insert into
+       		cart(num, userid, gcode, gname, gprice, gimage)
+       		values(6, #{userId}, #{gCode}, #{gName}, #{gPrice}, #{gImage})
+       </insert>
+       
 </mapper>

@@ -69,5 +69,22 @@ public class CartService {
 		}
 	}
 
-	
+	/* 장바구니 추가 */
+	public void addCart(CartDTO dto) throws MyException{
+		
+		SqlSession session = MybatisTemplate.openSession();
+		CartDAO dao = new CartDAO();
+		
+		try {
+			int n = dao.addCart(session, dto);
+			if(n== 1) {
+				session.commit();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException("addCart 실패");
+		}finally {
+			session.close();
+		}
+	}
 }

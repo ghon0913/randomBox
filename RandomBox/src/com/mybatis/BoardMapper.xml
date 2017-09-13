@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 문의게시판 전체 리스트 보기 -->
 	<select id="inquiryList" resultType="BoardDTO" parameterType="hashmap">
-		select num, category, title, to_Char(writeday, 'yyyy/mm/dd') writeday, readcnt, userid, state
+		select num, category, title, to_Char(writeday, 'yyyy/mm/dd') writeday, readcnt, userid, state, open
 		from board
 		where state in('답변완료','처리중')
 		<if test="searchCategory != null">
@@ -44,13 +44,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 문의글 작성하기 -->
 	<insert id="inquiryWrite" parameterType="BoardDTO">
 		insert into
-		board(num, category, title, content, readcnt, userid, state)
-		values (27, #{category}, #{title}, #{content}, 0, #{userId}, '처리중')
+		board(num, category, title, content, readcnt, userid, state, open)
+		values (30, #{category}, #{title}, #{content}, 0, #{userId}, '처리중', #{open})
 	</insert>
 	
 	<!-- 문의글 자세히 보기 -->
 	<select id="inquiryRetrieve" parameterType="int" resultType="BoardDTO">
-		select num, category, title, content, to_Char(writeday, 'yyyy/mm/dd') writeday, readcnt, userid, state
+		select num, category, title, content, to_Char(writeday, 'yyyy/mm/dd') writeday, readcnt, userid, state, open
 		from board
 		where num = #{num}
 	</select>
@@ -63,7 +63,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 문의글 수정하기 -->
 	<update id="inquiryUpdate" parameterType="BoardDTO">
 		update board
-		set category = #{category}, title = #{title}, content = #{content}
+		set category = #{category}, title = #{title}, content = #{content}, open = #{open}
 		where num = #{num}
 	</update>
 	

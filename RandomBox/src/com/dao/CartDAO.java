@@ -29,5 +29,10 @@ public class CartDAO {
 		return n;
 	}
 
-	
+	/* 장바구니 추가 */
+	public int addCart (SqlSession session, CartDTO dto) {
+		
+		int n = session.insert("addCart", dto);
+		return n;
+	}
 }

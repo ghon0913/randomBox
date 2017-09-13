@@ -29,16 +29,25 @@ public class GoodsMixListByCategoryServlet extends HttpServlet {
 		Random rand = new Random();
 		
 		List<GoodsDTO> listByCategory16 = new ArrayList<>();
+		int totalPrice = 0;
 
 		for (int i = 0; i < 16; i++) {
 			int idx = rand.nextInt(list.size());
 			listByCategory16.add(list.get(idx));
+			totalPrice += listByCategory16.get(i).getgPrice();
 		}
 		String listByCategory = "listBy"+gCategory;
-		System.out.println("전"+session.getAttribute(listByCategory));
 		session.setAttribute(listByCategory, listByCategory16);
-		System.out.println("후"+session.getAttribute(listByCategory));
-		System.out.println(listByCategory);
+		
+		// 최종 랜덤 상품 저장 ******
+		int randomGoods_idx = rand.nextInt(listByCategory16.size());
+		GoodsDTO randomGoods = listByCategory16.get(randomGoods_idx);
+		
+		int resultPrice = (totalPrice / 16)/10*10;
+		randomGoods.setgPrice(resultPrice);
+		
+		session.setAttribute("randomGoods", randomGoods);
+		// ******************
 		
 		request.setAttribute("isCategory", session.getAttribute(listByCategory));
 		request.setAttribute("gCategory", gCategory);
