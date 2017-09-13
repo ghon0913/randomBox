@@ -36,7 +36,6 @@ public class MyPageFrontServlet extends HttpServlet {
 		String target = "myPage1.jsp";
 		// login세션확인
 		MemberDTO login = (MemberDTO) session.getAttribute("login");
-		System.out.println(login);
 
 		// login 세션 없을경우 loginform으로 redirect
 		if (login == null) {
@@ -182,6 +181,7 @@ public class MyPageFrontServlet extends HttpServlet {
 				String startdate = request.getParameter("startdate");
 				String finaldate = request.getParameter("finaldate");
 
+				
 				HashMap<String, String> map = new HashMap();
 				map.put("startdate", startdate);
 				System.out.println(">>>>>>>>>>>>>>>>>>" + startdate);

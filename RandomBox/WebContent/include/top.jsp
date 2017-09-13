@@ -40,6 +40,9 @@
 				<c:if test="${sessionScope.login.ox=='N'}">
 					<a href="CartListServlet">장바구니</a>&nbsp;&nbsp; ${sessionScope.login.username}님 안녕하세요
  				</c:if>
+ 					<c:if test="${sessionScope.login.ox=='Z'}">
+				<a href="first.admin">관리자페이지</a>&nbsp;&nbsp; 관리자님 안녕하세요.
+ 			</c:if>
 			</form>
 		</div>
 	</c:if>
