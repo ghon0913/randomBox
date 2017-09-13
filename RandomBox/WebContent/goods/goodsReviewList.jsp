@@ -3,9 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <table width="100%" cellspacing="0" cellpadding="0">
 	<tr height="10" />
-
 	<tr>
 		<td>
 			<table align="center" width="710" cellspacing="0" cellpadding="0"
@@ -24,16 +24,18 @@
 							<tr>
 								<td height="7" />
 							</tr>
-							<tr>
-								<td colspan="3"><select id="searchCategory"
-									name="searchCategory">
-										<option>카테고리별로 보기</option>
-										<option value="category1">category1</option>
-										<option value="category2">category2</option>
-										<option value="category3">category3</option>
-										<option value="category4">category4</option>
-								</select></td>
-							</tr>
+							<c:if test="${empty searchCategory}">
+								<tr>
+									<td colspan="3"><select id="searchCategory"
+										name="searchCategory">
+											<option>카테고리별로 보기</option>
+											<option value="category1">category1</option>
+											<option value="category2">category2</option>
+											<option value="category3">category3</option>
+											<option value="category4">category4</option>
+									</select></td>
+								</tr>
+							</c:if>
 							<tr>
 								<td colspan="10">
 									<hr size="1" color="CCCCCC">

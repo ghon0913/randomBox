@@ -23,8 +23,6 @@ public class GoodsReviewListServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		String gCategory = request.getParameter("category");
 		request.setAttribute("category", gCategory);
-		String listByCategory = "listBy"+gCategory;
-		request.setAttribute("isCategory", session.getAttribute(listByCategory));
 		
 		//
 		
@@ -34,6 +32,7 @@ public class GoodsReviewListServlet extends HttpServlet {
         }
 
         String searchCategory = request.getParameter("searchCategory");
+        request.setAttribute("searchCategory", searchCategory);
         String searchName = request.getParameter("searchName");
         String searchWord = request.getParameter("searchWord");
         
