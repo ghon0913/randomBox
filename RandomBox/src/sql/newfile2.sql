@@ -283,4 +283,33 @@ COMMENT ON COLUMN REVIEW_BOARD.READCNT IS '조회수
 ';
 
 
+--
+-- 민죵이 없을 때 DB 추가한고 --
+--
+
+-- board 시퀀스 생성
+create sequence board_seq;
+
+-- cart 시퀀스 생성
+create sequence cart_seq;
+
+-- cart의 gName 크기 더크게!
+alter table cart
+modify (gname varchar2(100));
+
+-- state -> 처리중, readCnt -> 0 로 디폴트
+alter table board
+modify (state varchar2(10) default '처리중');
+alter table board
+modify (readCnt NUMBER(5) default 0);
+
+-- answer table 생성
+-- 컬럼 (boardnum, answer, userid, sellerid, writeTime)
+CREATE TABLE answer
+(boardnum NUMBER(4) PRIMARY KEY,
+answer varchar2(3000) not null,
+userid varchar2(15) not null,
+sellerid varchar2(15) not null,
+writeTime date DEFAULT sysdate);
+
 
