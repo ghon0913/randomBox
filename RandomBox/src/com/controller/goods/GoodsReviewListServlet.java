@@ -20,12 +20,6 @@ public class GoodsReviewListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession session = request.getSession();
-		String gCategory = request.getParameter("category");
-		request.setAttribute("category", gCategory);
-		
-		//
-		
 		String curPage = request.getParameter("curPage");
         if(curPage == null) {
                curPage = "1";
@@ -44,11 +38,12 @@ public class GoodsReviewListServlet extends HttpServlet {
 		BoardService service = new BoardService();
 		BoardPageDTO dto = new BoardPageDTO();
 		
-		String target = "goodsReviewList.jsp";
+		String target = "home.jsp";
 		
 		try {
 			dto = service.reviewList(Integer.parseInt(curPage), searchMap);
 			request.setAttribute("boardList", dto);
+			request.setAttribute("chk_reviewPage", "reviewPage");
 		} catch (MyException e) {
 			e.printStackTrace();
 			target = "error.jsp";

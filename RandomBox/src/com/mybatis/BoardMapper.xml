@@ -44,8 +44,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 문의글 작성하기 -->
 	<insert id="inquiryWrite" parameterType="BoardDTO">
 		insert into
-		board(num, category, title, content, readcnt, userid, state, open)
-		values (30, #{category}, #{title}, #{content}, 0, #{userId}, '처리중', #{open})
+		board(num, category, title, content, userid, open)
+		values (board_seq.nextval, #{category}, #{title}, #{content}, #{userId} #{open})
 	</insert>
 	
 	<!-- 문의글 자세히 보기 -->

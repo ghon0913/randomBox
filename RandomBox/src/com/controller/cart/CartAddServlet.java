@@ -28,7 +28,7 @@ public class CartAddServlet extends HttpServlet {
 		CartDTO dto = new CartDTO();
 		dto.setgCode(gCode);
 		dto.setgImage(gImage);
-		dto.setgName("["+gCategory+"]랜덤");
+		dto.setgName("["+gCategory+"] 랜덤박스");
 		dto.setgPrice(Integer.parseInt(gPrice));
 		dto.setUserId(userId);
 		

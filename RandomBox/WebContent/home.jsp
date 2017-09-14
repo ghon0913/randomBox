@@ -23,23 +23,28 @@
 
 	<jsp:include page="include/top.jsp" flush="true" /><br>
 	<jsp:include page="include/category.jsp" flush="true" /><br>
-	<c:if test="${empty isCategory }">
-		<c:if test="${ empty retrieve }">
-			<jsp:include page="goods/goodsList.jsp" flush="true" /><br>
+	<c:if test="${empty chk_reviewPage }">
+		<c:if test="${empty isCategory }">
+			<c:if test="${ empty retrieve }">
+				<jsp:include page="goods/goodsList.jsp" flush="true" /><br>
+			</c:if>
+	
+			<c:if test="${! empty retrieve }">
+				<jsp:include page="goods/goodsRetrieve.jsp" flush="true" /><br>
+			</c:if>
 		</c:if>
-
-		<c:if test="${! empty retrieve }">
-			<jsp:include page="goods/goodsRetrieve.jsp" flush="true" /><br>
+		<c:if test="${!empty isCategory }">
+			<c:if test="${ empty retrieve }">
+				<jsp:include page="goods/goodsListByCategory.jsp" flush="true" /><br>
+			</c:if>
+	
+			<c:if test="${! empty retrieve }">
+				<jsp:include page="goods/goodsRetrieveByCategory.jsp" flush="true" /><br>
+			</c:if>
 		</c:if>
 	</c:if>
-	<c:if test="${!empty isCategory }">
-		<c:if test="${ empty retrieve }">
-			<jsp:include page="goods/goodsListByCategory.jsp" flush="true" /><br>
-		</c:if>
-
-		<c:if test="${! empty retrieve }">
-			<jsp:include page="goods/goodsRetrieveByCategory.jsp" flush="true" /><br>
-		</c:if>
+	<c:if test="${!empty chk_reviewPage }">
+		<jsp:include page="goods/goodsReviewList.jsp" flush="true" /><br>
 	</c:if>
 
 

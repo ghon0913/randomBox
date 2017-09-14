@@ -33,7 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        <insert id="addCart" parameterType="CartDTO">
        		insert into
        		cart(num, userid, gcode, gname, gprice, gimage)
-       		values(6, #{userId}, #{gCode}, #{gName}, #{gPrice}, #{gImage})
+       		values(cart_seq.nextval, #{userId}, #{gCode}, #{gName}, #{gPrice}, #{gImage})
        </insert>
        
 </mapper>
