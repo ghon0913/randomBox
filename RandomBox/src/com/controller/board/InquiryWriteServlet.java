@@ -25,7 +25,6 @@ public class InquiryWriteServlet extends HttpServlet {
 		String content = request.getParameter("content");
 		String category = request.getParameter("category");
 		String open = request.getParameter("open");
-		System.out.println(open+"####");
 		
 		BoardDTO dto = new BoardDTO();
 		dto.setCategory(category);

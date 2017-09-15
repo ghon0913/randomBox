@@ -46,7 +46,7 @@ public class OrderDoneServlet extends HttpServlet {
 
 		OrderService service = new OrderService();
 		GoodsDTO goodsDTO = null;
-		String target = "orderDone.jsp";
+		String target = "order.jsp";
 		
 		try {
 			goodsDTO = service.goods_orderInfo(gCode);
@@ -65,6 +65,7 @@ public class OrderDoneServlet extends HttpServlet {
 		try {
 			service.orderDone(orderDTO, Integer.parseInt(num), gCode);
 			request.setAttribute("orderDTO", orderDTO);
+			request.setAttribute("chk_orderPage", "orderDone");
 		} catch (NumberFormatException | MyException e) {
 			e.printStackTrace();
 			target = "error.jsp";

@@ -29,13 +29,14 @@ public class OrderConfirmServlet extends HttpServlet {
 		OrderService o_service = new OrderService();
 		MyPageService m_service = new MyPageService();
 		
-		String target = "orderConfirm.jsp";
+		String target = "order.jsp";
 		
 		try {
 			CartDTO c_dto = o_service.orderConfirm(Integer.parseInt(num));
 			MemberDTO m_dto = m_service.myPageUserInfo(userid);
 			request.setAttribute("cDTO", c_dto);
 			request.setAttribute("mDTO", m_dto);
+			request.setAttribute("chk_orderPage", "orderConfirm");
 			
 		} catch (MyException e) {
 			e.printStackTrace();

@@ -26,7 +26,7 @@ public class CartListServlet extends HttpServlet {
 		
 		CartService service = new CartService();
 		List<CartDTO> list = null;
-		String target = "cart.jsp";
+		String target = "cartList.jsp";
 		
 		try {
 			list = service.cartList(dto.getUserid());

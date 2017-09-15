@@ -21,12 +21,13 @@ public class InquiryRetrieveServlet extends HttpServlet {
 		String num = request.getParameter("num");
 		
 		BoardService service = new BoardService();
-		String target = "inquiryRetrieve.jsp";
+		String target = "inquiry.jsp";
 		BoardDTO dto = null;
 		
 		try {
 			dto = service.inquiryRetrieve(Integer.parseInt(num));
 			request.setAttribute("retrieveDTO", dto);
+			request.setAttribute("chk_inquiryPage", "inquiryRetrieve");
 		} catch (NumberFormatException | MyException e) {
 			e.printStackTrace();
 			target = "error.jsp";

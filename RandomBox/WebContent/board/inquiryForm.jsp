@@ -12,15 +12,29 @@
 				<td>${sessionScope.login.userid }</td>
 			</tr>
 			<tr>
-				<td>카테고리 :</td>
+				<td>문의사항 선택 :</td>
 				<td>
-					<select name="category">
-						<option value="category1">카테고리 1</option>
-						<option value="category2">카테고리 2</option>
-						<option value="category3">카테고리 3</option>
-						<option value="category4">카테고리 4</option>
-					</select>
-				</td>
+					<div>
+						<select name="question">
+							<option>문의사항을 선택해 주세요.</option>
+							<option value="q_goods">상품 문의</option>
+							<option value="q_admin">관리자에게 질문하기</option>
+						</select>
+					</div>
+					<div>
+						<select name="category">
+							<option value="category1">카테고리 1</option>
+							<option value="category2">카테고리 2</option>
+							<option value="category3">카테고리 3</option>
+							<option value="category4">카테고리 4</option>
+						</select>
+					</div>
+					<div id="goods">
+						<select name="gCode">
+							<option value=""></option>
+						</select>
+					</div>
+				</td>	
 			</tr>
 			<tr>
 				<td>문의글 공개여부 :</td>
