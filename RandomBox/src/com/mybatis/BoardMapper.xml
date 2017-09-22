@@ -44,13 +44,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 문의글 작성하기 -->
 	<insert id="inquiryWrite" parameterType="BoardDTO">
 		insert into
-		board(num, category, title, content, userid, open)
-		values (board_seq.nextval, #{category}, #{title}, #{content}, #{userId}, #{open})
+		board(num, category, title, content, userid, open, gCode)
+		values (board_seq.nextval, #{category}, #{title}, #{content}, #{userId}, #{open}, #{gCode})
 	</insert>
 	
 	<!-- 문의글 자세히 보기 -->
 	<select id="inquiryRetrieve" parameterType="int" resultType="BoardDTO">
-		select num, category, title, content, to_Char(writeday, 'yyyy/mm/dd') writeday, readcnt, userid, state, open
+		select num, category, title, content, to_Char(writeday, 'yyyy/mm/dd') writeday, readcnt, userid, state, open, gCode
 		from board
 		where num = #{num}
 	</select>
@@ -72,6 +72,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from board
 		where num = #{num}
 	</delete>
+	
+	<!-- 문의글 작성 -> 카테고리 선택 -->
+	<select id="selectCategory" parameterType="String" resultType="CartDTO">
+		select gCode, gName, gCategory
+		from goods
+		where gCategory = #{gCategory}
+	</select>
 
 <!-- ********** -->
 <!-- 후기게시판 SQL -->

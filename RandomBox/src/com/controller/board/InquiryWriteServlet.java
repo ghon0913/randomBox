@@ -20,11 +20,18 @@ public class InquiryWriteServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
+		String s_question = request.getParameter("select_question");
 		String userId = request.getParameter("userid");
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		String category = request.getParameter("category");
+		String category = request.getParameter("select_category");
 		String open = request.getParameter("open");
+		String gCode = request.getParameter("gCode");
+
+		if(s_question.equals("q_admin")) {
+			category = "관리자질문";
+			gCode = "admin";
+		}
 		
 		BoardDTO dto = new BoardDTO();
 		dto.setCategory(category);
@@ -32,6 +39,9 @@ public class InquiryWriteServlet extends HttpServlet {
 		dto.setTitle(title);
 		dto.setUserId(userId);
 		dto.setOpen(open);
+		dto.setgCode(gCode);
+		
+		System.out.println("%%%%%%%"+dto.getgCode());
 		
 		BoardService service = new BoardService();
 		String target = "InquiryListServlet";
