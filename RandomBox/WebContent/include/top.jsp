@@ -32,16 +32,17 @@
 		<div align="center">
 			<form action="GoodsBySearchServlet" method="GET">
 				<input type="text" name="searchBar" value="검색하세요" size="50">
-				<input type="submit" value="검색">
-				<a href="LogoutServlet">로그아웃</a>&nbsp;&nbsp; <a href="MyPageServlet">마이페이지</a>&nbsp;&nbsp;
+				<input type="submit" value="검색"> <a href="LogoutServlet">로그아웃</a>&nbsp;&nbsp;
 				<c:if test="${sessionScope.login.ox=='Y'}">
+					<a href="MyPageServlet">마이페이지</a>&nbsp;&nbsp;
 					<a href="GoodsRegisterFormServlet">상품등록</a>&nbsp;&nbsp; ${sessionScope.login.username}님 안녕하세요
    				</c:if>
 				<c:if test="${sessionScope.login.ox=='N'}">
+					<a href="MyPageServlet">마이페이지</a>&nbsp;&nbsp;
 					<a href="CartListServlet">장바구니</a>&nbsp;&nbsp; ${sessionScope.login.username}님 안녕하세요
  				</c:if>
- 					<c:if test="${sessionScope.login.ox=='Z'}">
-				<a href="first.admin">관리자페이지</a>&nbsp;&nbsp; 관리자님 안녕하세요.
+				<c:if test="${sessionScope.login.ox=='Z'}">
+					<a href="first.admin">관리자페이지</a>&nbsp;&nbsp; 관리자님 안녕하세요.
  			</c:if>
 			</form>
 		</div>
