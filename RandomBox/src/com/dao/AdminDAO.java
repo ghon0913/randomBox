@@ -47,5 +47,10 @@ public class AdminDAO {
 		return dto;
 		
 	}
+	
+	public void AdminSalesStatus(SqlSession session) {
+		
+	
+	}
 
 }

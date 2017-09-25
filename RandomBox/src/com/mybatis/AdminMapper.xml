@@ -38,7 +38,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="userInfototalPage" resultType="int">
-		select count(*) from joinmember
+		select count(*) from
+		joinmember
 	</select>
 
 	<select id="userInfoSearchPage" resultType="int" parameterType="hashmap">
@@ -52,5 +53,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			'%'||#{searchValue}||'%'
 		</if>
 	</select>
+
+
 
 </mapper>
