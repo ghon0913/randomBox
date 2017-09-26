@@ -4,10 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<select id="select_goods" name="gCode">
 	<option>상품명 선택</option>
 	<option value="none">목록에 없음</option>
 	<c:forEach var="goods" items="${goodsList }">
 		<option value="${goods.gCode }">${goods.gName }</option>
 	</c:forEach>
-</select>

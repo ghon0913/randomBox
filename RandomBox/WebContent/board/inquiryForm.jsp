@@ -4,6 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <div>
+	<h3>문의글 쓰기</h3>
 	<form id="inquiryWriteForm" action="InquiryWriteServlet" method="post">
 		<table>
 			<input type="hidden" name="userid" value="${sessionScope.login.userid }">
@@ -26,6 +27,7 @@
 						<option value="1">카테고리 3</option>
 						<option value="test">카테고리 4</option>
 					</select>
+					<select id="select_goods" name="gCode" style="display: none;"></select>
 				</td>	
 			</tr>
 			<tr>
@@ -43,7 +45,7 @@
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-					<input type="submit" value="문의하기">&nbsp;<input type="button" value="목록보기">
+					<input type="submit" value="문의하기">&nbsp;<input id="inquiryList" type="button" value="작성취소">
 				</td>
 			</tr>
 		</table>
@@ -54,6 +56,11 @@
 <script>
 $(document).ready(function(){
 
+	/* 목록보기 */
+	$("#inquiryList").on("click", function(){
+		$(location).attr("href", "InquiryListServlet");
+	});
+	
 	/* 문의사항 선택하기  */
 	$("#select_question").on("change", function(){
 		
@@ -68,6 +75,9 @@ $(document).ready(function(){
 	/* 카테고리 선택하기 */
 	$("#select_category").on("change", function(){
 		
+		$("#select_goods").hide();
+		$("#select_goods").empty();
+		
 		var s_category = $("#select_category option:selected").val();
 
         $.ajax({
@@ -77,8 +87,8 @@ $(document).ready(function(){
                dataType:"text",
                
                success : function(responseData, status, xhr){
-            	   console.log(responseData);
-            	   $("#select_category").after(responseData);
+            	   $("#select_goods").show();
+            	   $("#select_goods").append(responseData);
                },
                
                error : function(xhr, status, e){

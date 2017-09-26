@@ -8,7 +8,7 @@
 <table border="1">
 	<tr>
 		<form action="orderinfopage.do">
-		<td colspan="3">기간별조회 <input type="date" name="startdate"> - <input
+		<td colspan="4">기간별조회 <input type="date" name="startdate"> - <input
 			type="date" name="finaldate"><input type="submit">
 		</td>
 		
@@ -16,7 +16,7 @@
 	</tr>
 	<tr>
 
-			<td colspan="3">
+			<td colspan="4">
 				<form action="MyPageOrderInfoPageServlet">
 					<select name="perpage">
 						<!-- change함수주기 -->
@@ -30,6 +30,7 @@
 		</tr>
 	<tr>
 		<td>날짜</td>
+		<td>주문번호</td>
 		<td>상품정보</td>
 		<td>상태</td>
 	</tr>
@@ -44,13 +45,13 @@
 	
 	<c:forEach var="order" items="${pagedto.getOlist() }">
 	<tr>
-		<td>${order.orderDay }<br/>
-		<a href="orderinforetrieve.do?num=${order.num }" target="blank">${order.num }</a>
-		<br />
-		</td>
+		<input id="num" type="hidden" value="${order.num }">
+		<input id="gName" type="hidden" value="${order.gName }">
+		<td>${order.orderDay }
+		<td><a href="orderinforetrieve.do?num=${order.num }" target="blank">${order.num }</a></td>
 		<td>
 		<img src="images/goods/${order.gImage }" height="100" width="100"> ${order.gName }${order.gPrice }</td>
-		<td>배송중/배송완료</td> 
+		<td>배송중/배송완료<br><input class="reviewWrite" type="button" value="후기 작성하기"></td> 
 	</tr>
 	</c:forEach>
 	<tr>
@@ -61,3 +62,16 @@
 </table>
 </form>
 </div>
+
+<script type="text/javascript" src="jquery-3.2.1.js"></script>
+<script>
+$(document).ready(function(){
+
+	/* 후기작성하기 */
+	$(".reviewWrite").on("click", function(){
+		var orderNum = $(this).parent().siblings("#num").val();
+		var gName = $(this).parent().siblings("#gName").val();
+		$(location).attr("href", "ReviewFormServlet?num="+orderNum+"&gName="+gName);
+	});
+});
+</script>

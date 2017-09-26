@@ -63,7 +63,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 문의글 수정하기 -->
 	<update id="inquiryUpdate" parameterType="BoardDTO">
 		update board
-		set category = #{category}, title = #{title}, content = #{content}, open = #{open}
+		set title = #{title}, content = #{content}, open = #{open}
 		where num = #{num}
 	</update>
 	
