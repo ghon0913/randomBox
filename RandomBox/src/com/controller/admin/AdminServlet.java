@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.dto.AdminSalesStatusDTO;
 import com.dto.AdminUserInfoPageDTO;
 import com.dto.MemberDTO;
 import com.exception.MyException;
@@ -45,7 +46,13 @@ public class AdminServlet extends HttpServlet {
 				if (command.equals("/salesStatus.admin")) {
 					request.setAttribute("page", "management/salesStatus.jsp");
 					
-					service.AdminSalesStatus();
+					try {
+						List<AdminSalesStatusDTO> list = service.AdminSalesStatus();
+						request.setAttribute("slist", list);
+					} catch (MyException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 
 					RequestDispatcher dis = request.getRequestDispatcher(target);
 					dis.forward(request, response);

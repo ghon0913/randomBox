@@ -53,7 +53,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			'%'||#{searchValue}||'%'
 		</if>
 	</select>
-
+	<select id="salesStatus" resultType="AdminSalesStatusDTO">
+		select to_char(ORDERDAY,'mm/dd') orderDay , sellerid, sum(gprice) gPrice
+		from order_info
+		group by to_char(ORDERDAY,'mm/dd'),sellerid
+		order by sellerid
+	</select>
 
 
 </mapper>
