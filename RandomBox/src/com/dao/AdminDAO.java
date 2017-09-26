@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
+import com.dto.AdminSalesStatusDTO;
 import com.dto.AdminUserInfoPageDTO;
 import com.dto.BoardDTO;
 import com.dto.MemberDTO;
@@ -48,8 +49,10 @@ public class AdminDAO {
 		
 	}
 	
-	public void AdminSalesStatus(SqlSession session) {
-		
+	public List<AdminSalesStatusDTO> AdminSalesStatus(SqlSession session) {
+		List<AdminSalesStatusDTO> list = session.selectList("salesStatus");
+		System.out.println("dao"+list);
+		return list;
 	
 	}
 

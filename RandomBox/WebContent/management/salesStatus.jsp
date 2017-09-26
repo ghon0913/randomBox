@@ -8,17 +8,24 @@
 <div id="container"
 	style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
+
+
 <script>
 var orderDay = new Array();
 var gPrice = new Array();
-var userId = new Array();
+var sellerid = new Array();
 //1.array선언
+
+
 </script>
-<c:forEach var="s" items="${sdto }" varStatus="status">
+
+
+<c:forEach var="s" items="${slist }" varStatus="status">
 	<script>//foreach script배열을 추가 
 		orderDay[${status.index}]='${s.orderDay}';
-		userId[${status.index}]='${s.userid}';
+		sellerid[${status.index}]='${s.sellerid}';
 		gPrice[${status.index}]=parseInt('${s.gPrice}');
+		
 	</script>
 </c:forEach>
 
@@ -51,10 +58,14 @@ Highcharts.chart('container', {
         }
     },
     series: [
+
+		<c:forEach var="a" items="${slist }">
     	{
-         name: '매출',
-         data: gPrice
+         name: ${a.sellerid}
+         data: ${a.gPrice}
     	}
-    ]
-});
+    	</c:forEach>
+    	<script >
+    	]
+    });
 </script>
