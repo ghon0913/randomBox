@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.dao.BoardDAO;
 import com.dto.BoardDTO;
 import com.dto.BoardPageDTO;
+import com.dto.GoodsDTO;
 import com.exception.MyException;
 import com.mybatis.MybatisTemplate;
 
@@ -102,6 +103,25 @@ public class BoardService {
 		}finally {
 			session.close();
 		}
+	}
+	
+	/* 문의글 작성 -> 카테고리 선택  */
+	public List<GoodsDTO> selectCategory(String gCategory) throws MyException{
+		
+		SqlSession session = MybatisTemplate.openSession();
+		BoardDAO dao = new BoardDAO();
+		List<GoodsDTO> list = null;
+		
+		try {
+			list = dao.selectCategory(session, gCategory);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException("selectCategory 실패");
+		}finally {
+			session.close();
+		}
+		
+		return list;
 	}
 	
 	/* 후기게시판 전체 목록 */

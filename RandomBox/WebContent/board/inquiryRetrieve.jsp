@@ -3,32 +3,32 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <div>
-	<form action="InquiryUpdateServlet" method="post">
+	<form action="InquiryUpdateServlet" method="post" id="inquiryRetrieveForm">
 		<table>
 			<tr>
-				<td>글번호 : ${retrieveDTO.num }
-				<input type="hidden" name="num" value="${retrieveDTO.num }"></td>
+				<td>글번호 : ${retrieveDTO.num }<input type="hidden" name="num" value="${retrieveDTO.num }"></td>
 				<td id="writer">작성자 : ${retrieveDTO.userId }</td>
 				<td>작성일 : ${retrieveDTO.writeDay }</td>
-				<td>조회수 : ${retrieveDTO.readCnt }</td>
 			</tr>
 			<tr>
 				<td>처리상태 : ${retrieveDTO.state }</td>
+				<td></td>
+				<td>조회수 : ${retrieveDTO.readCnt }</td>
 			</tr>
-			<c:if test="${retrieveDTO.userId == sessionScope.login.userid}">
+			<tr>
+				<td>카테고리 :</td>
+				<td>${retrieveDTO.category }</td>
+			</tr>
+			<c:if test="${!empty retrieveDTO.gCode}">
 				<tr>
-					<td>카테고리 :</td>
-					<td>
-						<select name="category" id="category">
-							<option value="category1">카테고리 1</option>
-							<option value="category2">카테고리 2</option>
-							<option value="category3">카테고리 3</option>
-							<option value="category4">카테고리 4</option>
-						</select>
-					</td>
+					<td>문의 상품 :</td>
+					<td>${retrieveDTO.gCode }</td>
 				</tr>
+			</c:if>
+		</table>
+		<table>
+			<c:if test="${retrieveDTO.userId == sessionScope.login.userid}">
 				<tr>
 					<td>문의글 공개여부 :</td>
 					<td id="open"><input type="radio" name="open" value="N">비공개글로 작성&nbsp;&nbsp;
@@ -39,8 +39,8 @@
 					<td><input type="text" name="title" id="title" value="${retrieveDTO.title }"></td>
 				</tr>
 				<tr>
-					<td>내용 :</td>
-					<td><textarea rows="10" cols="30" name="content" id="content">${retrieveDTO.content }</textarea></td>
+					<td>문의 내용 :</td>
+					<td><textarea rows="10" cols="50" name="content" id="content">${retrieveDTO.content }</textarea></td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center">
@@ -51,16 +51,13 @@
 				</tr>
 			</c:if>
 			<c:if test="${retrieveDTO.userId != sessionScope.login.userid}">
-				<tr>
-					<td>카테고리 :  ${retrieveDTO.category }</td>
-				</tr>
-				<tr>
+				<tr >
 					<td>제목 :</td>
 					<td><input type="text" name="title" id="title" readonly="readonly"></td>
 				</tr>
-				<tr>
-					<td>내용 :</td>
-					<td><textarea rows="18" cols="25" name="content" id="content" readonly="readonly"></textarea></td>
+				<tr id="content">
+					<td>문의 내용 :</td>
+					<td><textarea rows="10" cols="50" name="content" id="content" readonly="readonly"></textarea></td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center">
@@ -81,10 +78,6 @@ $(document).ready(function(){
 		$(location).attr("href", "InquiryListServlet");
 	});
 	
-	/* 지정한 카테고리로 설정되도록 */
-	var category = '${retrieveDTO.category }';
-	$("#category").find("[value='"+category+"']").attr("selected", "selected");
-	
 	/* 삭제하기 */
 	$("#delete").on("click", function(){
 		$(location).attr("href", "InquiryDeleteServlet?num=${retrieveDTO.num }");
@@ -94,6 +87,65 @@ $(document).ready(function(){
 	var open = '${retrieveDTO.open }';
 	$("#open").find("[value='"+open+"']").attr("checked", "checked");
 	
+	/* 문의사항 선택하기  */
+	$("#select_question").on("change", function(){
+		
+		var s_question = $("option:selected").val();
+ 		if(s_question == "q_goods"){
+			$("#select_category").show();
+		}else{
+			$("#select_category").hide();
+		}
+	});
+	
+	/* 카테고리 선택하기 */
+	$("#select_category").on("change", function(){
+		
+		var s_category = $("#select_category option:selected").val();
+
+        $.ajax({
+               type:"get",
+               url:"SelectCategoryServlet",
+               data: {gCategory: s_category},
+               dataType:"text",
+               
+               success : function(responseData, status, xhr){
+            	   console.log(responseData);
+            	   $("#select_category").after(responseData);
+               },
+               
+               error : function(xhr, status, e){
+					console.log(status, e);
+               }
+        }); // ajax 끝
+	});
+	
+	/* 문의사항 선택 확인  */
+	$("#inquiryRetrieveForm").on("submit", function(e){
+		
+		if($("#title").val().length==0){
+			alert("제목을 입력해 주세요!");
+			e.preventDefault();
+		}else if($("#content").val().length==0){
+			alert("내용을 입력해 주세요!");
+			e.preventDefault();
+		}else if($("#select_question option:selected").val()!="q_admin"){
+			
+			if($("#select_question option:selected").val()=="문의사항 선택"){
+				alert("문의사항 선택 항목을 확인해 주세요!");
+				e.preventDefault();
+			}else{
+				if($("#select_category option:selected").val()=="카테고리 선택"){
+					alert("카테고리 선택 항목을 확인해 주세요!");
+					e.preventDefault();
+				}else if($("#select_goods option:selected").val()=="상품명 선택"){
+					alert("상품명 선택 항목을 확인해 주세요!");
+					e.preventDefault();
+				}
+			}
+		}
+
+	});
 });
 
 </script>

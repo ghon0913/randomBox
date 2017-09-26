@@ -1,6 +1,7 @@
-package com.controller.order;
+package com.controller.board;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,35 +10,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dto.CartDTO;
-import com.dto.MemberDTO;
+import com.dto.GoodsDTO;
 import com.exception.MyException;
-import com.service.CartService;
-import com.service.MemberService;
-import com.service.MyPageService;
-import com.service.OrderService;
+import com.service.BoardService;
 
-@WebServlet("/OrderConfirmServlet")
-public class OrderConfirmServlet extends HttpServlet {
+@WebServlet("/SelectCategoryServlet")
+public class SelectCategoryServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String gCategory = request.getParameter("gCategory");
 		
-		String num = request.getParameter("num");
-		String userid = request.getParameter("userid");
-		
-		OrderService o_service = new OrderService();
-		MyPageService m_service = new MyPageService();
-		
-		String target = "order.jsp";
+		BoardService service = new BoardService();
+		List<GoodsDTO> list = null;
+		String target = "board/selectCategory.jsp";
 		
 		try {
-			CartDTO c_dto = o_service.orderConfirm(Integer.parseInt(num));
-			MemberDTO m_dto = m_service.myPageUserInfo(userid);
-			request.setAttribute("cDTO", c_dto);
-			request.setAttribute("mDTO", m_dto);
-			request.setAttribute("chk_orderPage", "orderConfirm");
-			
+			list = service.selectCategory(gCategory);
+			request.setAttribute("goodsList", list);
 		} catch (MyException e) {
 			e.printStackTrace();
 			target = "error.jsp";
@@ -45,7 +35,6 @@ public class OrderConfirmServlet extends HttpServlet {
 		
 		RequestDispatcher dis = request.getRequestDispatcher(target);
 		dis.forward(request, response);
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

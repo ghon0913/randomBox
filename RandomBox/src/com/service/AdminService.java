@@ -44,5 +44,11 @@ public class AdminService {
 		}
 		return dto;
 	}
+	
+	public void AdminSalesStatus() {
+		SqlSession session = MybatisTemplate.openSession();
+		AdminDAO dao = new AdminDAO();
+		dao.AdminSalesStatus(session);
+	}
 
 }

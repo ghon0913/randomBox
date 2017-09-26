@@ -39,11 +39,12 @@ public class InquiryListServlet extends HttpServlet {
 		BoardService service = new BoardService();
 		BoardPageDTO dto = new BoardPageDTO();
 		
-		String target = "inquiryList.jsp";
+		String target = "inquiry.jsp";
 		
 		try {
 			dto = service.inquiryList(Integer.parseInt(curPage), searchMap);
 			request.setAttribute("boardList", dto);
+			request.setAttribute("chk_inquiryPage", "inquiryList");
 		} catch (MyException e) {
 			e.printStackTrace();
 			target = "error.jsp";

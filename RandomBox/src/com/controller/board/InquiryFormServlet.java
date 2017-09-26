@@ -14,7 +14,8 @@ public class InquiryFormServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String target = "inquiryForm.jsp";
+		String target = "inquiry.jsp";
+		request.setAttribute("chk_inquiryPage", "inquiryForm");
 		
 		RequestDispatcher dis = request.getRequestDispatcher(target);
 		dis.forward(request, response);

@@ -44,6 +44,8 @@ public class AdminServlet extends HttpServlet {
 			} else {
 				if (command.equals("/salesStatus.admin")) {
 					request.setAttribute("page", "management/salesStatus.jsp");
+					
+					service.AdminSalesStatus();
 
 					RequestDispatcher dis = request.getRequestDispatcher(target);
 					dis.forward(request, response);
@@ -118,10 +120,8 @@ public class AdminServlet extends HttpServlet {
 					RequestDispatcher dis = request.getRequestDispatcher(target);
 					dis.forward(request, response);
 				}
-
 			}
 		}
-
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

@@ -26,7 +26,7 @@ public class OrderAllConfirmServlet extends HttpServlet {
 		String [] nums = request.getParameterValues("check");
 		String userId = request.getParameter("userid");
 		
-		String target = "orderAllConfirm.jsp";
+		String target = "order.jsp";
 		
 		OrderService o_service = new OrderService();
 		MyPageService m_service = new MyPageService();
@@ -36,6 +36,7 @@ public class OrderAllConfirmServlet extends HttpServlet {
 			MemberDTO m_dto = m_service.myPageUserInfo(userId);
 			request.setAttribute("orderList", o_list);
 			request.setAttribute("mDTO", m_dto);
+			request.setAttribute("chk_orderPage", "orderAllConfirm");
 
 		} catch (MyException e) {
 			e.printStackTrace();

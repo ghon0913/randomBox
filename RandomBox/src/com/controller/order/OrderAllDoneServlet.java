@@ -35,7 +35,7 @@ public class OrderAllDoneServlet extends HttpServlet {
 		String gPrice = request.getParameter("gPrice");
 		String [] gCodeList = request.getParameterValues("gCode");
 		
-		String target = "orderAllDone.jsp";
+		String target = "order.jsp";
 		
 		// GoodsDTO 가져오기
 		OrderService o_service = new OrderService();
@@ -76,6 +76,7 @@ public class OrderAllDoneServlet extends HttpServlet {
 		try {
 			o_service.orderAllDone(orderDTOList, Arrays.asList(numList), Arrays.asList(gCodeList));
 			request.setAttribute("orderList", orderDTOList);
+			request.setAttribute("chk_orderPage", "orderAllDone");
 		} catch (MyException e) {
 			e.printStackTrace();
 			target = "error.jsp";

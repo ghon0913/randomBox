@@ -34,13 +34,13 @@ public class OrderAddServlet extends HttpServlet {
 		c_dto.setUserId(userId);
 		
 		MyPageService m_service = new MyPageService();
-		String target = "orderConfirm.jsp";
+		String target = "order.jsp";
 		
 		try {
 			MemberDTO m_dto = m_service.myPageUserInfo(userId);
 			request.setAttribute("cDTO", c_dto);
 			request.setAttribute("mDTO", m_dto);
-			
+			request.setAttribute("chk_orderPage", "orderConfirm");
 		} catch (MyException e) {
 			e.printStackTrace();
 			target = "error.jsp";

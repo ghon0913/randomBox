@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.dto.BoardDTO;
 import com.dto.BoardPageDTO;
 import com.dto.CartDTO;
+import com.dto.GoodsDTO;
 
 public class BoardDAO {
 
@@ -62,6 +63,13 @@ public class BoardDAO {
 		
 		int n = session.delete("inquiryDelete", num);
 		return n;
+	}
+	
+	/* 문의글 작성 -> 카테고리 선택  */
+	public List<GoodsDTO> selectCategory(SqlSession session, String gCategory) {
+		
+		List<GoodsDTO> list = session.selectList("selectCategory", gCategory);
+		return list;
 	}
 	
 	/* 후기게시판 전체 목록  + 페이징*/	
