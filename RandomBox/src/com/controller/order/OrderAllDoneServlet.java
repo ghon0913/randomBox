@@ -34,6 +34,7 @@ public class OrderAllDoneServlet extends HttpServlet {
 		String payMethod = request.getParameter("payMethod");
 		String gPrice = request.getParameter("gPrice");
 		String [] gCodeList = request.getParameterValues("gCode");
+		String [] gNameList = request.getParameterValues("gName");
 		
 		String target = "order.jsp";
 		

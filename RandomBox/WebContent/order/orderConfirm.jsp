@@ -10,10 +10,12 @@
 	<FORM name="orderConfirmForm" method="get" action="">
 		<table width="80%" cellspacing="0" cellpadding="0">
 			<input type="hidden" name="gCode" value="${cDTO.gCode }">
+			<input type="hidden" name="gName" value="${cDTO.gName }">
 			<input type="hidden" name="userId" value="${mDTO.userid }">
 			<input type="hidden" name="eMail" value="${mDTO.email }">
 			<input type="hidden" name="num" value="${cDTO.num }">
 			<input type="hidden" name="gPrice" value="${cDTO.gPrice }">
+			
 
 			<tr>
 				<td height="30">
