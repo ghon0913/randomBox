@@ -93,10 +93,12 @@ public class MemberService {
 		try {
 			int n = dao.updateCookieId(session, map);
 			if(n==1) {
+				System.out.println(".....");
 				session.commit();
 			}
 			
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new MyException("updateCookieId 실패");
 		} finally {
 			session.close();

@@ -18,22 +18,22 @@ public class FindPasswdServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String userid = request.getParameter("userid");
-		
-		MemberDTO dto = null;
-	
-		String target="sendMail.jsp";
-		MemberService service  = new MemberService();
+		String target = "sendMail.jsp";
 		try {
+			String userid = request.getParameter("userid");
 			
+			MemberDTO dto = null;
+
+			MemberService service = new MemberService();
+
 			dto = service.findPasswd(userid);
-			
+
 			String passwd = dto.getPasswd();
 			String email = dto.getEmail();
-			
+
 			System.out.println(email);
 			System.out.println(passwd);
-			
+
 			request.setAttribute("passwd", passwd);
 			request.setAttribute("email", email);
 

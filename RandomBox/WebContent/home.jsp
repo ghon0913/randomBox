@@ -12,6 +12,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
 <title>Insert title here</title>
 </head>
 <body>
@@ -46,7 +49,5 @@
 	<c:if test="${!empty chk_reviewPage }">
 		<jsp:include page="goods/goodsReviewList.jsp" flush="true" /><br>
 	</c:if>
-
-
 </body>
 </html>
