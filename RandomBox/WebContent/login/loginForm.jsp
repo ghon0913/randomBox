@@ -5,9 +5,9 @@
 	pageEncoding="UTF-8"%>
 <div align="center">
 	<div class="loginForm">
-		<form name="LoginForm" method="get" action="">
+		<form name="LoginForm" method="get">
 			<div class="box">
-				<input type="text" class="iText" name="userid" value="아이디를 입력하세요.">
+				<input type="text" class="iText" name="userid" value="&nbsp;">
 				<br> <input type="password" name="passwd" id="" class="iText">
 				<br>
 				<p>
@@ -39,7 +39,7 @@
 }
 
 .loginForm .box .iText {
-	width: 300px;
+	width: 250px;
 	margin: 3px 0;
 	padding: 10px 12px;
 	border: 1px solid #e1e1e1
@@ -63,13 +63,13 @@
 	top: 0;
 	right: 0;
 	width: 80px;
-	height: 60px;
+	height: 100px;
 	padding: 10px;
 	border-radius: 5px;
 	font-size: 14px;
 	font-weight: 700;
 	color: #fff;
-	line-height: 60px;
+	line-height: 80px;
 	text-align: center;
 	text-shadow: 1px 1px 1px #004773;
 	background: #333

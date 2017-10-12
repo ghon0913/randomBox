@@ -6,14 +6,12 @@
 	
 	<br>
 	<br>
-	<br>
-	<br>
-	<br>
-	
+	<div align="center">
 	사용자의 아이디는 ${userid}입니다.
+	</div>
 	<br>
 	<br>
-	
-	<a href="LoginFormServlet">로그인하러가기</a><br>
-	
-	<a href="FindPasswdFormServlet">비밀번호 찾으러가기</a>
+	<div align="center">
+	<a href="LoginFormServlet"><input type="button" class="input-group-addon" value="로그인"></a>&nbsp;&nbsp;
+	<a href="FindPasswdFormServlet"><input type="button" class="input-group-addon" value="비밀번호 찾기"></a>
+	</div>

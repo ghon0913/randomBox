@@ -22,7 +22,7 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		String target = "";
+		String target = "GoodsListServlet";
 		// if (session.getAttribute("login") != null) {
 		// session.removeAttribute("login");
 		// }
@@ -53,7 +53,6 @@ public class LoginServlet extends HttpServlet {
 			request.setAttribute("error", "아이디/비번 확인하세요");
 		} else {
 
-			target = "home.jsp";
 			session.setAttribute("login", dto);
 			request.setAttribute("login", "로그인 성공");
 

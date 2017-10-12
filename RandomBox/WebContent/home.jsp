@@ -12,8 +12,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- bootstrap -->
-<link href="bootstrap-4.0.0-beta-dist/css/bootstrap.min.css" rel="stylesheet" />
+
 
 
 <title>Insert title here</title>
@@ -50,10 +49,5 @@
 	<c:if test="${!empty chk_reviewPage }">
 		<jsp:include page="goods/goodsReviewList.jsp" flush="true" /><br>
 	</c:if>
-
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins)-->
-	<script type="text/javascript" src="jquery-3.2.1.js"></script>
-	<!-- include all compiled plugins (below), or include individual files as needed -->
-	<script src="bootstrap-4.0.0-beta-dist/js/bootstrap.min.js"></script>
 </body>
 </html>

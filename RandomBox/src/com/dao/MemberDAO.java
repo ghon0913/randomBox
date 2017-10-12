@@ -56,6 +56,7 @@ public class MemberDAO {
 	public int updateCookieId(SqlSession session, HashMap<String, String> map) {
 
 		int n = session.update("updateCookieId", map);
+		System.out.println(n);
 		return n;
 	}
 	
