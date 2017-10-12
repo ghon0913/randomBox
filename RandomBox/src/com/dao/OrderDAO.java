@@ -1,5 +1,6 @@
 package com.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -7,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.dto.CartDTO;
 import com.dto.GoodsDTO;
 import com.dto.OrderInfoDTO;
+import com.exception.MyException;
 
 public class OrderDAO {
 	
@@ -31,11 +33,11 @@ public class OrderDAO {
 		return goodsDTO;
 	}
 	
-	/* 전체 주문한 상품 정보 리스트로 받아 가져오기  */
-	public List<GoodsDTO> goods_orderInfoAll(SqlSession session, List<String> gCodeList) {
+	/* 전체주문시 카트정보 가져오기 */
+	public List<CartDTO> cartListForOrder(SqlSession session, List<String> num) throws MyException{
 
-		List<GoodsDTO> goodsDTOList = session.selectList("goods_orderInfoAll", gCodeList);
-		return goodsDTOList;
+		List<CartDTO> list = session.selectList("cartListForOrder", num);		
+		return list;
 	}
 	
 	/* 주문정보 저장하기 */
@@ -60,9 +62,9 @@ public class OrderDAO {
 	}
 	
 	/* 전체 주문 리스트 amount 감소 */
-	public int orderAfterAmountAll(SqlSession session, List<String> gCodeList) {
+	public int orderAfterAmountAll(SqlSession session, List<GoodsDTO> list) {
 		
-		int n = session.update("orderAfterAmountAll", gCodeList);
+		int n = session.update("orderAfterAmountAll", list);
 		return n;
 	}
 }

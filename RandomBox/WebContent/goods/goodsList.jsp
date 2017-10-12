@@ -32,6 +32,7 @@
 										<input type="hidden" name="gName" value="${randomGoods.gName }">
 										<input type="hidden" name="gPrice" value="${randomGoods.gPrice }">
 										<input type="hidden" name="gImage" value="${randomGoods.gImage }">
+										<input type="hidden" name="sellerId" value="${randomGoods.sellerId }">
 										<input type="hidden" name="gCategory" value="전체 카테고리">
 									</form>
 								</td>

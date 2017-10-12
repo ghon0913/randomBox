@@ -304,7 +304,7 @@ alter table board
 modify (readCnt NUMBER(5) default 0);
 
 -- answer table 생성
--- 컬럼 (boardnum, answer, userid, sellerid, writeTime)
+-- (boardnum, answer, userid, sellerid, writeTime)
 CREATE TABLE answer
 (boardnum NUMBER(4) PRIMARY KEY,
 answer varchar2(3000) not null,
@@ -312,4 +312,7 @@ userid varchar2(15) not null,
 sellerid varchar2(15) not null,
 writeTime date DEFAULT sysdate);
 
+--cart에 sellerId추가
+alter table cart
+add ( sellerId varchar2(15));
 

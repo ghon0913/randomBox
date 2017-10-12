@@ -65,6 +65,8 @@
 					id="gPrice${xxx.num}">
 				<input type="hidden" name="userid" value="${xxx.userId}"
 					id="userid">
+				<input type="hidden" name="sellerId" value="${xxx.sellerId}"
+					id="sellerId">
 				<tr>
 					<td class="td_default" width="80">
 						<!-- checkbox는 체크된 값만 서블릿으로 넘어간다. 따라서 value에 삭제할 num값을 설정한다. -->
@@ -130,7 +132,6 @@
 	})
 	
 	$("#allCheck").on("change", function(){
-		
 		if($("#allCheck").prop("checked")){
 			$(".check").prop("checked", true);
 		}else{
@@ -139,7 +140,6 @@
 	});
 	
 	$("#delAllCart").on("click", function(){
-		
 		$("#cartListForm").attr("action", "CartDelAllServlet");
 		$("#cartListForm").submit();
 	});
@@ -149,7 +149,6 @@
 	});
 	
 	$("#orderAllConfirm").on("click", function(){
-		
 		$("#cartListForm").attr("action", "OrderAllConfirmServlet");
 		$("#cartListForm").submit();
 	});

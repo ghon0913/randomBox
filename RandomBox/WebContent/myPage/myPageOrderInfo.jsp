@@ -45,8 +45,9 @@
 	
 	<c:forEach var="order" items="${pagedto.getOlist() }">
 	<tr>
-		<input id="num" type="hidden" value="${order.num }">
+		<input id="gCode" type="hidden" value="${order.gCode }">
 		<input id="gName" type="hidden" value="${order.gName }">
+		<input id="gPrice" type="hidden" value="${order.gPrice }">
 		<td>${order.orderDay }
 		<td><a href="orderinforetrieve.do?num=${order.num }" target="blank">${order.num }</a></td>
 		<td>
@@ -69,9 +70,10 @@ $(document).ready(function(){
 
 	/* 후기작성하기 */
 	$(".reviewWrite").on("click", function(){
-		var orderNum = $(this).parent().siblings("#num").val();
+		var gCode = $(this).parent().siblings("#gCode").val();
 		var gName = $(this).parent().siblings("#gName").val();
-		$(location).attr("href", "ReviewFormServlet?num="+orderNum+"&gName="+gName);
+		var gPrice = $(this).parent().siblings("#gPrice").val();
+		$(location).attr("href", "ReviewFormServlet?gCode="+gCode+"&gName="+gName+"&gPrice="+gPrice);
 	});
 });
 </script>

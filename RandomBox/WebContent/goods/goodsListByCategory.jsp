@@ -33,6 +33,7 @@
 										<input type="hidden" name="gPrice" value="${randomGoods.gPrice }">
 										<input type="hidden" name="gImage" value="${randomGoods.gImage }">
 										<input type="hidden" name="gCategory" value="${randomGoods.gCategory }">
+										<input type="hidden" name="sellerId" value="${randomGoods.sellerId }">
 									</form>
 								</td>
 							</tr>

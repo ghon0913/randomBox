@@ -90,5 +90,11 @@ public class BoardDAO {
         
         return dto;
 	}
+	
+	/*후기작성 시 상품명 가져오기*/
+	public String getGoodsName(SqlSession session, String gCode) {
+		System.out.println(">>>>>>>>>>"+gCode);
+		return session.selectOne("getGoodsName", gCode);
+	}
 
 }

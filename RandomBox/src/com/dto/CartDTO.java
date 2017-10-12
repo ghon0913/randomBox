@@ -7,14 +7,14 @@ public class CartDTO {
 	private String gName;
 	private int gPrice;
 	private String gImage;
-	
-	
+	private String sellerId;
 	
 	public CartDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public CartDTO(int num, String userId, String gCode, String gName, int gPrice, String gImage) {
+	
+	public CartDTO(int num, String userId, String gCode, String gName, int gPrice, String gImage, String sellerId) {
 		super();
 		this.num = num;
 		this.userId = userId;
@@ -22,12 +22,9 @@ public class CartDTO {
 		this.gName = gName;
 		this.gPrice = gPrice;
 		this.gImage = gImage;
+		this.sellerId = sellerId;
 	}
-	@Override
-	public String toString() {
-		return "CartDTO [num=" + num + ", userId=" + userId + ", gCode=" + gCode + ", gName=" + gName + ", gPrice="
-				+ gPrice + ", gImage=" + gImage + "]";
-	}
+	
 	public int getNum() {
 		return num;
 	}
@@ -64,5 +61,17 @@ public class CartDTO {
 	public void setgImage(String gImage) {
 		this.gImage = gImage;
 	}
+	public String getSellerId() {
+		return sellerId;
+	}
+	public void setSellerId(String sellerId) {
+		this.sellerId = sellerId;
+	}
 
+	@Override
+	public String toString() {
+		return "CartDTO [num=" + num + ", userId=" + userId + ", gCode=" + gCode + ", gName=" + gName + ", gPrice="
+				+ gPrice + ", gImage=" + gImage + ", sellerId=" + sellerId + "]";
+	}
+	
 }

@@ -24,6 +24,7 @@ public class CartAddServlet extends HttpServlet {
 		String gPrice = request.getParameter("gPrice");
 		String gImage = request.getParameter("gImage");
 		String gCategory = request.getParameter("gCategory");
+		String sellerId = request.getParameter("sellerId");
 		
 		CartDTO dto = new CartDTO();
 		dto.setgCode(gCode);
@@ -31,6 +32,7 @@ public class CartAddServlet extends HttpServlet {
 		dto.setgName("["+gCategory+"] 랜덤박스");
 		dto.setgPrice(Integer.parseInt(gPrice));
 		dto.setUserId(userId);
+		dto.setSellerId(sellerId);
 		
 		CartService service = new CartService();
 		String target = "CartListServlet";

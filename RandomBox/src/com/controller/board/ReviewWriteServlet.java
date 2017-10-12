@@ -21,7 +21,12 @@ public class ReviewWriteServlet extends HttpServlet {
 		String userId = request.getParameter("userid");
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		String gCode = request.getParameter("gCode");
+		String category = request.getParameter("gName");
+		String gCode = request.getParameter("goodsName");
+		
+		for (int i = 0; i < category.length(); i++) {
+			
+		}
 		
 		BoardDTO dto = new BoardDTO();
 		dto.setContent(content);

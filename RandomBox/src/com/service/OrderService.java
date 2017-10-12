@@ -1,5 +1,6 @@
 package com.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -71,24 +72,24 @@ public class OrderService {
 		return goodsDTO;
 	} // end goods_orderInfo
 	
-	/* 주문한 상품 정보 가져오기 */
-	public List<GoodsDTO> goods_orderInfoAll(List<String> gCodeList) throws MyException{
+	/* 전체주문시 카트정보 가져오기 */
+	public List<CartDTO> cartListForOrder(List<String> num) throws MyException{
 		
 		SqlSession session = MybatisTemplate.openSession();
 		OrderDAO dao = new OrderDAO();
-		List<GoodsDTO> goodsDTOList = null;
+		List<CartDTO> list = null;
 		
 		try {
-			goodsDTOList = dao.goods_orderInfoAll(session, gCodeList);
+			list = dao.cartListForOrder(session, num);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new MyException("goods_orderInfo 실패");
+			throw new MyException("cartListForOrder 실패");
 		}finally {
 			session.close();
 		}
 		
-		return goodsDTOList;
-	} // end goods_orderInfoAll
+		return list;
+	}
 	
 	/* 주문 정보 저장하고 카드에서 삭제, 수량 감소시키기 */
 	public void orderDone(OrderInfoDTO dto, int num, String gCode) throws MyException{
@@ -114,8 +115,8 @@ public class OrderService {
 		}
 	}// end orderDone
 	
-	/* 주문 정보 저장하고 카드에서 삭제, 수량 감소시키기 */
-	public void orderAllDone(List<OrderInfoDTO> orderDTO, List<String> numList, List<String> gCodeList) throws MyException{
+	/* 전체 주문 정보 저장하고 카드에서 삭제, 수량 감소시키기 */
+	public void orderAllDone(List<OrderInfoDTO> orderDTO, List<String> numList, List<GoodsDTO> list) throws MyException{
 		//List<String> gCodeList
 		SqlSession session = MybatisTemplate.openSession();
 		OrderDAO oDAO = new OrderDAO();
@@ -124,11 +125,13 @@ public class OrderService {
 		try {
 			int oN = oDAO.orderAllDone(session, orderDTO);
 			int cN = cDAO.delAllCart(session, numList);
-			int aN = oDAO.orderAfterAmountAll(session, gCodeList);
+			int aN = oDAO.orderAfterAmountAll(session, list);
 			
-			if(oN == orderDTO.size() && cN == numList.size() && aN == gCodeList.size()) {
+			if(oN == orderDTO.size() && cN == numList.size() && aN == list.size()) {
+				System.out.println("$$$$");
 				session.commit();
 			}
+			
 		} catch (Exception e) {
 			session.rollback();
 			e.printStackTrace();

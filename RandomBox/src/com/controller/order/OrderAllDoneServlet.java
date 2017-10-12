@@ -3,7 +3,10 @@ package com.controller.order;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,17 +15,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.jasper.tagplugins.jstl.core.ForEach;
+
+import com.dto.CartDTO;
 import com.dto.GoodsDTO;
 import com.dto.OrderInfoDTO;
 import com.exception.MyException;
+import com.service.CartService;
 import com.service.OrderService;
 
 @WebServlet("/OrderAllDoneServlet")
 public class OrderAllDoneServlet extends HttpServlet {
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-		String [] numList = request.getParameterValues("num");
+		String[] numList = request.getParameterValues("num"); // cartNum
 		String userId = request.getParameter("userId");
 		String orderName = request.getParameter("orderName");
 		String phone = request.getParameter("phone");
@@ -32,28 +40,49 @@ public class OrderAllDoneServlet extends HttpServlet {
 		String addr1 = request.getParameter("addr1");
 		String addr2 = request.getParameter("addr2");
 		String payMethod = request.getParameter("payMethod");
-		String gPrice = request.getParameter("gPrice");
-		String [] gCodeList = request.getParameterValues("gCode");
-		String [] gNameList = request.getParameterValues("gName");
+		String[] gCodeList = request.getParameterValues("gCode");
+		
+		List<GoodsDTO> list = new ArrayList<>();
+		GoodsDTO dto = new GoodsDTO();
+		
+		HashMap<String, Integer> map  = new HashMap<>();
+		for(int i=0;i<gCodeList.length;i++) {
+			if(!map.containsKey(gCodeList[i])) {
+				map.put(gCodeList[i], 1);
+			} else {
+				map.put(gCodeList[i], map.get(gCodeList[i])+1);
+			}
+		}
+		
+		Set<String> keys = map.keySet();
+
+        for (String key : keys) {
+        	System.out.println(key+"//"+map.get(key));
+        	dto.setgCode(key);
+        	dto.setgAmount(map.get(key));
+        	
+        	list.add(dto);
+        }
+
 		
 		String target = "order.jsp";
-		
-		// GoodsDTO 가져오기
+
 		OrderService o_service = new OrderService();
-		List<GoodsDTO> goodsDTOList = null;
+		List<CartDTO> cartDTOList = null;
+
+		// CartDTO 가져와서 배송정보랑 함께 orderInfoDTO에 저장 
 		try {
-			goodsDTOList = o_service.goods_orderInfoAll(Arrays.asList(gCodeList));
+			cartDTOList = o_service.cartListForOrder(Arrays.asList(numList));
 		} catch (MyException e) {
 			e.printStackTrace();
 			target = "error.jsp";
 		}
-		
+
 		List<OrderInfoDTO> orderDTOList = new ArrayList<>();
-		
-		for (GoodsDTO GoodsDTO : goodsDTOList) {
-			
-			//for (OrderInfoDTO orderInfoDTO : orderDTOList) {
-			OrderInfoDTO orderInfoDTO = new OrderInfoDTO(); 
+
+		for (CartDTO cartDTO : cartDTOList) {
+
+			OrderInfoDTO orderInfoDTO = new OrderInfoDTO();
 				orderInfoDTO.setUserId(userId);
 				orderInfoDTO.setOrderName(orderName);
 				orderInfoDTO.setPhone(phone);
@@ -63,19 +92,17 @@ public class OrderAllDoneServlet extends HttpServlet {
 				orderInfoDTO.setAddr1(addr1);
 				orderInfoDTO.setAddr2(addr2);
 				orderInfoDTO.setPayMethod(payMethod);
-				orderInfoDTO.setgPrice(Integer.parseInt(gPrice));
-				orderInfoDTO.setgCode(GoodsDTO.getgCode());
-				orderInfoDTO.setgName(GoodsDTO.getgName());
-				orderInfoDTO.setgImage(GoodsDTO.getgImage());
-				orderInfoDTO.setSellerId(GoodsDTO.getSellerId());
-			//}
-				orderDTOList.add(orderInfoDTO);
+				orderInfoDTO.setgCode(cartDTO.getgCode());
+				orderInfoDTO.setgName(cartDTO.getgName());
+				orderInfoDTO.setgPrice(cartDTO.getgPrice());
+				orderInfoDTO.setgImage(cartDTO.getgImage());
+				orderInfoDTO.setSellerId(cartDTO.getSellerId());
+			orderDTOList.add(orderInfoDTO);
 		}
-
-		/* *********************************** orderDTO 저장 끝 */
+/* **************************************************************************** orderDTO 저장 끝 */	
 		
 		try {
-			o_service.orderAllDone(orderDTOList, Arrays.asList(numList), Arrays.asList(gCodeList));
+			o_service.orderAllDone(orderDTOList, Arrays.asList(numList), list);
 			request.setAttribute("orderList", orderDTOList);
 			request.setAttribute("chk_orderPage", "orderAllDone");
 		} catch (MyException e) {
@@ -85,10 +112,11 @@ public class OrderAllDoneServlet extends HttpServlet {
 
 		RequestDispatcher dis = request.getRequestDispatcher(target);
 		dis.forward(request, response);
-		
+
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

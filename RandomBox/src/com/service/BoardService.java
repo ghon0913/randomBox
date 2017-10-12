@@ -142,4 +142,21 @@ public class BoardService {
 		
 		return dto;
 	}
+	
+	/*후기작성 시 상품명 가져오기*/
+	public String getGoodsName(String gCode) throws MyException{
+		SqlSession session = MybatisTemplate.openSession();
+		BoardDAO dao = new BoardDAO();
+		String goodsName = null;
+		try {
+			goodsName = dao.getGoodsName(session, gCode);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException("getGoodsName 실패");
+		}finally {
+			session.close();
+		}
+		
+		return goodsName;
+	}
 }

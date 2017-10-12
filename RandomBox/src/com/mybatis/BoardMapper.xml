@@ -120,4 +120,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</choose>
 	</select>
 	
+	<!-- 후기쓰기 (주문 데이터 선택) -->
+	<select id="getGoodsName" parameterType="String" resultType="String">
+		select gName
+		from goods
+		where gCode = #{gCode}
+	</select>
+	
 </mapper>

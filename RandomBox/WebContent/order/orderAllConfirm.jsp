@@ -52,6 +52,7 @@
 							<input type="hidden" name="eMail" value="${mDTO.email }">
 							<input type="hidden" name="num" value="${oList.num }">
 							<input type="hidden" name="gPrice" value="${oList.gPrice }">
+							<input type="hidden" name="sellerId" value="${oList.sellerId }">
 							<c:set var="totalPrice" value="${totalPrice + oList.gPrice}"></c:set>
 						<tr>
 							<td class="td_default" width="80">${oList.num }</td>

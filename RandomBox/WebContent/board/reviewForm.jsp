@@ -13,10 +13,14 @@
 				<td>${sessionScope.login.userid }</td>
 			</tr>
 			<tr>
-				<td>구매 상품 : </td>
+				<td>구매 카테고리 : </td>
 				<td>${gName }</td>
-				<input type="hidden" name="num" value="${num }">
 				<input type="hidden" name="gName" value="${gName }">
+			</tr>
+			<tr>
+				<td>랜덤 배송 상품 :</td>
+				<td>${goodsName }</td>
+				<input type="hidden" name="goodsName" value="${goodsName }">
 			</tr>
 			<tr>
 				<td>제목 :</td>
