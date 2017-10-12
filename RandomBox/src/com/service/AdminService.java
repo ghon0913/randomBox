@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import com.dao.AdminDAO;
+import com.dto.AdminSalesStatusDTO;
 import com.dto.AdminUserInfoPageDTO;
 import com.dto.MemberDTO;
 import com.exception.MyException;
@@ -45,10 +46,16 @@ public class AdminService {
 		return dto;
 	}
 	
-	public void AdminSalesStatus() {
+	public List<AdminSalesStatusDTO> AdminSalesStatus() throws MyException {
 		SqlSession session = MybatisTemplate.openSession();
 		AdminDAO dao = new AdminDAO();
-		dao.AdminSalesStatus(session);
+		List<AdminSalesStatusDTO> list = null;
+		try {
+			 list=dao.AdminSalesStatus(session);
+		}catch(Exception e) {
+			throw new MyException("서비스예외");
+		}
+		return list;
 	}
 
 }

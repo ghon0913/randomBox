@@ -30,6 +30,7 @@ public class OrderDoneServlet extends HttpServlet {
 		String addr2 = request.getParameter("addr2");
 		String payMethod = request.getParameter("payMethod");
 		String gCode = request.getParameter("gCode");
+		String gName = request.getParameter("gName");
 		String gPrice = request.getParameter("gPrice");
 		
 		OrderInfoDTO orderDTO = new OrderInfoDTO();
@@ -43,6 +44,7 @@ public class OrderDoneServlet extends HttpServlet {
 		orderDTO.setAddr2(addr2);
 		orderDTO.setPayMethod(payMethod);
 		orderDTO.setgPrice(Integer.parseInt(gPrice));
+		orderDTO.setgName(gName);
 
 		OrderService service = new OrderService();
 		GoodsDTO goodsDTO = null;
@@ -56,7 +58,6 @@ public class OrderDoneServlet extends HttpServlet {
 		}
 		
 		orderDTO.setgCode(goodsDTO.getgCode());
-		orderDTO.setgName(goodsDTO.getgName());
 		orderDTO.setgImage(goodsDTO.getgImage());
 		orderDTO.setSellerId(goodsDTO.getSellerId());
 		

@@ -36,7 +36,8 @@ public class ReviewListServlet extends HttpServlet {
 		BoardService service = new BoardService();
 		BoardPageDTO dto = new BoardPageDTO();
 		
-		String target = "reviewList.jsp";
+		String target = "review.jsp";
+		request.setAttribute("chk_reviewPage", "reviewList");
 		
 		try {
 			dto = service.reviewList(Integer.parseInt(curPage), searchMap);

@@ -47,6 +47,7 @@
 						<c:set var="totalPrice" value="0"></c:set>
 						<c:forEach var="oList" items="${orderList}">
 							<input type="hidden" name="gCode" value="${oList.gCode }">
+							<input type="hidden" name="gName" value="${oList.gName }">
 							<input type="hidden" name="userId" value="${mDTO.userid }">
 							<input type="hidden" name="eMail" value="${mDTO.email }">
 							<input type="hidden" name="num" value="${oList.num }">
