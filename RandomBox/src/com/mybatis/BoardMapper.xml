@@ -147,7 +147,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select num, category, title, to_Char(writeday, 'yyyy/mm/dd') writeday, readcnt, userid, state, open
 		from board
 		where gCode = #{gCode}
-		order by num desc;
 	</select>
 	
 	<!-- 답변하기 게시판 전체리스트 수 -->
