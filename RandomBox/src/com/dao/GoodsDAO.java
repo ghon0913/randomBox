@@ -28,4 +28,9 @@ public class GoodsDAO {
 		List<GoodsDTO> list = session.selectList("selectBySearch", searchWord);
 		return list;
 	}
+	
+	public List<String> selectgName(SqlSession session, List<String> gCodeList){
+		List<String> list = session.selectList("selectgName");
+		return list;
+	}
 }

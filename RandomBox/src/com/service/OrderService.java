@@ -127,6 +127,10 @@ public class OrderService {
 			int cN = cDAO.delAllCart(session, numList);
 			int aN = 0;
 			
+			for (String string : gCodeList) {
+				System.out.println(string+"****************");
+			}
+			
 			for (int i = 0; i < gCodeList.size(); i++) {
 				String code1 = gCodeList.get(i);
 				int result = oDAO.orderAfterAmount(session, code1);

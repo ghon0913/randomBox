@@ -73,5 +73,14 @@ public class GoodsService {
 		return list;
 
 	}
+	
+	public List<String> selectgName(List<String> gCodeList){
+		
+		SqlSession session = MybatisTemplate.openSession();
+		GoodsDAO dao = new GoodsDAO();
+		
+		List<String> list = dao.selectgName(session, gCodeList);
+		return list;
+	}
 
 }
