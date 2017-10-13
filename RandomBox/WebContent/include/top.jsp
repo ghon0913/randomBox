@@ -12,7 +12,7 @@
 		<a class="navbar-brand" href="GoodsListServlet"><img
 			src="logo.jpg" width="150" height="150" align="left"></a>
 
-		<div align="right">
+		<div align="left">
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 
 				<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -20,7 +20,7 @@
 
 
 
-				<form class="form-inline my-2 my-lg-0" style="margin-left: 10000"
+				<form class="form-inline my-2 my-lg-0"
 					action="GoodsBySearchServlet">
 					<input class="form-control mr-sm-2" type="text"
 						placeholder="Search" aria-label="Search" name="searchBar" size=50>
