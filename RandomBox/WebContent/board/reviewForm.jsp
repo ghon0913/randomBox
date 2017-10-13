@@ -5,7 +5,7 @@
 	pageEncoding="UTF-8"%>
 <div>
 	<h3>후기 쓰기</h3>
-	<form id="reviewWriteForm" action="reviewWriteServlet" method="post">
+	<form id="reviewWriteForm" action="ReviewWriteServlet" method="post">
 		<table>
 			<input type="hidden" name="userid" value="${sessionScope.login.userid }">
 			<tr>

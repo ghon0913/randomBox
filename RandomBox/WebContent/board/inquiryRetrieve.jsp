@@ -42,6 +42,14 @@
 					<td>문의 내용 :</td>
 					<td><textarea rows="10" cols="50" name="content" id="content">${retrieveDTO.content }</textarea></td>
 				</tr>
+				
+				<c:if test="${ ! empty answerDTO}">
+				<tr>
+					<td>답변 내용 :</td>
+					<td><textarea rows="10" cols="50" name="content" id="content">${answerDTO.answer }</textarea></td>
+				</tr>					
+				</c:if>
+				
 				<tr>
 					<td colspan="2" align="center">
 						<input type="submit" value="수정하기" id="update">&nbsp;
@@ -53,12 +61,18 @@
 			<c:if test="${retrieveDTO.userId != sessionScope.login.userid}">
 				<tr >
 					<td>제목 :</td>
-					<td><input type="text" name="title" id="title" readonly="readonly"></td>
+					<td><input type="text" name="title" id="title" readonly="readonly" value="${retrieveDTO.title }"></td>
 				</tr>
 				<tr id="content">
 					<td>문의 내용 :</td>
-					<td><textarea rows="10" cols="50" name="content" id="content" readonly="readonly"></textarea></td>
+					<td><textarea rows="10" cols="50" name="content" id="content" readonly="readonly">${retrieveDTO.content }</textarea></td>
 				</tr>
+				<c:if test="${ ! empty answerDTO}">
+				<tr>
+					<td>답변 내용 :</td>
+					<td><textarea rows="10" cols="50" name="content" id="content">${answerDTO.answer }</textarea></td>
+				</tr>					
+				</c:if>
 				<tr>
 					<td colspan="2" align="center">
 						<input type="button" value="목록보기" id="inquiryList">

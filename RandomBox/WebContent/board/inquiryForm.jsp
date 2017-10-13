@@ -3,55 +3,68 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<div>
-	<h3>문의글 쓰기</h3>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+	<h3>|&nbsp;&nbsp;&nbsp;문의글 쓰기&nbsp;&nbsp;&nbsp;|</h3><br>
 	<form id="inquiryWriteForm" action="InquiryWriteServlet" method="post">
-		<table>
+		<table class="table">
 			<input type="hidden" name="userid" value="${sessionScope.login.userid }">
 			<tr>
-				<td>작성자 : </td>
+				<td width="200px">작성자 : </td>
 				<td>${sessionScope.login.userid }</td>
 			</tr>
 			<tr>
 				<td>문의사항 선택 :</td>
 				<td>
-					<select id="select_question" name="select_question">
+				<span class="row">
+					<span class="col-xs-2">
+					<select class="form-control" id="select_question" name="select_question" style="font-size: 12px;">
 						<option>문의사항 선택</option>
-						<option value="q_goods">상품 문의하기</option>
-						<option value="q_admin">관리자에게 질문하기</option>
+						<option value="q_goods">상품 문의</option>
+						<option value="q_admin">관리자에게 질문</option>
 					</select>
-					<select id="select_category" name="select_category" style="display: none;">
+					</span>&nbsp;&nbsp;
+					<span class="col-xs-2">
+					<select class="form-control" id="select_category" name="select_category" style="display: none; font-size: 12px;">
 						<option>카테고리 선택</option>
 						<option value="c1">카테고리 1</option>
 						<option value="90">카테고리 2</option>
 						<option value="1">카테고리 3</option>
 						<option value="test">카테고리 4</option>
 					</select>
-					<select id="select_goods" name="gCode" style="display: none;"></select>
+					</span>&nbsp;&nbsp;
+					<span class="col-xs-2">
+					<select class="form-control" id="select_goods" name="gCode" style="display: none; font-size: 12px;">
+					</select>
+					</span>
 				</td>	
 			</tr>
 			<tr>
 				<td>문의글 공개여부 :</td>
-				<td><input type="radio" name="open" value="N">비공개글로 작성&nbsp;&nbsp;
-				<input type="radio" name="open" value="Y" checked="checked">공개글로 작성</td>
+				<td><input type="radio" name="open" value="N">&nbsp;비공개글로 작성&nbsp;&nbsp;&nbsp;
+				<input type="radio" name="open" value="Y" checked="checked">&nbsp;공개글로 작성</td>
 			</tr>
 			<tr>
 				<td>제목 :</td>
-				<td><input type="text" name="title" id="title"></td>
+				<td><input class="form-control" type="text" name="title" id="title"></td>
 			</tr>
 			<tr>
 				<td>문의 내용 :</td>
-				<td><textarea rows="10" cols="30" name="content" id="content"></textarea></td>
+				<td><textarea class="form-control" rows="10" cols="30" name="content" id="content"></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-					<input type="submit" value="문의하기">&nbsp;<input id="inquiryList" type="button" value="작성취소">
+					<input class="btn btn-success" type="submit" value="문의하기">&nbsp;
+					<input class="btn btn-default" id="inquiryList" type="button" value="작성취소">
 				</td>
 			</tr>
 		</table>
 	</form>
 </div>
-
+</div></div>
 <script type="text/javascript" src="jquery-3.2.1.js"></script>
 <script>
 $(document).ready(function(){

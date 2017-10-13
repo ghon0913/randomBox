@@ -93,19 +93,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from dual
 	</insert>
 
-	<!-- 전체 주문한 상품 모두 amount 감소 -->
-	<update id="orderAfterAmountAll" parameterType="list">
-	begin
-		 <foreach collection="list" item="item" separator=";">
-			update goods
-			<set> 
-				<if test="gAmount != null">
-				 gAmount = #{item.gAmount}
-				 </if>
-			</set>
-			where gCode = #{item.gCode}
-		</foreach>
-		end
-	</update>
-
 </mapper>

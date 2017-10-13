@@ -31,17 +31,20 @@
 	<td>상품명</td>
 	<td>카테고리</td>
 	<td>가격</td>
+	<td>Q&A</td>
 </tr>
 
 <c:forEach var="goods" items="${pagedto.glist }">
 <tr>
-	<td> <a href="goodsinforetrieve.do?gCode=${goods.gCode }" >${goods.gCode }</a>
+	<td> <a href="goodsinforetrieve.do?gCode=${goods.gCode }" id="gCode">${goods.gCode }</a>
 	</td>
 	<td>${goods.gImage }${goods.gName }
 	</td>
 	<td>${goods.gCategory }
 	</td>
 	<td>${goods.gPrice }
+	</td>
+	<td><a href="QuestionListServlet?gCode=${goods.gCode}">답변하러가기</a>
 	</td>
 </tr>
 

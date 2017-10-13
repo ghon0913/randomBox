@@ -7,19 +7,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Review</title>
+<title>Q & A</title>
 </head>
 <body>
 	<jsp:include page="include/top.jsp" flush="true" /><br>
 	<c:if test="${! empty sessionScope.login }">
-		<c:if test="${chk_reviewPage == 'reviewForm' }">
-			<jsp:include page="board/reviewForm.jsp" flush="true" /><br>
+		<c:if test="${chk_QnAPage == 'questionList' }">
+			<jsp:include page="board/qnaList.jsp" flush="true" /><br>
 		</c:if>
-		<c:if test="${chk_reviewPage == 'reviewList' }">
-			<jsp:include page="board/reviewList.jsp" flush="true" /><br>
-		</c:if>
-		<c:if test="${chk_reviewPage == 'reviewRetrieve' }">
-			<jsp:include page="board/reviewRetrieve.jsp" flush="true" /><br>
+		<c:if test="${chk_QnAPage == 'questionForm' }">
+			<jsp:include page="board/answerForm.jsp" flush="true" /><br>
 		</c:if>
 	</c:if>
 	<c:if test="${empty sessionScope.login }">

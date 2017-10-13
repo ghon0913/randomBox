@@ -44,8 +44,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 문의글 작성하기 -->
 	<insert id="inquiryWrite" parameterType="BoardDTO">
 		insert into
-		board(num, category, title, content, userid, open, gCode)
-		values (board_seq.nextval, #{category}, #{title}, #{content}, #{userId}, #{open}, #{gCode})
+		board(num, category, title, content, userid, open, gCode, state)
+		values (board_seq.nextval, #{category}, #{title}, #{content}, #{userId}, #{open}, #{gCode}, #{state})
 	</insert>
 	
 	<!-- 문의글 자세히 보기 -->
@@ -127,4 +127,54 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where gCode = #{gCode}
 	</select>
 	
+	<!-- 후기글 수정하기 -->
+	<update id="reviewUpdate" parameterType="BoardDTO">
+		update board
+		set title = #{title}, content = #{content}
+		where num = #{num}
+	</update>
+	
+	<!-- 후기글 삭제하기 -->
+	<delete id="reviewDelete" parameterType="int">
+		delete from board
+		where num = #{num}
+	</delete>
+	
+<!-- ********** -->
+<!-- QnA게시판 SQL -->
+
+	<select id="questionList" parameterType="string" resultType="BoardDTO">
+		select num, category, title, to_Char(writeday, 'yyyy/mm/dd') writeday, readcnt, userid, state, open
+		from board
+		where gCode = #{gCode}
+	</select>
+	
+	<!-- 답변하기 게시판 전체리스트 수 -->
+	<select id="questionList_totalCount" parameterType="string" resultType="int">
+		select count(*)
+		from board
+		where state = '처리중'
+		and gCode = #{gCode}
+	</select>
+	
+	<!-- 문의글 작성하기 -->
+	<insert id="answerWrite" parameterType="AnswerDTO">
+		insert into
+		answer(userId, sellerId, boardNum, answer)
+		values (#{userId}, #{sellerId}, #{boardNum}, #{answer})
+	</insert>
+	
+	<!-- 답변처리 -->
+	<update id="stateUpdate" parameterType="int">
+		update board
+		set state = '답변완료'
+		where num = #{num}
+	</update>
+	
+	<!-- 답변 불러오기 -->
+	<select id="selectAnswer" parameterType="int" resultType="AnswerDTO">
+		select *
+		from answer
+		where boardnum = #{num}
+	</select>
 </mapper>

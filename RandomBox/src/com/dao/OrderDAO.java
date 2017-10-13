@@ -60,11 +60,4 @@ public class OrderDAO {
 		int n = session.update("orderAfterAmount", gCode);
 		return n;
 	}
-	
-	/* 전체 주문 리스트 amount 감소 */
-	public int orderAfterAmountAll(SqlSession session, List<GoodsDTO> list) {
-		
-		int n = session.update("orderAfterAmountAll", list);
-		return n;
-	}
 }

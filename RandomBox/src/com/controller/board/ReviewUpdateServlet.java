@@ -1,6 +1,8 @@
 package com.controller.board;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,42 +13,34 @@ import com.dto.BoardDTO;
 import com.exception.MyException;
 import com.service.BoardService;
 
-@WebServlet("/ReviewWriteServlet")
-public class ReviewWriteServlet extends HttpServlet {
+@WebServlet("/ReviewUpdateServlet")
+public class ReviewUpdateServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 		request.setCharacterEncoding("UTF-8");
 		
-		String userId = request.getParameter("userid");
+		String num = request.getParameter("num");
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		String category = request.getParameter("gName");
-		String gCode = request.getParameter("goodsName");
-
-		int end = category.indexOf("]");
-		String str = category.substring(1, end);
-		category = str;
 		
 		BoardDTO dto = new BoardDTO();
-		dto.setContent(content);
+		dto.setNum(Integer.parseInt(num));
 		dto.setTitle(title);
-		dto.setUserId(userId);
-		dto.setgCode(gCode);
-		dto.setState("상품후기");
-		dto.setCategory(category);
-		dto.setOpen("X");
+		dto.setContent(content);
 		
 		BoardService service = new BoardService();
 		String target = "ReviewListServlet";
 		
 		try {
-			service.inquiryWrite(dto);
+			service.reviewUpdate(dto);
 		} catch (MyException e) {
 			e.printStackTrace();
+			target = "error.jsp";
 		}
 		
-		response.sendRedirect(target);
+		RequestDispatcher dis = request.getRequestDispatcher(target);
+		dis.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

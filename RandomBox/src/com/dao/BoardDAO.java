@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
+import com.dto.AnswerDTO;
 import com.dto.BoardDTO;
 import com.dto.BoardPageDTO;
 import com.dto.CartDTO;
@@ -93,8 +94,61 @@ public class BoardDAO {
 	
 	/*후기작성 시 상품명 가져오기*/
 	public String getGoodsName(SqlSession session, String gCode) {
-		System.out.println(">>>>>>>>>>"+gCode);
 		return session.selectOne("getGoodsName", gCode);
+	}
+	
+	/* 후기글 수정하기 */
+	public int reviewUpdate(SqlSession session, BoardDTO dto) {
+		
+		int n = session.update("reviewUpdate", dto);
+		return n;
+	}
+	
+	/* 후기글 삭제하기 */
+	public int reviewDelete(SqlSession session, int num) {
+		
+		int n = session.delete("reviewDelete", num);
+		return n;
+	}
+	
+	/* 답변쓰기 리스트 */
+	public BoardPageDTO questionList(SqlSession session, String gCode, int curPage) {
+		
+		BoardPageDTO dto = new BoardPageDTO();
+		
+		int sIndex = (curPage - 1) * dto.getPerPage();
+        int length = dto.getPerPage();
+        List<BoardDTO> list =
+           session.selectList("questionList", gCode);
+        int totalCount = session.selectOne("questionList_totalCount", gCode);
+        
+        //pageDTO에 4개의 저장
+        dto.setList(list);
+        dto.setCurPage(curPage);
+        dto.setTotalCount(totalCount);
+        
+        return dto;
+	}
+	
+	/*문의글 작성하기*/
+	public int answerWrite(SqlSession session, AnswerDTO dto) {
+		
+		int n = session.insert("answerWrite", dto);
+		return n;
+	}
+	
+	/*답변처리*/
+	public int stateUpdate(SqlSession session, int boardNum) {
+		
+		int n = session.update("stateUpdate", boardNum);
+		return n;
+	}
+	
+	/*답변불러오기*/
+	public AnswerDTO selectAnswer(SqlSession session, int num) {
+		
+		AnswerDTO a_dto = session.selectOne("selectAnswer", num);
+		return a_dto;
 	}
 
 }

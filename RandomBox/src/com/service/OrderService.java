@@ -116,7 +116,7 @@ public class OrderService {
 	}// end orderDone
 	
 	/* 전체 주문 정보 저장하고 카드에서 삭제, 수량 감소시키기 */
-	public void orderAllDone(List<OrderInfoDTO> orderDTO, List<String> numList, List<GoodsDTO> list) throws MyException{
+	public void orderAllDone(List<OrderInfoDTO> orderDTO, List<String> numList, List<String> gCodeList) throws MyException{
 		//List<String> gCodeList
 		SqlSession session = MybatisTemplate.openSession();
 		OrderDAO oDAO = new OrderDAO();
@@ -125,9 +125,25 @@ public class OrderService {
 		try {
 			int oN = oDAO.orderAllDone(session, orderDTO);
 			int cN = cDAO.delAllCart(session, numList);
-			int aN = oDAO.orderAfterAmountAll(session, list);
+			int aN = 0;
 			
-			if(oN == orderDTO.size() && cN == numList.size() && aN == list.size()) {
+			for (int i = 0; i < gCodeList.size(); i++) {
+				String code1 = gCodeList.get(i);
+				int result = oDAO.orderAfterAmount(session, code1);
+				aN = aN + result;
+				
+				for (int j = 0; j < gCodeList.size(); j++) {
+					if (i == j) continue;
+					String code2 = gCodeList.get(j);
+					if (code1.equals(code2)) {
+						oDAO.orderAfterAmount(session, code1);
+						aN = aN + result;
+						break;
+					}
+				}
+			}
+			System.out.println("$$$$"+oN+"$$$$"+cN+"$$$$"+aN);
+			if(oN == orderDTO.size() && cN == numList.size() && aN == gCodeList.size()) {
 				System.out.println("$$$$");
 				session.commit();
 			}

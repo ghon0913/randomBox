@@ -56,7 +56,7 @@
 				<tr>
 					<td>${rList.num }</td>
 					<td>${rList.category }</td>
-					<td style="padding-left: 30px"><a href="InquiryRetrieveServlet?num=${rList.num }">${rList.title }</a></td>
+					<td style="padding-left: 30px"><a href="ReviewRetrieveServlet?num=${rList.num }">${rList.title }</a></td>
 					<td>${rList.writeDay }</td>
 					<td align="center">${rList.userId }</td>
 					<td>${rList.readCnt }</td>

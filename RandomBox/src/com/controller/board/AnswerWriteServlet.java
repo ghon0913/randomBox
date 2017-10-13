@@ -6,42 +6,37 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.dao.BoardDAO;
+import com.dto.AnswerDTO;
 import com.dto.BoardDTO;
 import com.exception.MyException;
 import com.service.BoardService;
 
-@WebServlet("/ReviewWriteServlet")
-public class ReviewWriteServlet extends HttpServlet {
+@WebServlet("/AnswerWriteServlet")
+public class AnswerWriteServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 		request.setCharacterEncoding("UTF-8");
 		
-		String userId = request.getParameter("userid");
-		String title = request.getParameter("title");
-		String content = request.getParameter("content");
-		String category = request.getParameter("gName");
-		String gCode = request.getParameter("goodsName");
-
-		int end = category.indexOf("]");
-		String str = category.substring(1, end);
-		category = str;
+		String boardNum = request.getParameter("boardNum");
+		String userId = request.getParameter("userId");
+		String sellerId = request.getParameter("sellerId");
+		String answer = request.getParameter("answer");
 		
-		BoardDTO dto = new BoardDTO();
-		dto.setContent(content);
-		dto.setTitle(title);
+		AnswerDTO dto = new AnswerDTO();
 		dto.setUserId(userId);
-		dto.setgCode(gCode);
-		dto.setState("상품후기");
-		dto.setCategory(category);
-		dto.setOpen("X");
+		dto.setAnswer(answer);
+		dto.setBoardNum(Integer.parseInt(boardNum));
+		dto.setSellerId(sellerId);
 		
 		BoardService service = new BoardService();
-		String target = "ReviewListServlet";
+		String target = "InquiryListServlet";
 		
 		try {
-			service.inquiryWrite(dto);
+			service.answerWrite(dto, Integer.parseInt(boardNum));
 		} catch (MyException e) {
 			e.printStackTrace();
 		}

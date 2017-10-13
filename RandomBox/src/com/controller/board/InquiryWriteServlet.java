@@ -40,6 +40,7 @@ public class InquiryWriteServlet extends HttpServlet {
 		dto.setUserId(userId);
 		dto.setOpen(open);
 		dto.setgCode(gCode);
+		dto.setState("처리중");
 		
 		BoardService service = new BoardService();
 		String target = "InquiryListServlet";

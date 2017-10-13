@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import com.dao.BoardDAO;
+import com.dto.AnswerDTO;
 import com.dto.BoardDTO;
 import com.dto.BoardPageDTO;
 import com.dto.GoodsDTO;
@@ -158,5 +159,98 @@ public class BoardService {
 		}
 		
 		return goodsName;
+	}
+	
+	/* 후기 글 삭제하기 */
+	public void reviewDelete(int num) throws MyException{
+		
+		SqlSession session = MybatisTemplate.openSession();
+		BoardDAO dao = new BoardDAO();
+		
+		try {
+			int n = dao.reviewDelete(session, num);
+			if(n==1) session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException("reviewDelete 실패");
+		}finally {
+			session.close();
+		}
+	}
+	
+	/* 후기글 수정하기 */
+	public void reviewUpdate(BoardDTO dto) throws MyException{
+		
+		SqlSession session = MybatisTemplate.openSession();
+		BoardDAO dao = new BoardDAO();
+		
+		try {
+			int n = dao.reviewUpdate(session, dto);
+			if(n==1) session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException("reviewUpdate 실패");
+		}finally {
+			session.close();
+		}
+	}
+	
+	/* 답변하기 게시판 전체 목록 */
+	public BoardPageDTO questionList(int curPage, String gCode) throws MyException{
+		
+		SqlSession session = MybatisTemplate.openSession();
+		BoardDAO dao = new BoardDAO();
+		BoardPageDTO dto = new BoardPageDTO();
+		
+		try {
+			dto = dao.questionList(session, gCode, curPage);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException("questionList 실패");
+		}finally {
+			session.close();
+		}
+		
+		return dto;
+	}
+	
+	/*답변*/
+	public void answerWrite(AnswerDTO dto, int boardNum) throws MyException{
+		
+		SqlSession session = MybatisTemplate.openSession();
+		BoardDAO dao = new BoardDAO();
+		
+		try {
+			int n = dao.answerWrite(session, dto);
+			int n2 = dao.stateUpdate(session, boardNum);
+			
+			if(n==1 && n2 ==1) {
+				session.commit();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException("answerWrite 실패");
+		}finally {
+			session.close();
+		}
+	}
+	
+	/*답변불러오기*/
+	public AnswerDTO selectAnswer(int num) throws MyException{
+		
+		SqlSession session = MybatisTemplate.openSession();
+		BoardDAO dao = new BoardDAO();
+		AnswerDTO a_dto = null;
+		
+		try {
+			a_dto = dao.selectAnswer(session, num);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException("selectAnswer 실패");
+		}finally {
+			session.close();
+		}
+		
+		return a_dto;
 	}
 }

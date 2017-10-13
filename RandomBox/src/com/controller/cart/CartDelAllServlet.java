@@ -23,9 +23,6 @@ public class CartDelAllServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String [] checks = request.getParameterValues("check");
-		for (String string : checks) {
-			System.out.println(string+"@@@");
-		}
 		
 		CartService service = new CartService();
 		String target = "CartListServlet";

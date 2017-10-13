@@ -42,7 +42,7 @@ public class OrderAllDoneServlet extends HttpServlet {
 		String payMethod = request.getParameter("payMethod");
 		String[] gCodeList = request.getParameterValues("gCode");
 		
-		List<GoodsDTO> list = new ArrayList<>();
+/*		List<GoodsDTO> list = new ArrayList<>();
 		GoodsDTO dto = new GoodsDTO();
 		
 		HashMap<String, Integer> map  = new HashMap<>();
@@ -62,7 +62,7 @@ public class OrderAllDoneServlet extends HttpServlet {
         	dto.setgAmount(map.get(key));
         	
         	list.add(dto);
-        }
+        }*/
 
 		
 		String target = "order.jsp";
@@ -102,7 +102,7 @@ public class OrderAllDoneServlet extends HttpServlet {
 /* **************************************************************************** orderDTO 저장 끝 */	
 		
 		try {
-			o_service.orderAllDone(orderDTOList, Arrays.asList(numList), list);
+			o_service.orderAllDone(orderDTOList, Arrays.asList(numList), Arrays.asList(gCodeList));
 			request.setAttribute("orderList", orderDTOList);
 			request.setAttribute("chk_orderPage", "orderAllDone");
 		} catch (MyException e) {
