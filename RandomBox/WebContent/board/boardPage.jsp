@@ -9,6 +9,10 @@
 <c:if test="${(board.totalCount % board.perPage) != 0}">
 	<c:set var="totalNum" value="${totalNum +1}"></c:set>
 </c:if>
+<c:if test="${totalNum==1}">
+1
+</c:if>
+<c:if test="${totalNum>=2 }">
 <c:forEach begin="1" end="${totalNum}" varStatus="status">
        <c:if test="${board.curPage == status.index}">
               ${status.index}&nbsp;
@@ -18,3 +22,4 @@
               &nbsp;
        </c:if>
 </c:forEach>
+</c:if>

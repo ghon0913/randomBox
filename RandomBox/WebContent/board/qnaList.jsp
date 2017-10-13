@@ -3,33 +3,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<div>
-	<h3>답변하기</h3>
-	<table>
+<div class="container">
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+		<h3>|&nbsp;&nbsp;&nbsp;답변하기&nbsp;&nbsp;&nbsp;|</h3><br>
+	<table class="table">
 		<tr>
-			<td colspan="10">
-				<hr size="1" color="CCCCCC">
-			</td>
-		</tr>
-		<tr>
-			<td height="7" />
-		</tr>
-		<tr>
-			<th>글번호</th>
-			<th>카테고리</th>
+			<th width="90">글번호</th>
+			<th width="110">카테고리</th>
 			<th width="250">제목</th>
 			<th>작성일</th>
-			<th width="80">작성자</th>
-			<th>조회수</th>
-			<th>처리상태</th>
-		</tr>
-		<tr>
-			<td colspan="10">
-				<hr size="1" color="CCCCCC">
-			</td>
-		</tr>
-		<tr>
-			<td height="7" />
+			<th width="100">작성자</th>
+			<th width="100">조회수</th>
+			<th width="120">처리상태</th>
 		</tr>
 <!-- ----------------------------------------------------------------리스트 목록 없을 때 -------------------------------->
 		<c:if test="${ boardList.getList().size() == 0 }">
@@ -55,20 +42,10 @@
 				</tr>
 			</c:forEach>
 			<tr>
-				<td colspan="10">
-					<hr size="1" color="CCCCCC">
-				</td>
-			</tr>
-			<tr>
 				<td align="center" colspan="7">
 					<jsp:include page="boardPage.jsp" flush="true"></jsp:include>
 				</td>
 			</tr>
 		</c:if>
-		<tr>
-			<td colspan="10">
-				<hr size="1" color="CCCCCC">
-			</td>
-		</tr>
 	</table>
-</div>
+</div></div></div>

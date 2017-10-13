@@ -4,8 +4,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<div>
-	<h3>나의 장바구니</h3>
+<div class="container">
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-11">
+	<h3>|&nbsp;&nbsp;&nbsp;나의 장바구니&nbsp;&nbsp;&nbsp;|</h3><br>
 	<table width="70%" cellspacing="0" cellpadding="0" border="0">
 		<tr>
 		<td height="30">
@@ -120,7 +123,7 @@
 				</td>
 			</tr>
 	</table>
-</div>
+</div></div></div>
 
 <!--script cartList------------------------------------------------------------------------------------------------------>
 

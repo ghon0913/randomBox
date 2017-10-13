@@ -3,21 +3,25 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+		<h3>|&nbsp;&nbsp;&nbsp;Q & A&nbsp;&nbsp;&nbsp;|</h3><br>
 	<form action="InquiryUpdateServlet" method="post" id="inquiryRetrieveForm">
-		<table>
+		<table class="table">
 			<tr>
-				<td>글번호 : ${retrieveDTO.num }<input type="hidden" name="num" value="${retrieveDTO.num }"></td>
-				<td id="writer">작성자 : ${retrieveDTO.userId }</td>
-				<td>작성일 : ${retrieveDTO.writeDay }</td>
+				<td>글번호 : &nbsp;&nbsp;&nbsp;${retrieveDTO.num }<input type="hidden" name="num" value="${retrieveDTO.num }"></td>
+				<td id="writer">작성자 : &nbsp;&nbsp;&nbsp;${retrieveDTO.userId }</td>
+				<td>작성일 : &nbsp;&nbsp;&nbsp;${retrieveDTO.writeDay }</td>
 			</tr>
 			<tr>
-				<td>처리상태 : ${retrieveDTO.state }</td>
+				<td>처리상태 : &nbsp;&nbsp;&nbsp;${retrieveDTO.state }</td>
 				<td></td>
-				<td>조회수 : ${retrieveDTO.readCnt }</td>
+				<td>조회수 : &nbsp;&nbsp;&nbsp;${retrieveDTO.readCnt }</td>
 			</tr>
 			<tr>
-				<td>카테고리 :</td>
+				<td>상품 카테고리 :</td>
 				<td>${retrieveDTO.category }</td>
 			</tr>
 			<c:if test="${!empty retrieveDTO.gCode}">
@@ -27,7 +31,7 @@
 				</tr>
 			</c:if>
 		</table>
-		<table>
+		<table class="table">
 			<c:if test="${retrieveDTO.userId == sessionScope.login.userid}">
 				<tr>
 					<td>문의글 공개여부 :</td>
@@ -82,7 +86,7 @@
 		</table>
 	</form>
 </div>
-
+</div></div>
 <script type="text/javascript" src="jquery-3.2.1.js"></script>
 <script>
 $(document).ready(function(){

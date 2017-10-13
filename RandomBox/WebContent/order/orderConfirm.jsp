@@ -4,7 +4,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-11">
 	<h3>주문 페이지</h3>
 
 	<FORM name="orderConfirmForm" method="get" action="">
@@ -224,7 +227,7 @@
 
 		</table>
 	</FORM>
-</div>
+</div></div></div>
 <script>
 	function sameAddress(chk) {
 

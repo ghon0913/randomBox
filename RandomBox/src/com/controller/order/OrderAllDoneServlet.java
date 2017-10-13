@@ -42,29 +42,6 @@ public class OrderAllDoneServlet extends HttpServlet {
 		String payMethod = request.getParameter("payMethod");
 		String[] gCodeList = request.getParameterValues("gCode");
 		
-/*		List<GoodsDTO> list = new ArrayList<>();
-		GoodsDTO dto = new GoodsDTO();
-		
-		HashMap<String, Integer> map  = new HashMap<>();
-		for(int i=0;i<gCodeList.length;i++) {
-			if(!map.containsKey(gCodeList[i])) {
-				map.put(gCodeList[i], 1);
-			} else {
-				map.put(gCodeList[i], map.get(gCodeList[i])+1);
-			}
-		}
-		
-		Set<String> keys = map.keySet();
-
-        for (String key : keys) {
-        	System.out.println(key+"//"+map.get(key));
-        	dto.setgCode(key);
-        	dto.setgAmount(map.get(key));
-        	
-        	list.add(dto);
-        }*/
-
-		
 		String target = "order.jsp";
 
 		OrderService o_service = new OrderService();

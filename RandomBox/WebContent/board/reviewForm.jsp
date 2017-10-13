@@ -3,13 +3,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<div>
-	<h3>후기 쓰기</h3>
+<div class="container">
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+	<h3>|&nbsp;&nbsp;&nbsp;후기 쓰기&nbsp;&nbsp;&nbsp;|</h3><br>
 	<form id="reviewWriteForm" action="ReviewWriteServlet" method="post">
-		<table>
+		<table class="table">
 			<input type="hidden" name="userid" value="${sessionScope.login.userid }">
 			<tr>
-				<td>작성자 : </td>
+				<td width="200px">작성자 : </td>
 				<td>${sessionScope.login.userid }</td>
 			</tr>
 			<tr>
@@ -24,22 +27,22 @@
 			</tr>
 			<tr>
 				<td>제목 :</td>
-				<td><input type="text" name="title" id="title"></td>
+				<td><input class="form-control" type="text" name="title" id="title"></td>
 			</tr>
 			<tr>
 				<td>후기 내용 :</td>
-				<td><textarea rows="10" cols="30" name="content" id="content"></textarea></td>
+				<td><textarea class="form-control" rows="10" cols="30" name="content" id="content"></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-					<input type="submit" value="후기작성">&nbsp;
-					<input type="reset" value="다시작성">&nbsp;
+					<input class="btn btn-success" type="submit" value="후기작성">&nbsp;
+					<input class="btn btn-default" type="reset" value="다시작성">&nbsp;
 				</td>
 			</tr>
 		</table>
 	</form>
 </div>
-
+</div></div>
 <script type="text/javascript" src="jquery-3.2.1.js"></script>
 <script>
 $(document).ready(function(){

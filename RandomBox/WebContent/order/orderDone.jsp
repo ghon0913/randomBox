@@ -3,7 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<div class="container">
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-11">
 <table width="70%" cellspacing="0" cellpadding="0">
 	<tr>
 		<td height="30">
@@ -137,4 +140,4 @@
 	</tr>
 
 </table>
-    
+    </div></div></div>

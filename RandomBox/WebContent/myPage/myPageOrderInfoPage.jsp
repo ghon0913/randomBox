@@ -33,6 +33,10 @@
 </c:if>
 
 <!-- 번호출력하기 -->
+<c:if test="${endPage <= 1 }">
+1
+</c:if>
+<c:if test="${endPage > 1 }">
 
 <!-- 첫패이지로이동 -->
 <c:if test="${curPage == 1}">
@@ -113,4 +117,5 @@
 	<a href="orderinfopage.do?curPage=${endPage+1 }&searchName=${searchName }&searchValue=${searchValue }">
 	마지막
 	</a>
+</c:if>
 </c:if> &nbsp;
