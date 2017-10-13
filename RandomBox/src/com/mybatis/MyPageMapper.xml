@@ -199,5 +199,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from order_info
 		where sellerid=#{userid}
 		group by to_char(ORDERDAY,'mm/dd')
+		order by orderDay
 	</select>
 </mapper>
